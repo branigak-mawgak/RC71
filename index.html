@@ -1114,6 +1114,122 @@ html,body{max-width:100vw!important;overflow-x:hidden!important}
 .para.ayah .ayah-no{z-index:1!important;flex:none!important}
 </style>
 
+
+<style id="rc71-v8-ipad-reading-final">
+/* RC71 V8 FINAL — iPad reading layout
+   1) Portrait: reading paper nearly fills the iPad width.
+   2) Landscape: reading area extends to the left edge of the right navigation rail.
+   3) Ayah number is a dedicated flex column; text starts after the number and wraps only in its own column.
+   4) iPad-specific padding/margins are deliberately compact for maximum reading area. */
+
+@media (min-width:700px) and (orientation:portrait){
+  .reader-wrap{
+    width:100%!important;
+    max-width:none!important;
+    padding:8px 10px calc(76px + env(safe-area-inset-bottom))!important;
+    overflow-x:hidden!important;
+  }
+  .book{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:18px 18px 42px!important;
+    border-radius:12px!important;
+  }
+  .chapter{width:100%!important;max-width:none!important;padding-top:10px!important}
+  .chapter h2{padding:10px 0 8px!important;margin:0!important}
+  .para{
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 7px!important;
+    padding:8px 4px!important;
+    line-height:1.65!important;
+  }
+  .para.ayah{
+    display:flex!important;
+    align-items:flex-start!important;
+    gap:12px!important;
+    padding-left:0!important;
+    padding-right:4px!important;
+    min-width:0!important;
+  }
+  .para.ayah .ayah-no{
+    position:static!important;
+    flex:0 0 34px!important;
+    width:34px!important;
+    min-width:34px!important;
+    height:34px!important;
+    margin:1px 0 0 0!important;
+    display:grid!important;
+    place-items:center!important;
+  }
+  .para.ayah{
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+  }
+}
+
+@media (min-width:700px) and (orientation:landscape){
+  :root{--rc71-right-nav-reserve:72px}
+  .reader-wrap,
+  #reader{
+    width:calc(100% - var(--rc71-right-nav-reserve))!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:6px 6px 12px 8px!important;
+    overflow-x:hidden!important;
+  }
+  .book{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:16px 20px 34px!important;
+    border-radius:10px!important;
+  }
+  .chapter{width:100%!important;max-width:none!important;padding-top:8px!important}
+  .chapter h2{padding:8px 0 7px!important;margin:0!important}
+  .para{
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 5px!important;
+    padding:7px 4px!important;
+    line-height:1.58!important;
+  }
+  .para.ayah{
+    display:flex!important;
+    align-items:flex-start!important;
+    gap:14px!important;
+    padding-left:0!important;
+    padding-right:4px!important;
+    min-width:0!important;
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+  }
+  .para.ayah .ayah-no{
+    position:static!important;
+    flex:0 0 36px!important;
+    width:36px!important;
+    min-width:36px!important;
+    height:36px!important;
+    margin:0!important;
+    display:grid!important;
+    place-items:center!important;
+  }
+  /* In fullscreen the actual right rail is ~58px wide. */
+  body.app-fullscreen .reader-wrap,
+  html:fullscreen .reader-wrap,
+  html:-webkit-full-screen .reader-wrap{
+    width:calc(100% - 70px)!important;
+    padding-right:4px!important;
+  }
+}
+
+/* The direct text after .ayah-no becomes an anonymous flex item.  These rules
+   prevent it from shrinking under the number and keep long words inside the text column. */
+.para.ayah{min-width:0!important;}
+.para.ayah > .ayah-no{z-index:1!important;}
+</style>
+
 </head>
 <body data-revision="RC71-V7-IPAD-WIDE-READING-NONOVERLAP" data-amalan-build="RC71-V7-IPAD-WIDE-READING-NONOVERLAP">
 <button aria-label="Smart Counter manual" id="manualSmartCounterBtn" title="Smart Counter Manual" type="button">🔢</button><button aria-label="Kurangi satu hitungan" class="counter-undo" id="counterUndo" type="button">↶ Kurangi</button>
@@ -3878,5 +3994,67 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 }
 </script>
+<style id="rc71-ipad-portrait-width-fix">
+/* RC71 V9 — iPad portrait reading area: override the legacy 8cm book width. */
+@media (orientation: portrait) and (min-width: 600px) {
+  html, body, .app {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .reader-wrap, #reader {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 8px 12px 120px !important;
+    margin: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  .book {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 16px 20px 34px !important;
+    border-radius: 12px !important;
+  }
+
+  .chapter,
+  .chapter-body,
+  .chapter-head,
+  .para,
+  .wirid-sholat-para {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+  }
+
+  .para {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  /* Dedicated number column also applies in portrait iPad. */
+  .ayah {
+    display: grid !important;
+    grid-template-columns: 38px minmax(0, 1fr) !important;
+    column-gap: 10px !important;
+    align-items: start !important;
+    padding-left: 0 !important;
+    position: relative !important;
+  }
+
+  .ayah-no {
+    position: static !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 30px !important;
+    height: 30px !important;
+    margin-top: 3px !important;
+    justify-self: start !important;
+  }
+}
+</style>
+
 </body>
 </html>

@@ -17,7 +17,7 @@ Do not alter the Waqi'ah 74–96 numbering/content without a new revision.
 <meta name="amalan-build" content="RC54-STABLE-CANONICAL">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="rc71-version" content="V6.1.4 PDF iPad/iOS • DB-safe Visual Teleprompter • Portrait Tablet Fix">
+<meta name="rc71-version" content="V6.1.8 iPad Reading Width + Ayah Number Fix">
 <title>Amalan Muslim Personal Edition — RC54 Stable — Persistence Fixed</title>
 <script id="tuned-safe-storage">
 (function(){
@@ -1620,6 +1620,109 @@ html,body{width:100%;min-width:0;overflow-x:hidden;-webkit-overflow-scrolling:to
   }
 }
 </style>
+
+<style id="rc71-v618-ipad-reading-final">
+/* RC71 V6.1.8
+   iPad reading-width + ayah-number collision fix.
+   Phone layout remains unchanged.
+*/
+@media only screen and (min-width:768px) and (orientation:portrait){
+  .reader-wrap,#reader{
+    width:calc(100vw - 88px - env(safe-area-inset-right))!important;
+    max-width:none!important;
+    padding:14px 8px calc(120px + env(safe-area-inset-bottom)) 8px!important;
+  }
+  .reader-wrap .book{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:26px 30px 64px!important;
+    border-radius:18px!important;
+  }
+  .reader-wrap .chapter,
+  .reader-wrap .chapter-body,
+  .reader-wrap .para,
+  .reader-wrap .wirid-sholat-para{
+    width:100%!important;
+    max-width:none!important;
+  }
+  /* Reserve a dedicated number column so the first word never sits under the badge. */
+  .reader-wrap .para.ayah{
+    padding-left:58px!important;
+    padding-right:12px!important;
+    position:relative!important;
+  }
+  .reader-wrap .ayah-no{
+    left:10px!important;
+    top:10px!important;
+    width:32px!important;
+    height:32px!important;
+    min-width:32px!important;
+    font-size:13px!important;
+    z-index:1!important;
+  }
+}
+
+@media only screen and (min-width:768px) and (orientation:landscape){
+  .reader-wrap,#reader{
+    width:calc(100vw - 86px - env(safe-area-inset-right))!important;
+    max-width:none!important;
+    padding:8px 10px calc(90px + env(safe-area-inset-bottom)) 10px!important;
+  }
+  .reader-wrap .book{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:22px 34px 52px!important;
+    border-radius:16px!important;
+  }
+  .reader-wrap .chapter,
+  .reader-wrap .chapter-body,
+  .reader-wrap .para,
+  .reader-wrap .wirid-sholat-para{
+    width:100%!important;
+    max-width:none!important;
+  }
+  /* Critical fix: previous landscape .para shorthand erased .ayah padding-left. */
+  .reader-wrap .para.ayah{
+    padding-left:60px!important;
+    padding-right:12px!important;
+    position:relative!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+  .reader-wrap .ayah-no{
+    left:10px!important;
+    top:9px!important;
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    font-size:13px!important;
+    z-index:1!important;
+  }
+}
+
+/* Fullscreen keeps the same iPad reading proportions. */
+@media only screen and (min-width:768px) and (orientation:portrait){
+  body.app-fullscreen .reader-wrap .book,
+  html:fullscreen .reader-wrap .book,
+  html:-webkit-full-screen .reader-wrap .book{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+  }
+}
+@media only screen and (min-width:768px) and (orientation:landscape){
+  body.app-fullscreen .reader-wrap .book,
+  html:fullscreen .reader-wrap .book,
+  html:-webkit-full-screen .reader-wrap .book{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+  }
+}
+</style>
+
 </head>
 <body data-revision="RC71-V6.1.6-IPAD-PRO-NAV-FIX" data-amalan-build="RC71-V6.1.6-IPAD-PRO-NAV-FIX">
 <button aria-label="Smart Counter manual" id="manualSmartCounterBtn" title="Smart Counter Manual" type="button">🔢</button><button aria-label="Kurangi satu hitungan" class="counter-undo" id="counterUndo" type="button">↶ Kurangi</button>

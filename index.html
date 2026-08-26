@@ -1551,6 +1551,75 @@ html,body{width:100%;min-width:0;overflow-x:hidden;-webkit-overflow-scrolling:to
 }
 </style>
 
+
+<style id="rc71-v617-ipad-wide-reading">
+/* RC71 V6.1.7 — iPad wide reading fine-tune
+   Makes the actual reading page use the available iPad width.
+   Phone layout is untouched. */
+@media only screen and (min-width:768px) and (orientation:portrait){
+  .reader-wrap,#reader{
+    width:calc(100vw - 88px - env(safe-area-inset-right))!important;
+    max-width:none!important;
+    padding:12px 8px calc(100px + env(safe-area-inset-bottom))!important;
+  }
+  .reader-wrap .book{
+    width:calc(100% - 8px)!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:0 auto!important;
+    padding:24px 24px 58px!important;
+    border-radius:16px!important;
+  }
+  .reader-wrap .chapter,.reader-wrap .chapter-body,
+  .reader-wrap .para,.reader-wrap .wirid-sholat-para{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .reader-wrap .para,.reader-wrap .wirid-sholat-para{
+    font-size:clamp(20px,2.25vw,28px)!important;
+    line-height:1.68!important;
+    padding:6px 4px!important;
+    margin-bottom:10px!important;
+  }
+}
+
+@media only screen and (min-width:768px) and (orientation:landscape){
+  .reader-wrap,#reader{
+    width:calc(100vw - 82px - env(safe-area-inset-right))!important;
+    max-width:none!important;
+    padding:8px 8px calc(78px + env(safe-area-inset-bottom))!important;
+  }
+  .reader-wrap .book{
+    width:calc(100% - 8px)!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:0 auto!important;
+    padding:20px 28px 48px!important;
+    border-radius:14px!important;
+  }
+  .reader-wrap .chapter,.reader-wrap .chapter-body,
+  .reader-wrap .para,.reader-wrap .wirid-sholat-para{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .reader-wrap .para,.reader-wrap .wirid-sholat-para{
+    font-size:clamp(18px,1.7vw,25px)!important;
+    line-height:1.64!important;
+    padding:5px 4px!important;
+    margin-bottom:9px!important;
+  }
+}
+
+@media only screen and (min-width:768px){
+  body.app-fullscreen .reader-wrap .book,
+  html:fullscreen .reader-wrap .book,
+  html:-webkit-full-screen .reader-wrap .book{
+    width:calc(100% - 8px)!important;
+    max-width:none!important;
+    margin:0 auto!important;
+  }
+}
+</style>
 </head>
 <body data-revision="RC71-V6.1.6-IPAD-PRO-NAV-FIX" data-amalan-build="RC71-V6.1.6-IPAD-PRO-NAV-FIX">
 <button aria-label="Smart Counter manual" id="manualSmartCounterBtn" title="Smart Counter Manual" type="button">🔢</button><button aria-label="Kurangi satu hitungan" class="counter-undo" id="counterUndo" type="button">↶ Kurangi</button>

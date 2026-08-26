@@ -16,7 +16,7 @@ Do not alter the Waqi'ah 74–96 numbering/content without a new revision.
 <meta name="amalan-build" content="RC54-STABLE-CANONICAL">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Amalan Muslim — RC71 V6.1.4 PDF PWA iPad</title>
+<title>Amalan Muslim — RC71 V6.1.4 PDF PWA iPad FIX IMPORT</title>
 <script id="tuned-safe-storage">
 (function(){
   'use strict';
@@ -1103,7 +1103,7 @@ body.rc71-native-pip-active{
 </div>
 <div class="slideshow-settings"><label>Durasi <select id="slideDuration"><option value="2000">2 detik</option><option value="3000">3 detik</option><option selected="" value="5000">5 detik</option><option value="10000">10 detik</option></select></label><label><input id="slideShuffle" type="checkbox"/> Acak</label><label><input checked="" id="slideRepeat" type="checkbox"/> Ulangi</label></div>
 <p class="hint">Foto disimpan offline di perangkat. Slide show dapat memenuhi layar dan dikendalikan dengan sentuhan atau tombol panah.</p>
-<div class="media-gallery-panel" id="mediaGalleryPanel">
+<div class="media-gallery-panel" id="mediaGalleryPanel"><div id="rc71PdfImportHint" style="font-size:12px;color:var(--muted);margin:6px 0 10px">PDF disimpan di penyimpanan browser perangkat ini.</div>
   <div class="media-tabs">
     <button class="action on" type="button" data-media-tab="photo">📷 Foto</button>
     <button class="action" type="button" data-media-tab="audio">🎵 Audio</button>
@@ -1114,8 +1114,8 @@ body.rc71-native-pip-active{
     <label class="action primary media-import-label">＋ Impor Audio / Video
       <input id="mediaImportInput" type="file" accept="audio/*,video/*,.mp3,.mp4,.m4a,.aac,.wav,.ogg,.webm" multiple hidden>
     </label>
-    <button class="action" id="mediaImportPdfBtn" type="button">＋ Impor PDF</button>
-    <input id="mediaImportPdfInput" type="file" accept="application/pdf,.pdf" multiple hidden>
+    <label class="action primary file-label" id="mediaImportPdfBtn" for="mediaImportPdfInput">＋ Impor PDF</label>
+    <input id="mediaImportPdfInput" type="file" accept="application/pdf,.pdf,application/octet-stream" multiple hidden>
     <button class="action" id="mediaExportFolderBtn" type="button">📁 Simpan ke Folder Media</button>
     <button class="action" id="mediaExportAllBtn" type="button">⬇ Ekspor Semua</button>
     <small>Media tersimpan di database perangkat; dapat dicadangkan ke Folder Media.</small>
@@ -2806,14 +2806,34 @@ window.renderBlocks=(container,blocks)=>{if(!container)return;container.replaceC
 <script id="rc71-import-storage-engine">
 (function(){
 'use strict';
-const DB_NAME='RC71_IMPORT_STORAGE',DB_VER=2;
+const DB_NAME='RC71_IMPORT_STORAGE',DB_VER=3;
 let dbp;
-function openDB(){if(dbp)return dbp;dbp=new Promise((resolve,reject)=>{const r=indexedDB.open(DB_NAME,DB_VER);
-r.onupgradeneeded=()=>{const d=r.result;
-if(!d.objectStoreNames.contains('library'))d.createObjectStore('library',{keyPath:'id',autoIncrement:true});
-if(!d.objectStoreNames.contains('documents'))d.createObjectStore('documents',{keyPath:'id',autoIncrement:true});
-if(!d.objectStoreNames.contains('media'))d.createObjectStore('media',{keyPath:'id',autoIncrement:true});};
-r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});return dbp}
+function openDB(){
+  if(dbp)return dbp;
+  dbp=new Promise((resolve,reject)=>{
+    const r=indexedDB.open(DB_NAME,DB_VER);
+    r.onupgradeneeded=()=>{
+      const d=r.result;
+      if(!d.objectStoreNames.contains('library'))d.createObjectStore('library',{keyPath:'id',autoIncrement:true});
+      if(!d.objectStoreNames.contains('documents'))d.createObjectStore('documents',{keyPath:'id',autoIncrement:true});
+      if(!d.objectStoreNames.contains('media'))d.createObjectStore('media',{keyPath:'id',autoIncrement:true});
+    };
+    r.onblocked=()=>reject(new Error('Penyimpanan sedang dipakai tab RC71 lain. Tutup tab RC71 yang lain lalu coba lagi.'));
+    r.onsuccess=()=>{
+      const db=r.result;
+      db.onversionchange=()=>{try{db.close()}catch{}};
+      if(!db.objectStoreNames.contains('documents')){
+        try{db.close()}catch{}
+        dbp=null;
+        try{indexedDB.deleteDatabase(DB_NAME)}catch{}
+        return reject(new Error('Basis data PDF lama tidak lengkap. Muat ulang RC71 sekali lalu coba impor lagi.'));
+      }
+      resolve(db);
+    };
+    r.onerror=()=>reject(r.error||new Error('IndexedDB tidak tersedia di browser ini.'));
+  });
+  return dbp;
+}
 async function put(store,v){const d=await openDB();return new Promise((ok,no)=>{const q=d.transaction(store,'readwrite').objectStore(store).add(v);q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})}
 function notify(s){if(typeof window.showToast==='function')window.showToast(s);else if(typeof window.toast==='function')window.toast(s);else console.log(s)}
 async function zipEntries(buf){
@@ -2866,8 +2886,9 @@ async function importLibraryFile(file){
 async function importDocument(file){
  const name=file?.name||'', type=file?.type||'';
  if(!/\.(pdf|docx)$/i.test(name) && !/application\/(pdf|vnd.openxmlformats-officedocument.wordprocessingml.document)/i.test(type)) throw Error('Format dokumen tidak didukung');
- const buf=await file.arrayBuffer();
- await put('documents',{name,type:type||'application/octet-stream',size:file.size,blob:buf,createdAt:Date.now()});
+ const blob=new Blob([await file.arrayBuffer()],{type:type||'application/pdf'});
+ if(!blob.size)throw new Error('File PDF kosong atau tidak dapat dibaca.');
+ await put('documents',{name,type:type||'application/pdf',size:blob.size,blob,createdAt:Date.now()});
  document.dispatchEvent(new CustomEvent('rc71-documents-updated'));
  notify('Dokumen tersimpan: '+file.name);
 }
@@ -2993,7 +3014,7 @@ function render(){
   list.appendChild(c);
  });
 }
-async function openImportDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open('RC71_IMPORT_STORAGE',2);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+async function openImportDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open('RC71_IMPORT_STORAGE',3);r.onupgradeneeded=()=>{const db=r.result;if(!db.objectStoreNames.contains('library'))db.createObjectStore('library',{keyPath:'id',autoIncrement:true});if(!db.objectStoreNames.contains('documents'))db.createObjectStore('documents',{keyPath:'id',autoIncrement:true});if(!db.objectStoreNames.contains('media'))db.createObjectStore('media',{keyPath:'id',autoIncrement:true})};r.onblocked=()=>reject(new Error('Database RC71 sedang dipakai tab lain.'));r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error||new Error('Database PDF tidak tersedia.'))})}
 async function getDocuments(){const d=await openImportDB();return new Promise((ok,no)=>{const q=d.transaction('documents','readonly').objectStore('documents').getAll();q.onsuccess=()=>ok(q.result||[]);q.onerror=()=>no(q.error)})}
 async function deleteDocument(id){const d=await openImportDB();return new Promise((ok,no)=>{const q=d.transaction('documents','readwrite').objectStore('documents').delete(id);q.onsuccess=()=>ok();q.onerror=()=>no(q.error)})}
 function blobOfDoc(d){return d.blob instanceof Blob?d.blob:new Blob([d.blob],{type:d.type||'application/pdf'})}
@@ -3269,8 +3290,18 @@ $('mediaExportAllBtn')?.addEventListener('click',exportAllMedia);
  const r=await mirrorAllMedia();
  console.info('MEDIA_STORAGE mirror',r);
 })();
-$('mediaImportPdfBtn')?.addEventListener('click',()=>$('mediaImportPdfInput')?.click());
-$('mediaImportPdfInput')?.addEventListener('change',async e=>{for(const f of e.target.files||[]){try{await window.RC71ImportStorage.importDocument(f)}catch(err){console.warn(err);toast2('Impor PDF gagal: '+err.message)}}e.target.value=''});
+$('mediaImportPdfInput')?.addEventListener('change',async e=>{
+ const files=[...(e.target.files||[])];
+ if(!files.length)return;
+ let ok=0;
+ for(const f of files){
+  try{await window.RC71ImportStorage.importDocument(f);ok++;}
+  catch(err){console.warn('PDF import failed',err);toast2('Impor PDF gagal: '+(err?.message||'File tidak dapat disimpan'));}
+ }
+ e.target.value='';
+ if(ok)toast2(ok+' PDF berhasil diimpor');
+ await reloadPdfs();
+});
 $('rc71PdfClose')?.addEventListener('click',closePdfReader);$('rc71PdfTpBtn')?.addEventListener('click',()=>pdfCurrent&&openPdfTeleprompter(pdfCurrent));$('rc71TpClose')?.addEventListener('click',closeTp);tpPause?.addEventListener('click',()=>{if(tpRunning)stopTp();else startTp()});$('rc71TpSlow')?.addEventListener('click',()=>{tpSpeed=Math.max(.2,+(tpSpeed-.1).toFixed(1));updateTpSpeed()});$('rc71TpFast')?.addEventListener('click',()=>{tpSpeed=Math.min(3,+(tpSpeed+.1).toFixed(1));updateTpSpeed()});$('rc71TpFontDown')?.addEventListener('click',()=>{tpFont=Math.max(18,tpFont-2);updateTpFont()});$('rc71TpFontUp')?.addEventListener('click',()=>{tpFont=Math.min(64,tpFont+2);updateTpFont()});$('rc71TpRestart')?.addEventListener('click',()=>{stopTp();tpOffset=0;tpText.style.transform='translateY(28vh)'});$('rc71PdfFullBtn')?.addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await pdfOverlay.requestFullscreen?.({navigationUI:'hide'})}catch{}});document.addEventListener('rc71-documents-updated',reloadPdfs);document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(tpOverlay.classList.contains('open'))closeTp();else if(pdfOverlay.classList.contains('open'))closePdfReader()}});
 (async()=>{await seedBuiltins();await reload();await reloadPdfs()})();
 })();

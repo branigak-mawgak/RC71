@@ -1117,8 +1117,442 @@ html,body{width:100%;min-width:0;overflow-x:hidden;-webkit-overflow-scrolling:to
   #autoFocusFab,.auto-focus-fab,#smartCounterControls,.smart-counter-controls,.counter-fab{right:calc(92px + env(safe-area-inset-right))!important;}
 }
 </style>
+
+<style id="rc71-v615-reading-text-layout-final">
+/*
+ RC71 V6.1.5
+ READING TEXT ONLY — Portrait/Landscape iPad layout.
+ Goal:
+ - iPad portrait: tablet-width reading page, not phone-width 8 cm.
+ - iPad landscape: wide reading page while preserving the right navigation rail.
+ - Phone layouts remain unchanged.
+ - PDF Reader / PDF Visual Teleprompter are not altered by this block.
+*/
+@media only screen and (min-width:768px) and (orientation:portrait){
+  .reader-wrap,#reader{
+    width:calc(100vw - 96px - env(safe-area-inset-right))!important;
+    max-width:none!important;
+    height:calc(100dvh - 58px)!important;
+    padding:18px 12px calc(120px + env(safe-area-inset-bottom))!important;
+    margin:0!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+  }
+
+  .reader-wrap .book{
+    width:min(88vw,900px)!important;
+    max-width:900px!important;
+    min-width:0!important;
+    min-height:calc(100dvh - 100px)!important;
+    margin:0 auto!important;
+    padding:26px 38px 64px!important;
+    border-radius:18px!important;
+  }
+
+  .reader-wrap .chapter,
+  .reader-wrap .chapter-body,
+  .reader-wrap .para,
+  .reader-wrap .wirid-sholat-para{
+    width:100%!important;
+    max-width:none!important;
+  }
+
+  .reader-wrap .chapter h2{
+    font-size:clamp(26px,3vw,34px)!important;
+    line-height:1.25!important;
+  }
+
+  .reader-wrap .para,
+  .reader-wrap .wirid-sholat-para{
+    font-size:clamp(20px,2.15vw,27px)!important;
+    line-height:1.72!important;
+    padding:8px 12px!important;
+    margin-bottom:12px!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+}
+
+@media only screen and (min-width:768px) and (orientation:landscape){
+  .reader-wrap,#reader{
+    width:calc(100vw - 86px - env(safe-area-inset-right))!important;
+    max-width:none!important;
+    height:calc(100dvh - 48px)!important;
+    padding:10px 12px calc(90px + env(safe-area-inset-bottom))!important;
+    margin:0!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+  }
+
+  .reader-wrap .book{
+    width:min(calc(100vw - 116px),1080px)!important;
+    max-width:1080px!important;
+    min-width:0!important;
+    min-height:calc(100dvh - 70px)!important;
+    margin:0 auto!important;
+    padding:22px 42px 52px!important;
+    border-radius:16px!important;
+  }
+
+  .reader-wrap .chapter,
+  .reader-wrap .chapter-body,
+  .reader-wrap .para,
+  .reader-wrap .wirid-sholat-para{
+    width:100%!important;
+    max-width:none!important;
+  }
+
+  .reader-wrap .chapter h2{
+    font-size:clamp(24px,2.2vw,32px)!important;
+    line-height:1.25!important;
+  }
+
+  .reader-wrap .para,
+  .reader-wrap .wirid-sholat-para{
+    font-size:clamp(18px,1.65vw,24px)!important;
+    line-height:1.68!important;
+    padding:7px 12px!important;
+    margin-bottom:10px!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+}
+
+/* If the app is put into its own fullscreen mode, keep the same
+   tablet reading proportions instead of reverting to the old 8 cm page. */
+@media only screen and (min-width:768px) and (orientation:portrait){
+  body.app-fullscreen .reader-wrap .book,
+  html:fullscreen .reader-wrap .book,
+  html:-webkit-full-screen .reader-wrap .book{
+    width:min(88vw,900px)!important;
+    max-width:900px!important;
+    margin:0 auto!important;
+  }
+}
+
+@media only screen and (min-width:768px) and (orientation:landscape){
+  body.app-fullscreen .reader-wrap .book,
+  html:fullscreen .reader-wrap .book,
+  html:-webkit-full-screen .reader-wrap .book{
+    width:min(calc(100vw - 40px),1200px)!important;
+    max-width:1200px!important;
+    margin:0 auto!important;
+  }
+}
+</style>
+
+
+<style id="rc71-v616-ipad-professional-ui">
+/*
+ RC71 V6.1.6 — iPad Professional UI
+ Scope:
+  • iPad/tablet only (>=768px)
+  • preserves phone layout
+  • professional right-side navigation rail in portrait + landscape
+  • keeps all existing button IDs and JS untouched
+  • reading area automatically reserves rail width
+*/
+
+/* ---------- iPad Portrait ---------- */
+@media only screen and (min-width:768px) and (max-width:1100px) and (orientation:portrait){
+  :root{--rc71-ipad-nav:96px}
+
+  html,body,.app{
+    width:100vw!important;
+    max-width:none!important;
+    min-height:100dvh!important;
+  }
+
+  header{
+    min-height:58px!important;
+    height:58px!important;
+    padding-left:16px!important;
+    padding-right:calc(var(--rc71-ipad-nav) + 16px + env(safe-area-inset-right))!important;
+  }
+
+  header h1{
+    font-size:20px!important;
+    letter-spacing:.1px!important;
+  }
+
+  .reader-wrap,#reader{
+    width:calc(100vw - var(--rc71-ipad-nav) - env(safe-area-inset-right))!important;
+    height:calc(100dvh - 58px)!important;
+    max-width:none!important;
+    padding:16px 12px calc(32px + env(safe-area-inset-bottom))!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+  }
+
+  .reader-wrap .book{
+    width:min(88%,900px)!important;
+    max-width:900px!important;
+    min-height:calc(100dvh - 100px)!important;
+    margin:0 auto!important;
+    padding:28px 40px 64px!important;
+    border-radius:20px!important;
+  }
+
+  footer.bottom{
+    position:fixed!important;
+    top:calc(env(safe-area-inset-top) + 8px)!important;
+    right:calc(env(safe-area-inset-right) + 8px)!important;
+    bottom:calc(env(safe-area-inset-bottom) + 8px)!important;
+    left:auto!important;
+    width:var(--rc71-ipad-nav)!important;
+    min-width:var(--rc71-ipad-nav)!important;
+    height:auto!important;
+    max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px)!important;
+    box-sizing:border-box!important;
+    padding:8px!important;
+    margin:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    justify-content:flex-start!important;
+    gap:6px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    scrollbar-width:none!important;
+    background:color-mix(in srgb,var(--paper) 88%,transparent)!important;
+    border:1px solid color-mix(in srgb,var(--accent) 32%,var(--line))!important;
+    border-radius:22px!important;
+    box-shadow:0 16px 42px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.12)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(135%)!important;
+    backdrop-filter:blur(20px) saturate(135%)!important;
+    z-index:120!important;
+  }
+
+  footer.bottom::-webkit-scrollbar{display:none}
+
+  footer.bottom .action{
+    position:relative!important;
+    width:100%!important;
+    min-width:0!important;
+    height:48px!important;
+    min-height:48px!important;
+    flex:0 0 48px!important;
+    margin:0!important;
+    padding:4px 3px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    white-space:normal!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    border-radius:14px!important;
+    border:1px solid color-mix(in srgb,var(--line) 82%,var(--accent))!important;
+    background:color-mix(in srgb,var(--paper) 82%,var(--bg))!important;
+    color:var(--ink)!important;
+    font-size:11px!important;
+    font-weight:800!important;
+    line-height:1.08!important;
+    letter-spacing:.05px!important;
+    box-shadow:0 3px 9px rgba(0,0,0,.07)!important;
+    transition:transform .12s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease!important;
+  }
+
+  footer.bottom .action:active{
+    transform:scale(.95)!important;
+    box-shadow:0 1px 4px rgba(0,0,0,.12)!important;
+  }
+
+  footer.bottom .action.primary{
+    background:var(--accent)!important;
+    color:#fff!important;
+    border-color:var(--accent)!important;
+    box-shadow:0 7px 16px color-mix(in srgb,var(--accent) 28%,transparent)!important;
+  }
+
+  /* Group separators: navigation / reading / editing */
+  footer.bottom .action:nth-child(4),
+  footer.bottom .action:nth-child(9),
+  footer.bottom .action:nth-child(11){
+    margin-top:7px!important;
+  }
+
+  footer.bottom .action:nth-child(4)::before,
+  footer.bottom .action:nth-child(9)::before,
+  footer.bottom .action:nth-child(11)::before{
+    content:"";
+    position:absolute;
+    left:18%;
+    right:18%;
+    top:-7px;
+    height:1px;
+    background:color-mix(in srgb,var(--accent) 28%,var(--line));
+  }
+
+  #manualSmartCounterBtn{
+    right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
+    top:calc(env(safe-area-inset-top) + 10px)!important;
+    width:36px!important;
+    height:36px!important;
+  }
+
+  .counter-fab{
+    right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
+  }
+}
+
+/* ---------- Larger iPad / Landscape ---------- */
+@media only screen and (min-width:768px) and (orientation:landscape){
+  :root{--rc71-ipad-nav:104px}
+
+  header{
+    min-height:54px!important;
+    height:54px!important;
+    padding-left:16px!important;
+    padding-right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
+  }
+
+  header h1{font-size:20px!important}
+
+  .reader-wrap,#reader{
+    width:calc(100vw - var(--rc71-ipad-nav) - env(safe-area-inset-right))!important;
+    height:calc(100dvh - 54px)!important;
+    max-width:none!important;
+    padding:12px 14px calc(28px + env(safe-area-inset-bottom))!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+  }
+
+  .reader-wrap .book{
+    width:min(calc(100vw - var(--rc71-ipad-nav) - 58px),1200px)!important;
+    max-width:1200px!important;
+    min-height:calc(100dvh - 80px)!important;
+    margin:0 auto!important;
+    padding:24px 44px 56px!important;
+    border-radius:18px!important;
+  }
+
+  footer.bottom{
+    position:fixed!important;
+    top:calc(env(safe-area-inset-top) + 8px)!important;
+    right:calc(env(safe-area-inset-right) + 8px)!important;
+    bottom:calc(env(safe-area-inset-bottom) + 8px)!important;
+    left:auto!important;
+    width:var(--rc71-ipad-nav)!important;
+    min-width:var(--rc71-ipad-nav)!important;
+    height:auto!important;
+    max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px)!important;
+    box-sizing:border-box!important;
+    padding:8px!important;
+    margin:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    justify-content:flex-start!important;
+    gap:6px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    scrollbar-width:none!important;
+    background:color-mix(in srgb,var(--paper) 88%,transparent)!important;
+    border:1px solid color-mix(in srgb,var(--accent) 32%,var(--line))!important;
+    border-radius:22px!important;
+    box-shadow:0 16px 42px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.12)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(135%)!important;
+    backdrop-filter:blur(20px) saturate(135%)!important;
+    z-index:120!important;
+  }
+
+  footer.bottom::-webkit-scrollbar{display:none}
+
+  footer.bottom .action{
+    position:relative!important;
+    width:100%!important;
+    min-width:0!important;
+    height:46px!important;
+    min-height:46px!important;
+    flex:0 0 46px!important;
+    margin:0!important;
+    padding:3px 3px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    white-space:normal!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    border-radius:13px!important;
+    border:1px solid color-mix(in srgb,var(--line) 82%,var(--accent))!important;
+    background:color-mix(in srgb,var(--paper) 82%,var(--bg))!important;
+    color:var(--ink)!important;
+    font-size:10.5px!important;
+    font-weight:800!important;
+    line-height:1.08!important;
+    box-shadow:0 3px 9px rgba(0,0,0,.07)!important;
+    transition:transform .12s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease!important;
+  }
+
+  footer.bottom .action:active{transform:scale(.95)!important}
+
+  footer.bottom .action.primary{
+    background:var(--accent)!important;
+    color:#fff!important;
+    border-color:var(--accent)!important;
+    box-shadow:0 7px 16px color-mix(in srgb,var(--accent) 28%,transparent)!important;
+  }
+
+  footer.bottom .action:nth-child(4),
+  footer.bottom .action:nth-child(9),
+  footer.bottom .action:nth-child(11){
+    margin-top:7px!important;
+  }
+
+  footer.bottom .action:nth-child(4)::before,
+  footer.bottom .action:nth-child(9)::before,
+  footer.bottom .action:nth-child(11)::before{
+    content:"";
+    position:absolute;
+    left:18%;
+    right:18%;
+    top:-7px;
+    height:1px;
+    background:color-mix(in srgb,var(--accent) 28%,var(--line));
+  }
+
+  #manualSmartCounterBtn{
+    right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
+    top:calc(env(safe-area-inset-top) + 9px)!important;
+  }
+
+  .counter-fab{
+    right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
+  }
+
+  /* Fullscreen keeps the rail professional rather than reverting to bottom bar. */
+  :fullscreen footer.bottom,
+  :-webkit-full-screen footer.bottom{
+    top:8px!important;
+    right:calc(env(safe-area-inset-right) + 8px)!important;
+    bottom:8px!important;
+  }
+}
+
+/* ---------- iPad Pro / large tablet: slightly wider rail ---------- */
+@media only screen and (min-width:1101px){
+  :root{--rc71-ipad-nav:112px}
+  footer.bottom .action{
+    min-height:48px!important;
+    height:48px!important;
+    flex-basis:48px!important;
+    font-size:11px!important;
+  }
+}
+
+/* Never apply tablet rail to phones. */
+@media only screen and (max-width:767px){
+  footer.bottom{
+    /* Explicitly retain the existing mobile behavior. */
+    position:fixed;
+  }
+}
+</style>
+
 </head>
-<body data-revision="RC71-V6.1.4-IPAD-PORTRAIT-TELEPROMPTER-FIX" data-amalan-build="RC71-V6.1.4-IPAD-PORTRAIT-TELEPROMPTER-FIX">
+<body data-revision="RC71-V6.1.6-IPAD-PRO-NAV-FIX" data-amalan-build="RC71-V6.1.6-IPAD-PRO-NAV-FIX">
 <button aria-label="Smart Counter manual" id="manualSmartCounterBtn" title="Smart Counter Manual" type="button">🔢</button><button aria-label="Kurangi satu hitungan" class="counter-undo" id="counterUndo" type="button">↶ Kurangi</button>
 <button aria-label="Lanjutkan Auto Fokus dan tutup Smart Counter" class="counter-continue" id="counterContinue" type="button">▶ Lanjut Auto Fokus</button>
 <button aria-label="Tambah hitungan dzikir" class="counter-fab" id="counterFab" type="button"><span class="counter-value" id="counterValue">0 / 33</span><span class="counter-mini-progress"><i id="counterProgress"></i></span><span class="counter-label" id="counterLabel">Dzikir</span><span class="counter-hint">Ketuk +1</span></button>

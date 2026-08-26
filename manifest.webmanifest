@@ -1,0 +1,18 @@
+{
+  "id":"./index.html",
+  "name":"Amalan Muslim RC71",
+  "short_name":"Amalan Muslim",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "orientation":"any",
+  "background_color":"#0c6b4f",
+  "theme_color":"#0c6b4f",
+  "lang":"id",
+  "prefer_related_applications":false,
+  "description":"Amalan Muslim RC71 V6.1.4 dengan PDF Reader dan PDF Visual Teleprompter Auto Scroll.",
+  "icons":[
+    {"src":"apple-touch-icon.png","sizes":"180x180","type":"image/png","purpose":"any"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

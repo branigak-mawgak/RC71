@@ -1,4 +1,3 @@
-<!-- RC71 V6.1.4 iPad iOS PDF build: Safari/iPad touch, safe-area, fullscreen fallback and PDF canvas memory tuning. -->
 
 
 <!-- RC54 PERSISTENCE FIX — VERIFIED: clears only legacy Waqi'ah overrides 75/96 when they contain the known erroneous duplicate text. -->
@@ -17,8 +16,7 @@ Do not alter the Waqi'ah 74–96 numbering/content without a new revision.
 <meta name="amalan-build" content="RC54-STABLE-CANONICAL">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="rc71-version" content="V6.1.8 iPad Reading Width + Ayah Number Fix">
-<title>Amalan Muslim Personal Edition — RC54 Stable — Persistence Fixed</title>
+<title>Amalan Muslim — RC71 V6.1.4 PDF PWA iPad FIX IMPORT</title>
 <script id="tuned-safe-storage">
 (function(){
   'use strict';
@@ -38,6 +36,14 @@ Do not alter the Waqi'ah 74–96 numbering/content without a new revision.
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta content="telephone=no" name="format-detection"/>
 <meta content="light dark" name="color-scheme"/>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="application-name" content="Amalan Muslim RC71">
+<meta name="apple-mobile-web-app-title" content="Amalan Muslim">
+<meta name="format-detection" content="telephone=no">
 <meta content="#0c6b4f" name="theme-color"/><style>
 :root{--bg:#edf4ef;--paper:#fffdf6;--ink:#18221d;--muted:#6a756f;--accent:#0c6b4f;--accent2:#d2a84a;--line:#d7e3dc;--shadow:0 14px 40px rgba(0,0,0,.18);--fs:20px;--c1:#0b6b50;--c2:#2456a6;--c3:#7b3fa1;--c4:#9a5a12;--c5:#9b2c2c}
 html[data-theme="dark"]{--bg:#101512;--paper:#18201c;--ink:#eef5f0;--muted:#aab7af;--accent:#6ad6ad;--accent2:#e3c36c;--line:#34433a;--c1:#7de0b8;--c2:#8eb7ff;--c3:#d2a2f0;--c4:#f2c56f;--c5:#ff9b9b}html[data-theme="sepia"]{--bg:#e8dcc4;--paper:#f7efd9;--ink:#463824;--muted:#806f55;--accent:#7b4f26;--accent2:#b1873a;--line:#d8c9aa;--c1:#386641;--c2:#365f91;--c3:#765084;--c4:#8a5b18;--c5:#873f3f}
@@ -1012,719 +1018,104 @@ body.rc71-native-pip-active{
 }
 </style>
 
+<script>
+(function(){
+  try {
+    if(location.protocol==='file:') document.documentElement.classList.add('rc71-local-file');
+  } catch(e){}
+})();
+</script>
 
-<style id="rc71-ipad-ios-pdf">
-/* RC71 V6.1.4 iPad/iOS compatibility layer — preserves the original PDF visually. */
-html,body{width:100%;min-width:0;overflow-x:hidden;-webkit-overflow-scrolling:touch}
-@supports (-webkit-touch-callout:none){
-  html{-webkit-text-size-adjust:100%;}
-  body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);}
-  button,.action{min-height:44px;}
-  input,select,textarea{font-size:16px;}
-  .media-card-actions{gap:8px;}
-  #rc71PdfVisualTpOverlay{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);}
-  #rc71PdfVisualTpOverlay .rc71-vtp-top{padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right));}
-  #rc71PdfVisualTpOverlay .rc71-vtp-bottom{padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right));padding-bottom:max(8px,env(safe-area-inset-bottom));}
-  #rc71VtpViewport{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y pinch-zoom;}
-  .rc71-vtp-page{display:block;max-width:100%;height:auto;margin:0 auto 14px;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.16);}
-}
-@media only screen and (min-width:768px) and (max-width:1366px){
-  #rc71PdfVisualTpOverlay .rc71-vtp-top{height:58px;min-height:58px;gap:8px;}
-  #rc71PdfVisualTpOverlay .rc71-vtp-title{font-size:15px;}
-  #rc71VtpPages{width:min(100%,1024px);margin:0 auto;padding:18px 18px 100px;box-sizing:border-box;}
-  #rc71PdfVisualTpOverlay .rc71-vtp-bottom{min-height:58px;justify-content:center;}
-}
-@media only screen and (orientation:landscape) and (min-width:768px){
-  #rc71PdfVisualTpOverlay .rc71-vtp-top{height:52px;min-height:52px;}
-  #rc71VtpPages{width:min(100%,1120px);padding-left:24px;padding-right:24px;}
-}
-/* iPad Safari does not consistently expose arbitrary-element Fullscreen APIs; the
-   app's CSS fullscreen fallback is therefore deliberately retained. */
-.rc71-ipad-fullscreen-fallback{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:99999!important;background:#000!important;}
-</style>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Amalan Muslim RC71">
+<style id="rc71-v7-ipad-reading-layout">
+/* RC71 V7 — iPad reading layout + non-overlapping ayah numbering.
+   Reference target: wide portrait reader and full-width landscape reader,
+   with a dedicated number column so text can never sit underneath the badge. */
+html,body{max-width:100vw!important;overflow-x:hidden!important}
 
-<style id="rc71-ipad-portrait-final">
-/* RC71 V6.1.4 — iPad PORTRAIT layout correction.
-   The old base .book width (8cm) is intentionally phone-sized. On iPad portrait,
-   use the tablet viewport instead, while retaining the compact phone layout below 768px. */
-@media only screen and (orientation:portrait) and (min-width:768px){
-  html,body{width:100%!important;min-width:0!important;overflow-x:hidden!important;}
-  body{font-size:16px!important;}
-  .app{width:100%!important;max-width:none!important;height:100dvh!important;}
-  header{min-height:58px!important;padding:10px max(18px,env(safe-area-inset-right)) 10px max(18px,env(safe-area-inset-left))!important;}
-  header h1{font-size:20px!important;}
-  .reader-wrap,#reader{
-    width:100%!important;max-width:none!important;
-    padding:20px max(28px,env(safe-area-inset-left)) calc(110px + env(safe-area-inset-bottom)) max(28px,env(safe-area-inset-left))!important;
+/* iPad portrait: use almost the entire available reading width. */
+@media (min-width:700px) and (orientation:portrait){
+  .reader-wrap{
+    width:100vw!important;
+    max-width:100vw!important;
+    padding:14px 16px calc(92px + env(safe-area-inset-bottom))!important;
+    overflow-x:hidden!important;
   }
   .book{
-    width:min(820px,calc(100vw - 72px))!important;
-    max-width:820px!important;
-    min-height:calc(100dvh - 90px)!important;
-    margin:0 auto!important;
-    border-radius:18px!important;
-    padding:28px 34px 48px!important;
-  }
-  .book .cover{min-height:calc(100dvh - 170px)!important;}
-  .chapter h2{font-size:27px!important;}
-  .para{font-size:20px!important;line-height:1.78!important;padding:9px 12px!important;margin-bottom:13px!important;}
-  .subhead{font-size:21px!important;}
-  .bottom{
-    left:max(10px,env(safe-area-inset-left))!important;
-    right:max(10px,env(safe-area-inset-right))!important;
-    bottom:max(6px,env(safe-area-inset-bottom))!important;
-    padding:8px 12px!important;
-    justify-content:center!important;
-    overflow-x:auto!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:24px clamp(22px,3.2vw,38px) 48px!important;
     border-radius:16px!important;
   }
-  .bottom .action{min-height:46px!important;font-size:14px!important;padding:10px 14px!important;}
-  .home-grid{gap:16px!important;margin:24px 0 34px!important;}
-  .home-card{min-height:132px!important;padding:18px!important;}
-  .home-card b{font-size:18px!important;}
-  .home-card span{font-size:14px!important;}
-  .control-card{padding:16px!important;}
-}
-/* iPad portrait PDF visual teleprompter: page should use tablet width, not phone width. */
-@media only screen and (orientation:portrait) and (min-width:768px){
-  #rc71PdfVisualTpOverlay .rc71-vtp-top{min-height:64px!important;height:64px!important;padding-left:18px!important;padding-right:18px!important;}
-  #rc71PdfVisualTpOverlay .rc71-vtp-title{font-size:18px!important;}
-  #rc71VtpPages{width:min(100%,900px)!important;margin:0 auto!important;padding:20px 24px 120px!important;}
-  #rc71PdfVisualTpOverlay .rc71-vtp-page{width:100%!important;max-width:none!important;margin:0 auto 18px!important;}
-  #rc71PdfVisualTpOverlay .rc71-vtp-bottom{min-height:64px!important;padding:8px 16px max(8px,env(safe-area-inset-bottom))!important;}
-}
-</style>
-<style id="rc71-ipad-portrait-layout-final">
-/* RC71 V6.1.4 FINAL — iPad portrait is tablet layout, not phone layout. */
-@media only screen and (orientation:portrait) and (min-width:768px){
-  html,body,.app{width:100%!important;max-width:none!important;min-width:0!important;}
-  .app{height:100dvh!important;}
-  header{min-height:58px!important;height:58px!important;padding:8px 18px!important;}
-  header h1{font-size:20px!important;}
-  .reader-wrap,#reader{width:100%!important;max-width:none!important;padding:18px 24px 105px!important;}
-  .book{width:min(82vw,760px)!important;max-width:760px!important;min-height:calc(100dvh - 120px)!important;margin:0 auto!important;padding:24px 30px 60px!important;border-radius:18px!important;}
-  .chapter,.para,.wirid-sholat-para{width:100%!important;max-width:none!important;}
-  .para{font-size:clamp(21px,2.5vw,30px)!important;line-height:1.75!important;}
-  .chapter h2{font-size:clamp(25px,3vw,34px)!important;}
-  footer.bottom,.bottom{left:auto!important;right:calc(env(safe-area-inset-right) + 8px)!important;top:calc(env(safe-area-inset-top) + 68px)!important;bottom:calc(env(safe-area-inset-bottom) + 8px)!important;width:76px!important;min-width:76px!important;height:auto!important;max-height:calc(100dvh - 84px)!important;padding:6px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:stretch!important;gap:6px!important;overflow-y:auto!important;overflow-x:hidden!important;border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line))!important;border-radius:18px!important;background:color-mix(in srgb,var(--paper) 94%,transparent)!important;backdrop-filter:blur(18px)!important;z-index:120!important;scrollbar-width:none!important;}
-  footer.bottom::-webkit-scrollbar,.bottom::-webkit-scrollbar{display:none!important;}
-  footer.bottom .action,.bottom .action{width:100%!important;min-width:0!important;min-height:46px!important;height:auto!important;padding:7px 3px!important;margin:0!important;font-size:11px!important;line-height:1.08!important;white-space:normal!important;border-radius:12px!important;flex:0 0 auto!important;}
-  .reader-wrap,#reader{padding-right:calc(100px + env(safe-area-inset-right))!important;}
-  #manualSmartCounterBtn{right:calc(92px + env(safe-area-inset-right))!important;}
-  #autoFocusFab,.auto-focus-fab,#smartCounterControls,.smart-counter-controls,.counter-fab{right:calc(92px + env(safe-area-inset-right))!important;}
-}
-</style>
-
-<style id="rc71-v615-reading-text-layout-final">
-/*
- RC71 V6.1.5
- READING TEXT ONLY — Portrait/Landscape iPad layout.
- Goal:
- - iPad portrait: tablet-width reading page, not phone-width 8 cm.
- - iPad landscape: wide reading page while preserving the right navigation rail.
- - Phone layouts remain unchanged.
- - PDF Reader / PDF Visual Teleprompter are not altered by this block.
-*/
-@media only screen and (min-width:768px) and (orientation:portrait){
-  .reader-wrap,#reader{
-    width:calc(100vw - 96px - env(safe-area-inset-right))!important;
-    max-width:none!important;
-    height:calc(100dvh - 58px)!important;
-    padding:18px 12px calc(120px + env(safe-area-inset-bottom))!important;
-    margin:0!important;
-    overflow-y:auto!important;
-    overflow-x:hidden!important;
+  .chapter{width:100%!important;max-width:none!important}
+  .para{width:100%!important;max-width:none!important;padding:10px 8px!important}
+  .para.ayah{
+    display:grid!important;
+    grid-template-columns:44px minmax(0,1fr)!important;
+    column-gap:12px!important;
+    align-items:start!important;
+    padding-left:0!important;
+    padding-right:8px!important;
   }
-
-  .reader-wrap .book{
-    width:min(88vw,900px)!important;
-    max-width:900px!important;
-    min-width:0!important;
-    min-height:calc(100dvh - 100px)!important;
-    margin:0 auto!important;
-    padding:26px 38px 64px!important;
-    border-radius:18px!important;
-  }
-
-  .reader-wrap .chapter,
-  .reader-wrap .chapter-body,
-  .reader-wrap .para,
-  .reader-wrap .wirid-sholat-para{
-    width:100%!important;
-    max-width:none!important;
-  }
-
-  .reader-wrap .chapter h2{
-    font-size:clamp(26px,3vw,34px)!important;
-    line-height:1.25!important;
-  }
-
-  .reader-wrap .para,
-  .reader-wrap .wirid-sholat-para{
-    font-size:clamp(20px,2.15vw,27px)!important;
-    line-height:1.72!important;
-    padding:8px 12px!important;
-    margin-bottom:12px!important;
-    overflow-wrap:normal!important;
-    word-break:normal!important;
-  }
-}
-
-@media only screen and (min-width:768px) and (orientation:landscape){
-  .reader-wrap,#reader{
-    width:calc(100vw - 86px - env(safe-area-inset-right))!important;
-    max-width:none!important;
-    height:calc(100dvh - 48px)!important;
-    padding:10px 12px calc(90px + env(safe-area-inset-bottom))!important;
-    margin:0!important;
-    overflow-y:auto!important;
-    overflow-x:hidden!important;
-  }
-
-  .reader-wrap .book{
-    width:min(calc(100vw - 116px),1080px)!important;
-    max-width:1080px!important;
-    min-width:0!important;
-    min-height:calc(100dvh - 70px)!important;
-    margin:0 auto!important;
-    padding:22px 42px 52px!important;
-    border-radius:16px!important;
-  }
-
-  .reader-wrap .chapter,
-  .reader-wrap .chapter-body,
-  .reader-wrap .para,
-  .reader-wrap .wirid-sholat-para{
-    width:100%!important;
-    max-width:none!important;
-  }
-
-  .reader-wrap .chapter h2{
-    font-size:clamp(24px,2.2vw,32px)!important;
-    line-height:1.25!important;
-  }
-
-  .reader-wrap .para,
-  .reader-wrap .wirid-sholat-para{
-    font-size:clamp(18px,1.65vw,24px)!important;
-    line-height:1.68!important;
-    padding:7px 12px!important;
-    margin-bottom:10px!important;
-    overflow-wrap:normal!important;
-    word-break:normal!important;
-  }
-}
-
-/* If the app is put into its own fullscreen mode, keep the same
-   tablet reading proportions instead of reverting to the old 8 cm page. */
-@media only screen and (min-width:768px) and (orientation:portrait){
-  body.app-fullscreen .reader-wrap .book,
-  html:fullscreen .reader-wrap .book,
-  html:-webkit-full-screen .reader-wrap .book{
-    width:min(88vw,900px)!important;
-    max-width:900px!important;
-    margin:0 auto!important;
-  }
-}
-
-@media only screen and (min-width:768px) and (orientation:landscape){
-  body.app-fullscreen .reader-wrap .book,
-  html:fullscreen .reader-wrap .book,
-  html:-webkit-full-screen .reader-wrap .book{
-    width:min(calc(100vw - 40px),1200px)!important;
-    max-width:1200px!important;
-    margin:0 auto!important;
-  }
-}
-</style>
-
-
-<style id="rc71-v616-ipad-professional-ui">
-/*
- RC71 V6.1.6 — iPad Professional UI
- Scope:
-  • iPad/tablet only (>=768px)
-  • preserves phone layout
-  • professional right-side navigation rail in portrait + landscape
-  • keeps all existing button IDs and JS untouched
-  • reading area automatically reserves rail width
-*/
-
-/* ---------- iPad Portrait ---------- */
-@media only screen and (min-width:768px) and (max-width:1100px) and (orientation:portrait){
-  :root{--rc71-ipad-nav:96px}
-
-  html,body,.app{
-    width:100vw!important;
-    max-width:none!important;
-    min-height:100dvh!important;
-  }
-
-  header{
-    min-height:58px!important;
-    height:58px!important;
-    padding-left:16px!important;
-    padding-right:calc(var(--rc71-ipad-nav) + 16px + env(safe-area-inset-right))!important;
-  }
-
-  header h1{
-    font-size:20px!important;
-    letter-spacing:.1px!important;
-  }
-
-  .reader-wrap,#reader{
-    width:calc(100vw - var(--rc71-ipad-nav) - env(safe-area-inset-right))!important;
-    height:calc(100dvh - 58px)!important;
-    max-width:none!important;
-    padding:16px 12px calc(32px + env(safe-area-inset-bottom))!important;
-    overflow-y:auto!important;
-    overflow-x:hidden!important;
-  }
-
-  .reader-wrap .book{
-    width:min(88%,900px)!important;
-    max-width:900px!important;
-    min-height:calc(100dvh - 100px)!important;
-    margin:0 auto!important;
-    padding:28px 40px 64px!important;
-    border-radius:20px!important;
-  }
-
-  footer.bottom{
-    position:fixed!important;
-    top:calc(env(safe-area-inset-top) + 8px)!important;
-    right:calc(env(safe-area-inset-right) + 8px)!important;
-    bottom:calc(env(safe-area-inset-bottom) + 8px)!important;
-    left:auto!important;
-    width:var(--rc71-ipad-nav)!important;
-    min-width:var(--rc71-ipad-nav)!important;
-    height:auto!important;
-    max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px)!important;
-    box-sizing:border-box!important;
-    padding:8px!important;
-    margin:0!important;
-    display:flex!important;
-    flex-direction:column!important;
-    align-items:stretch!important;
-    justify-content:flex-start!important;
-    gap:6px!important;
-    overflow-y:auto!important;
-    overflow-x:hidden!important;
-    scrollbar-width:none!important;
-    background:color-mix(in srgb,var(--paper) 88%,transparent)!important;
-    border:1px solid color-mix(in srgb,var(--accent) 32%,var(--line))!important;
-    border-radius:22px!important;
-    box-shadow:0 16px 42px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.12)!important;
-    -webkit-backdrop-filter:blur(20px) saturate(135%)!important;
-    backdrop-filter:blur(20px) saturate(135%)!important;
-    z-index:120!important;
-  }
-
-  footer.bottom::-webkit-scrollbar{display:none}
-
-  footer.bottom .action{
-    position:relative!important;
-    width:100%!important;
-    min-width:0!important;
-    height:48px!important;
-    min-height:48px!important;
-    flex:0 0 48px!important;
-    margin:0!important;
-    padding:4px 3px!important;
-    display:flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    text-align:center!important;
-    white-space:normal!important;
-    overflow:hidden!important;
-    text-overflow:ellipsis!important;
-    border-radius:14px!important;
-    border:1px solid color-mix(in srgb,var(--line) 82%,var(--accent))!important;
-    background:color-mix(in srgb,var(--paper) 82%,var(--bg))!important;
-    color:var(--ink)!important;
-    font-size:11px!important;
-    font-weight:800!important;
-    line-height:1.08!important;
-    letter-spacing:.05px!important;
-    box-shadow:0 3px 9px rgba(0,0,0,.07)!important;
-    transition:transform .12s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease!important;
-  }
-
-  footer.bottom .action:active{
-    transform:scale(.95)!important;
-    box-shadow:0 1px 4px rgba(0,0,0,.12)!important;
-  }
-
-  footer.bottom .action.primary{
-    background:var(--accent)!important;
-    color:#fff!important;
-    border-color:var(--accent)!important;
-    box-shadow:0 7px 16px color-mix(in srgb,var(--accent) 28%,transparent)!important;
-  }
-
-  /* Group separators: navigation / reading / editing */
-  footer.bottom .action:nth-child(4),
-  footer.bottom .action:nth-child(9),
-  footer.bottom .action:nth-child(11){
-    margin-top:7px!important;
-  }
-
-  footer.bottom .action:nth-child(4)::before,
-  footer.bottom .action:nth-child(9)::before,
-  footer.bottom .action:nth-child(11)::before{
-    content:"";
-    position:absolute;
-    left:18%;
-    right:18%;
-    top:-7px;
-    height:1px;
-    background:color-mix(in srgb,var(--accent) 28%,var(--line));
-  }
-
-  #manualSmartCounterBtn{
-    right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
-    top:calc(env(safe-area-inset-top) + 10px)!important;
-    width:36px!important;
-    height:36px!important;
-  }
-
-  .counter-fab{
-    right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
-  }
-}
-
-/* ---------- Larger iPad / Landscape ---------- */
-@media only screen and (min-width:768px) and (orientation:landscape){
-  :root{--rc71-ipad-nav:104px}
-
-  header{
-    min-height:54px!important;
-    height:54px!important;
-    padding-left:16px!important;
-    padding-right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
-  }
-
-  header h1{font-size:20px!important}
-
-  .reader-wrap,#reader{
-    width:calc(100vw - var(--rc71-ipad-nav) - env(safe-area-inset-right))!important;
-    height:calc(100dvh - 54px)!important;
-    max-width:none!important;
-    padding:12px 14px calc(28px + env(safe-area-inset-bottom))!important;
-    overflow-y:auto!important;
-    overflow-x:hidden!important;
-  }
-
-  .reader-wrap .book{
-    width:min(calc(100vw - var(--rc71-ipad-nav) - 58px),1200px)!important;
-    max-width:1200px!important;
-    min-height:calc(100dvh - 80px)!important;
-    margin:0 auto!important;
-    padding:24px 44px 56px!important;
-    border-radius:18px!important;
-  }
-
-  footer.bottom{
-    position:fixed!important;
-    top:calc(env(safe-area-inset-top) + 8px)!important;
-    right:calc(env(safe-area-inset-right) + 8px)!important;
-    bottom:calc(env(safe-area-inset-bottom) + 8px)!important;
-    left:auto!important;
-    width:var(--rc71-ipad-nav)!important;
-    min-width:var(--rc71-ipad-nav)!important;
-    height:auto!important;
-    max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px)!important;
-    box-sizing:border-box!important;
-    padding:8px!important;
-    margin:0!important;
-    display:flex!important;
-    flex-direction:column!important;
-    align-items:stretch!important;
-    justify-content:flex-start!important;
-    gap:6px!important;
-    overflow-y:auto!important;
-    overflow-x:hidden!important;
-    scrollbar-width:none!important;
-    background:color-mix(in srgb,var(--paper) 88%,transparent)!important;
-    border:1px solid color-mix(in srgb,var(--accent) 32%,var(--line))!important;
-    border-radius:22px!important;
-    box-shadow:0 16px 42px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.12)!important;
-    -webkit-backdrop-filter:blur(20px) saturate(135%)!important;
-    backdrop-filter:blur(20px) saturate(135%)!important;
-    z-index:120!important;
-  }
-
-  footer.bottom::-webkit-scrollbar{display:none}
-
-  footer.bottom .action{
-    position:relative!important;
-    width:100%!important;
-    min-width:0!important;
-    height:46px!important;
-    min-height:46px!important;
-    flex:0 0 46px!important;
-    margin:0!important;
-    padding:3px 3px!important;
-    display:flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    text-align:center!important;
-    white-space:normal!important;
-    overflow:hidden!important;
-    text-overflow:ellipsis!important;
-    border-radius:13px!important;
-    border:1px solid color-mix(in srgb,var(--line) 82%,var(--accent))!important;
-    background:color-mix(in srgb,var(--paper) 82%,var(--bg))!important;
-    color:var(--ink)!important;
-    font-size:10.5px!important;
-    font-weight:800!important;
-    line-height:1.08!important;
-    box-shadow:0 3px 9px rgba(0,0,0,.07)!important;
-    transition:transform .12s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease!important;
-  }
-
-  footer.bottom .action:active{transform:scale(.95)!important}
-
-  footer.bottom .action.primary{
-    background:var(--accent)!important;
-    color:#fff!important;
-    border-color:var(--accent)!important;
-    box-shadow:0 7px 16px color-mix(in srgb,var(--accent) 28%,transparent)!important;
-  }
-
-  footer.bottom .action:nth-child(4),
-  footer.bottom .action:nth-child(9),
-  footer.bottom .action:nth-child(11){
-    margin-top:7px!important;
-  }
-
-  footer.bottom .action:nth-child(4)::before,
-  footer.bottom .action:nth-child(9)::before,
-  footer.bottom .action:nth-child(11)::before{
-    content:"";
-    position:absolute;
-    left:18%;
-    right:18%;
-    top:-7px;
-    height:1px;
-    background:color-mix(in srgb,var(--accent) 28%,var(--line));
-  }
-
-  #manualSmartCounterBtn{
-    right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
-    top:calc(env(safe-area-inset-top) + 9px)!important;
-  }
-
-  .counter-fab{
-    right:calc(var(--rc71-ipad-nav) + 18px + env(safe-area-inset-right))!important;
-  }
-
-  /* Fullscreen keeps the rail professional rather than reverting to bottom bar. */
-  :fullscreen footer.bottom,
-  :-webkit-full-screen footer.bottom{
-    top:8px!important;
-    right:calc(env(safe-area-inset-right) + 8px)!important;
-    bottom:8px!important;
-  }
-}
-
-/* ---------- iPad Pro / large tablet: slightly wider rail ---------- */
-@media only screen and (min-width:1101px){
-  :root{--rc71-ipad-nav:112px}
-  footer.bottom .action{
-    min-height:48px!important;
-    height:48px!important;
-    flex-basis:48px!important;
-    font-size:11px!important;
-  }
-}
-
-/* Never apply tablet rail to phones. */
-@media only screen and (max-width:767px){
-  footer.bottom{
-    /* Explicitly retain the existing mobile behavior. */
-    position:fixed;
-  }
-}
-</style>
-
-
-<style id="rc71-v617-ipad-wide-reading">
-/* RC71 V6.1.7 — iPad wide reading fine-tune
-   Makes the actual reading page use the available iPad width.
-   Phone layout is untouched. */
-@media only screen and (min-width:768px) and (orientation:portrait){
-  .reader-wrap,#reader{
-    width:calc(100vw - 88px - env(safe-area-inset-right))!important;
-    max-width:none!important;
-    padding:12px 8px calc(100px + env(safe-area-inset-bottom))!important;
-  }
-  .reader-wrap .book{
-    width:calc(100% - 8px)!important;
-    max-width:none!important;
-    min-width:0!important;
-    margin:0 auto!important;
-    padding:24px 24px 58px!important;
-    border-radius:16px!important;
-  }
-  .reader-wrap .chapter,.reader-wrap .chapter-body,
-  .reader-wrap .para,.reader-wrap .wirid-sholat-para{
-    width:100%!important;
-    max-width:none!important;
-  }
-  .reader-wrap .para,.reader-wrap .wirid-sholat-para{
-    font-size:clamp(20px,2.25vw,28px)!important;
-    line-height:1.68!important;
-    padding:6px 4px!important;
-    margin-bottom:10px!important;
-  }
-}
-
-@media only screen and (min-width:768px) and (orientation:landscape){
-  .reader-wrap,#reader{
-    width:calc(100vw - 82px - env(safe-area-inset-right))!important;
-    max-width:none!important;
-    padding:8px 8px calc(78px + env(safe-area-inset-bottom))!important;
-  }
-  .reader-wrap .book{
-    width:calc(100% - 8px)!important;
-    max-width:none!important;
-    min-width:0!important;
-    margin:0 auto!important;
-    padding:20px 28px 48px!important;
-    border-radius:14px!important;
-  }
-  .reader-wrap .chapter,.reader-wrap .chapter-body,
-  .reader-wrap .para,.reader-wrap .wirid-sholat-para{
-    width:100%!important;
-    max-width:none!important;
-  }
-  .reader-wrap .para,.reader-wrap .wirid-sholat-para{
-    font-size:clamp(18px,1.7vw,25px)!important;
-    line-height:1.64!important;
-    padding:5px 4px!important;
-    margin-bottom:9px!important;
-  }
-}
-
-@media only screen and (min-width:768px){
-  body.app-fullscreen .reader-wrap .book,
-  html:fullscreen .reader-wrap .book,
-  html:-webkit-full-screen .reader-wrap .book{
-    width:calc(100% - 8px)!important;
-    max-width:none!important;
-    margin:0 auto!important;
-  }
-}
-</style>
-
-<style id="rc71-v618-ipad-reading-final">
-/* RC71 V6.1.8
-   iPad reading-width + ayah-number collision fix.
-   Phone layout remains unchanged.
-*/
-@media only screen and (min-width:768px) and (orientation:portrait){
-  .reader-wrap,#reader{
-    width:calc(100vw - 88px - env(safe-area-inset-right))!important;
-    max-width:none!important;
-    padding:14px 8px calc(120px + env(safe-area-inset-bottom)) 8px!important;
-  }
-  .reader-wrap .book{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:26px 30px 64px!important;
-    border-radius:18px!important;
-  }
-  .reader-wrap .chapter,
-  .reader-wrap .chapter-body,
-  .reader-wrap .para,
-  .reader-wrap .wirid-sholat-para{
-    width:100%!important;
-    max-width:none!important;
-  }
-  /* Reserve a dedicated number column so the first word never sits under the badge. */
-  .reader-wrap .para.ayah{
-    padding-left:58px!important;
-    padding-right:12px!important;
-    position:relative!important;
-  }
-  .reader-wrap .ayah-no{
-    left:10px!important;
-    top:10px!important;
-    width:32px!important;
-    height:32px!important;
-    min-width:32px!important;
-    font-size:13px!important;
-    z-index:1!important;
-  }
-}
-
-@media only screen and (min-width:768px) and (orientation:landscape){
-  .reader-wrap,#reader{
-    width:calc(100vw - 86px - env(safe-area-inset-right))!important;
-    max-width:none!important;
-    padding:8px 10px calc(90px + env(safe-area-inset-bottom)) 10px!important;
-  }
-  .reader-wrap .book{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:22px 34px 52px!important;
-    border-radius:16px!important;
-  }
-  .reader-wrap .chapter,
-  .reader-wrap .chapter-body,
-  .reader-wrap .para,
-  .reader-wrap .wirid-sholat-para{
-    width:100%!important;
-    max-width:none!important;
-  }
-  /* Critical fix: previous landscape .para shorthand erased .ayah padding-left. */
-  .reader-wrap .para.ayah{
-    padding-left:60px!important;
-    padding-right:12px!important;
-    position:relative!important;
-    overflow-wrap:normal!important;
-    word-break:normal!important;
-  }
-  .reader-wrap .ayah-no{
-    left:10px!important;
-    top:9px!important;
+  .para.ayah .ayah-no{
+    position:static!important;
+    grid-column:1!important;
+    grid-row:1!important;
     width:34px!important;
     height:34px!important;
     min-width:34px!important;
-    font-size:13px!important;
-    z-index:1!important;
+    margin:2px 0 0 0!important;
+    justify-self:center!important;
   }
+  .para.ayah > :not(.ayah-no){grid-column:2!important;min-width:0!important}
 }
 
-/* Fullscreen keeps the same iPad reading proportions. */
-@media only screen and (min-width:768px) and (orientation:portrait){
-  body.app-fullscreen .reader-wrap .book,
-  html:fullscreen .reader-wrap .book,
-  html:-webkit-full-screen .reader-wrap .book{
+/* iPad landscape: reading area fills the screen up to the right navigation. */
+@media (min-width:700px) and (orientation:landscape){
+  :root{--rc71-ipad-nav-width:82px}
+  .reader-wrap,#reader{
+    width:calc(100vw - var(--rc71-ipad-nav-width) - 10px)!important;
+    max-width:none!important;
+    padding:8px 8px calc(70px + env(safe-area-inset-bottom)) 10px!important;
+    overflow-x:hidden!important;
+  }
+  .book{
     width:100%!important;
     max-width:none!important;
     margin:0!important;
+    padding:20px clamp(22px,2.4vw,38px) 42px!important;
+    border-radius:10px!important;
   }
-}
-@media only screen and (min-width:768px) and (orientation:landscape){
-  body.app-fullscreen .reader-wrap .book,
-  html:fullscreen .reader-wrap .book,
-  html:-webkit-full-screen .reader-wrap .book{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
+  .chapter{width:100%!important;max-width:none!important}
+  .para{width:100%!important;max-width:none!important;padding:10px 8px!important}
+  .para.ayah{
+    display:grid!important;
+    grid-template-columns:46px minmax(0,1fr)!important;
+    column-gap:14px!important;
+    align-items:start!important;
+    padding-left:0!important;
+    padding-right:8px!important;
   }
+  .para.ayah .ayah-no{
+    position:static!important;
+    grid-column:1!important;
+    grid-row:1!important;
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    margin:2px 0 0 0!important;
+    justify-self:center!important;
+  }
+  .para.ayah > :not(.ayah-no){grid-column:2!important;min-width:0!important}
 }
+
+/* Desktop/non-iPad remains conservative; the iPad rules above are the only
+   breakpoint-specific expansion. */
+.para.ayah .ayah-no{z-index:1!important;flex:none!important}
 </style>
 
 </head>
-<body data-revision="RC71-V6.1.6-IPAD-PRO-NAV-FIX" data-amalan-build="RC71-V6.1.6-IPAD-PRO-NAV-FIX">
+<body data-revision="RC71-V7-IPAD-WIDE-READING-NONOVERLAP" data-amalan-build="RC71-V7-IPAD-WIDE-READING-NONOVERLAP">
 <button aria-label="Smart Counter manual" id="manualSmartCounterBtn" title="Smart Counter Manual" type="button">🔢</button><button aria-label="Kurangi satu hitungan" class="counter-undo" id="counterUndo" type="button">↶ Kurangi</button>
 <button aria-label="Lanjutkan Auto Fokus dan tutup Smart Counter" class="counter-continue" id="counterContinue" type="button">▶ Lanjut Auto Fokus</button>
 <button aria-label="Tambah hitungan dzikir" class="counter-fab" id="counterFab" type="button"><span class="counter-value" id="counterValue">0 / 33</span><span class="counter-mini-progress"><i id="counterProgress"></i></span><span class="counter-label" id="counterLabel">Dzikir</span><span class="counter-hint">Ketuk +1</span></button>
@@ -1801,7 +1192,7 @@ html,body{width:100%;min-width:0;overflow-x:hidden;-webkit-overflow-scrolling:to
 </div>
 <div class="slideshow-settings"><label>Durasi <select id="slideDuration"><option value="2000">2 detik</option><option value="3000">3 detik</option><option selected="" value="5000">5 detik</option><option value="10000">10 detik</option></select></label><label><input id="slideShuffle" type="checkbox"/> Acak</label><label><input checked="" id="slideRepeat" type="checkbox"/> Ulangi</label></div>
 <p class="hint">Foto disimpan offline di perangkat. Slide show dapat memenuhi layar dan dikendalikan dengan sentuhan atau tombol panah.</p>
-<div class="media-gallery-panel" id="mediaGalleryPanel">
+<div class="media-gallery-panel" id="mediaGalleryPanel"><div id="rc71PdfImportHint" style="font-size:12px;color:var(--muted);margin:6px 0 10px">PDF disimpan di penyimpanan browser perangkat ini.</div>
   <div class="media-tabs">
     <button class="action on" type="button" data-media-tab="photo">📷 Foto</button>
     <button class="action" type="button" data-media-tab="audio">🎵 Audio</button>
@@ -1812,8 +1203,8 @@ html,body{width:100%;min-width:0;overflow-x:hidden;-webkit-overflow-scrolling:to
     <label class="action primary media-import-label">＋ Impor Audio / Video
       <input id="mediaImportInput" type="file" accept="audio/*,video/*,.mp3,.mp4,.m4a,.aac,.wav,.ogg,.webm" multiple hidden>
     </label>
-    <button class="action" id="mediaImportPdfBtn" type="button">＋ Impor PDF</button>
-    <input id="mediaImportPdfInput" type="file" accept="application/pdf,.pdf" multiple hidden>
+    <label class="action primary file-label" id="mediaImportPdfBtn" for="mediaImportPdfInput">＋ Impor PDF</label>
+    <input id="mediaImportPdfInput" type="file" accept="application/pdf,.pdf,application/octet-stream" multiple hidden>
     <button class="action" id="mediaExportFolderBtn" type="button">📁 Simpan ke Folder Media</button>
     <button class="action" id="mediaExportAllBtn" type="button">⬇ Ekspor Semua</button>
     <small>Media tersimpan di database perangkat; dapat dicadangkan ke Folder Media.</small>
@@ -3504,33 +2895,31 @@ window.renderBlocks=(container,blocks)=>{if(!container)return;container.replaceC
 <script id="rc71-import-storage-engine">
 (function(){
 'use strict';
-const DB_NAME='RC71_IMPORT_STORAGE';
+const DB_NAME='RC71_IMPORT_STORAGE',DB_VER=3;
 let dbp;
-function ensureStores(d){
-  if(!d.objectStoreNames.contains('library'))d.createObjectStore('library',{keyPath:'id',autoIncrement:true});
-  if(!d.objectStoreNames.contains('documents'))d.createObjectStore('documents',{keyPath:'id',autoIncrement:true});
-  if(!d.objectStoreNames.contains('media'))d.createObjectStore('media',{keyPath:'id',autoIncrement:true});
-}
 function openDB(){
   if(dbp)return dbp;
   dbp=new Promise((resolve,reject)=>{
-    const r=indexedDB.open(DB_NAME); // Never request a lower IndexedDB version on iPad.
-    r.onerror=()=>{dbp=null;reject(r.error)};
-    r.onsuccess=()=>{
+    const r=indexedDB.open(DB_NAME,DB_VER);
+    r.onupgradeneeded=()=>{
       const d=r.result;
-      const missing=['library','documents','media'].some(s=>!d.objectStoreNames.contains(s));
-      if(!missing){
-        d.onversionchange=()=>d.close();
-        resolve(d);
-        return;
-      }
-      const next=d.version+1;
-      d.close();
-      const u=indexedDB.open(DB_NAME,next);
-      u.onupgradeneeded=()=>ensureStores(u.result);
-      u.onsuccess=()=>{u.result.onversionchange=()=>u.result.close();resolve(u.result)};
-      u.onerror=()=>{dbp=null;reject(u.error)};
+      if(!d.objectStoreNames.contains('library'))d.createObjectStore('library',{keyPath:'id',autoIncrement:true});
+      if(!d.objectStoreNames.contains('documents'))d.createObjectStore('documents',{keyPath:'id',autoIncrement:true});
+      if(!d.objectStoreNames.contains('media'))d.createObjectStore('media',{keyPath:'id',autoIncrement:true});
     };
+    r.onblocked=()=>reject(new Error('Penyimpanan sedang dipakai tab RC71 lain. Tutup tab RC71 yang lain lalu coba lagi.'));
+    r.onsuccess=()=>{
+      const db=r.result;
+      db.onversionchange=()=>{try{db.close()}catch{}};
+      if(!db.objectStoreNames.contains('documents')){
+        try{db.close()}catch{}
+        dbp=null;
+        try{indexedDB.deleteDatabase(DB_NAME)}catch{}
+        return reject(new Error('Basis data PDF lama tidak lengkap. Muat ulang RC71 sekali lalu coba impor lagi.'));
+      }
+      resolve(db);
+    };
+    r.onerror=()=>reject(r.error||new Error('IndexedDB tidak tersedia di browser ini.'));
   });
   return dbp;
 }
@@ -3586,8 +2975,9 @@ async function importLibraryFile(file){
 async function importDocument(file){
  const name=file?.name||'', type=file?.type||'';
  if(!/\.(pdf|docx)$/i.test(name) && !/application\/(pdf|vnd.openxmlformats-officedocument.wordprocessingml.document)/i.test(type)) throw Error('Format dokumen tidak didukung');
- const buf=await file.arrayBuffer();
- await put('documents',{name,type:type||'application/octet-stream',size:file.size,blob:buf,createdAt:Date.now()});
+ const blob=new Blob([await file.arrayBuffer()],{type:type||'application/pdf'});
+ if(!blob.size)throw new Error('File PDF kosong atau tidak dapat dibaca.');
+ await put('documents',{name,type:type||'application/pdf',size:blob.size,blob,createdAt:Date.now()});
  document.dispatchEvent(new CustomEvent('rc71-documents-updated'));
  notify('Dokumen tersimpan: '+file.name);
 }
@@ -3615,27 +3005,6 @@ new MutationObserver(bind).observe(document.documentElement,{childList:true,subt
 
 
 
-<style id="rc71-ipad-pdf-sizing">
-/* RC71 V6.1.4 — iPad/iOS sizing: dynamic viewport + safe areas. */
-html,body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
-#rc71PdfOverlay,#rc71TpOverlay,#rc71PdfVisualTpOverlay{
-  width:100%;max-width:100vw;height:100dvh;min-height:100dvh;
-  padding-top:env(safe-area-inset-top);padding-right:env(safe-area-inset-right);
-  padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);
-}
-@supports not (height:100dvh){
-  #rc71PdfOverlay,#rc71TpOverlay,#rc71PdfVisualTpOverlay{height:100vh;min-height:100vh}
-}
-@media (orientation:portrait){
-  #rc71PdfFrame{height:calc(100dvh - 54px - env(safe-area-inset-top) - env(safe-area-inset-bottom))}
-  #rc71VtpPages{width:min(100%,980px)}
-}
-@media (orientation:landscape){
-  #rc71PdfFrame{height:calc(100dvh - 50px - env(safe-area-inset-top) - env(safe-area-inset-bottom))}
-  #rc71VtpPages{width:min(100%,1250px)}
-}
-@media (min-width:1024px){#rc71VtpPages{width:min(100%,1250px)}}
-</style>
 <style id="rc71-pdf-reader-teleprompter-style">
 #rc71PdfOverlay,#rc71TpOverlay{position:fixed;inset:0;z-index:1000;background:#08110e;color:#f3fff9;display:none;box-sizing:border-box}
 #rc71PdfOverlay.open,#rc71TpOverlay.open{display:flex}
@@ -3689,7 +3058,7 @@ const panel=$('mediaGalleryPanel'), list=$('mediaList'), photoGrid=$('galleryGri
 if(!panel||!list)return;
 let tab='photo', items=[], current=null, currentURL=null, speed=1;
 let pdfItems=[], pdfCurrent=null, pdfURL=null, pdfText='', tpRunning=false, tpRaf=0, tpOffset=0;
-let tpSpeed=+(localStorage.getItem('rc71-pdf-tp-speed')||1), tpFont=+(localStorage.getItem('rc71-pdf-tp-font')||30);
+let tpSpeed=+(SAFE_STORE.getItem('rc71-pdf-tp-speed')||1), tpFont=+(SAFE_STORE.getItem('rc71-pdf-tp-font')||30);
 const overlay=$('mediaPlayerOverlay'), video=$('mediaVideoPlayer'), audio=$('mediaAudioPlayer'), title=$('mediaPlayerTitle');
 const pdfOverlay=$('rc71PdfOverlay'), pdfFrame=$('rc71PdfFrame'), pdfTitle=$('rc71PdfTitle'), tpOverlay=$('rc71TpOverlay'), tpTitle=$('rc71TpTitle'), tpText=$('rc71TpText'), tpPause=$('rc71TpPause'), tpSpeedLabel=$('rc71TpSpeedLabel'), tpStatus=$('rc71TpStatus');
 
@@ -3734,20 +3103,20 @@ function render(){
   list.appendChild(c);
  });
 }
-async function openImportDB(){return window.RC71ImportStorage.openDB()}
+async function openImportDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open('RC71_IMPORT_STORAGE',3);r.onupgradeneeded=()=>{const db=r.result;if(!db.objectStoreNames.contains('library'))db.createObjectStore('library',{keyPath:'id',autoIncrement:true});if(!db.objectStoreNames.contains('documents'))db.createObjectStore('documents',{keyPath:'id',autoIncrement:true});if(!db.objectStoreNames.contains('media'))db.createObjectStore('media',{keyPath:'id',autoIncrement:true})};r.onblocked=()=>reject(new Error('Database RC71 sedang dipakai tab lain.'));r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error||new Error('Database PDF tidak tersedia.'))})}
 async function getDocuments(){const d=await openImportDB();return new Promise((ok,no)=>{const q=d.transaction('documents','readonly').objectStore('documents').getAll();q.onsuccess=()=>ok(q.result||[]);q.onerror=()=>no(q.error)})}
 async function deleteDocument(id){const d=await openImportDB();return new Promise((ok,no)=>{const q=d.transaction('documents','readwrite').objectStore('documents').delete(id);q.onsuccess=()=>ok();q.onerror=()=>no(q.error)})}
 function blobOfDoc(d){return d.blob instanceof Blob?d.blob:new Blob([d.blob],{type:d.type||'application/pdf'})}
 function isPdfDoc(d){return /pdf/i.test(d.type||'')||/\.pdf$/i.test(d.name||'')}
 function stopTp(){tpRunning=false;cancelAnimationFrame(tpRaf);tpPause.textContent='▶ Mulai'}
-function updateTpSpeed(){tpSpeedLabel.textContent=tpSpeed.toFixed(1)+'×';localStorage.setItem('rc71-pdf-tp-speed',String(tpSpeed))}
-function updateTpFont(){tpText.style.fontSize=tpFont+'px';localStorage.setItem('rc71-pdf-tp-font',String(tpFont))}
+function updateTpSpeed(){tpSpeedLabel.textContent=tpSpeed.toFixed(1)+'×';SAFE_STORE.setItem('rc71-pdf-tp-speed',String(tpSpeed))}
+function updateTpFont(){tpText.style.fontSize=tpFont+'px';SAFE_STORE.setItem('rc71-pdf-tp-font',String(tpFont))}
 function tpTick(){if(!tpRunning)return;tpOffset-=0.35*tpSpeed;tpText.style.transform=`translateY(${tpOffset}px)`;tpRaf=requestAnimationFrame(tpTick)}
 function startTp(){if(!pdfText.trim())return;tpRunning=true;tpPause.textContent='Ⅱ Jeda';if(tpOffset===0)tpOffset=Math.min(0,innerHeight*.28);tpTick()}
 function openPdfReader(d){stopTp();pdfCurrent=d;if(pdfURL)URL.revokeObjectURL(pdfURL);pdfURL=URL.createObjectURL(blobOfDoc(d));pdfTitle.textContent=d.name||'PDF Reader';pdfFrame.src=pdfURL;pdfOverlay.classList.add('open');pdfOverlay.setAttribute('aria-hidden','false')}
 function closePdfReader(){pdfOverlay.classList.remove('open');pdfOverlay.setAttribute('aria-hidden','true');pdfFrame.src='about:blank';if(pdfURL)URL.revokeObjectURL(pdfURL);pdfURL=null;pdfCurrent=null}
 async function ensurePdfJs(){if(window.pdfjsLib)return window.pdfjsLib;if(window.__rc71PdfJsPromise)return window.__rc71PdfJsPromise;window.__rc71PdfJsPromise=new Promise((resolve,reject)=>{const sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';sc.async=true;sc.onload=()=>{try{window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';resolve(window.pdfjsLib)}catch(e){reject(e)}};sc.onerror=()=>reject(new Error('PDF.js tidak dapat dimuat. Teleprompter memerlukan koneksi internet saat pertama kali digunakan.'));document.head.appendChild(sc)});return window.__rc71PdfJsPromise}
-async function extractPdfText(d){const lib=await ensurePdfJs();const data=d.blob instanceof ArrayBuffer?d.blob:await blobOfDoc(d).arrayBuffer();const pdf=await lib.getDocument({data,disableWorker:true}).promise;const parts=[];for(let n=1;n<=pdf.numPages;n++){const page=await pdf.getPage(n),tc=await page.getTextContent();const lines=[];let lastY=null,line='';for(const it of tc.items){const str=(it.str||'').trim();if(!str)continue;const y=it.transform?.[5]??null;if(lastY!==null&&y!==null&&Math.abs(y-lastY)>4){if(line.trim())lines.push(line.trim());line=''}line+=(line?' ':'')+str;lastY=y}if(line.trim())lines.push(line.trim());parts.push(`[Halaman ${n}]\n`+lines.join('\n'))}return parts.join('\n\n').replace(/\n{3,}/g,'\n\n').trim()}
+async function extractPdfText(d){const lib=await ensurePdfJs();const data=d.blob instanceof ArrayBuffer?d.blob:await blobOfDoc(d).arrayBuffer();const pdf=await lib.getDocument({data}).promise;const parts=[];for(let n=1;n<=pdf.numPages;n++){const page=await pdf.getPage(n),tc=await page.getTextContent();const lines=[];let lastY=null,line='';for(const it of tc.items){const str=(it.str||'').trim();if(!str)continue;const y=it.transform?.[5]??null;if(lastY!==null&&y!==null&&Math.abs(y-lastY)>4){if(line.trim())lines.push(line.trim());line=''}line+=(line?' ':'')+str;lastY=y}if(line.trim())lines.push(line.trim());parts.push(`[Halaman ${n}]\n`+lines.join('\n'))}return parts.join('\n\n').replace(/\n{3,}/g,'\n\n').trim()}
 async function openPdfTeleprompter(d){stopTp();pdfCurrent=d;tpTitle.textContent=(d.name||'PDF')+' • Teleprompter';tpText.textContent='Mengekstrak teks PDF…';tpText.style.transform='translateY(28vh)';tpOffset=0;tpOverlay.classList.add('open');tpOverlay.setAttribute('aria-hidden','false');tpStatus.textContent='Memproses…';updateTpSpeed();updateTpFont();try{pdfText=await extractPdfText(d);if(!pdfText)throw Error('PDF tidak mengandung teks yang dapat diekstrak.');tpText.textContent=pdfText;tpOffset=0;tpText.style.transform='translateY(28vh)';tpStatus.textContent=pdfText.length.toLocaleString('id-ID')+' karakter'}catch(e){pdfText='';tpText.textContent='Teleprompter tidak dapat membaca teks PDF ini. Jika PDF berupa scan/gambar, diperlukan OCR.';tpStatus.textContent=e.message||'Gagal membaca PDF'}}
 function closeTp(){stopTp();tpOverlay.classList.remove('open');tpOverlay.setAttribute('aria-hidden','true');pdfCurrent=null;pdfText='';tpOffset=0}
 function renderPdfList(){if(!pdfList||!pdfEmpty)return;pdfList.innerHTML='';const arr=pdfItems.filter(isPdfDoc);pdfEmpty.hidden=arr.length>0;arr.forEach(d=>{const c=document.createElement('div');c.className='media-card';c.innerHTML=`<div class="media-card-head"><span class="media-card-icon">📄</span><div class="media-card-title">${esc(d.name||'Dokumen PDF')}</div><small>PDF • ${Math.max(1,Math.round((d.size||0)/1024))} KB</small></div><div class="media-card-actions"><button class="action primary" data-open>📖 Buka PDF</button><button class="action" data-tp>▶ Teleprompter</button><button class="action" data-del>Hapus</button></div>`;c.querySelector('[data-open]').onclick=()=>openPdfReader(d);c.querySelector('[data-tp]').onclick=()=>openPdfTeleprompter(d);c.querySelector('[data-del]').onclick=async()=>{if(confirm('Hapus PDF ini dari penyimpanan perangkat?')){await deleteDocument(d.id);await reloadPdfs();toast2('PDF dihapus')}};pdfList.appendChild(c)})}
@@ -4010,8 +3379,18 @@ $('mediaExportAllBtn')?.addEventListener('click',exportAllMedia);
  const r=await mirrorAllMedia();
  console.info('MEDIA_STORAGE mirror',r);
 })();
-$('mediaImportPdfBtn')?.addEventListener('click',()=>$('mediaImportPdfInput')?.click());
-$('mediaImportPdfInput')?.addEventListener('change',async e=>{for(const f of e.target.files||[]){try{await window.RC71ImportStorage.importDocument(f)}catch(err){console.warn(err);toast2('Impor PDF gagal: '+err.message)}}e.target.value=''});
+$('mediaImportPdfInput')?.addEventListener('change',async e=>{
+ const files=[...(e.target.files||[])];
+ if(!files.length)return;
+ let ok=0;
+ for(const f of files){
+  try{await window.RC71ImportStorage.importDocument(f);ok++;}
+  catch(err){console.warn('PDF import failed',err);toast2('Impor PDF gagal: '+(err?.message||'File tidak dapat disimpan'));}
+ }
+ e.target.value='';
+ if(ok)toast2(ok+' PDF berhasil diimpor');
+ await reloadPdfs();
+});
 $('rc71PdfClose')?.addEventListener('click',closePdfReader);$('rc71PdfTpBtn')?.addEventListener('click',()=>pdfCurrent&&openPdfTeleprompter(pdfCurrent));$('rc71TpClose')?.addEventListener('click',closeTp);tpPause?.addEventListener('click',()=>{if(tpRunning)stopTp();else startTp()});$('rc71TpSlow')?.addEventListener('click',()=>{tpSpeed=Math.max(.2,+(tpSpeed-.1).toFixed(1));updateTpSpeed()});$('rc71TpFast')?.addEventListener('click',()=>{tpSpeed=Math.min(3,+(tpSpeed+.1).toFixed(1));updateTpSpeed()});$('rc71TpFontDown')?.addEventListener('click',()=>{tpFont=Math.max(18,tpFont-2);updateTpFont()});$('rc71TpFontUp')?.addEventListener('click',()=>{tpFont=Math.min(64,tpFont+2);updateTpFont()});$('rc71TpRestart')?.addEventListener('click',()=>{stopTp();tpOffset=0;tpText.style.transform='translateY(28vh)'});$('rc71PdfFullBtn')?.addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await pdfOverlay.requestFullscreen?.({navigationUI:'hide'})}catch{}});document.addEventListener('rc71-documents-updated',reloadPdfs);document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(tpOverlay.classList.contains('open'))closeTp();else if(pdfOverlay.classList.contains('open'))closePdfReader()}});
 (async()=>{await seedBuiltins();await reload();await reloadPdfs()})();
 })();
@@ -4408,9 +3787,9 @@ const $=id=>document.getElementById(id);
 const ov=$('rc71PdfVisualTpOverlay'), vp=$('rc71VtpViewport'), pages=$('rc71VtpPages');
 const title=$('rc71VtpTitle'), pause=$('rc71VtpPause'), speedLabel=$('rc71VtpSpeedLabel'), status=$('rc71VtpStatus');
 if(!ov||!vp||!pages)return;
-let running=false, raf=0, last=0, speed=+(localStorage.getItem('rc71-vtp-speed')||40), current=null, pdfUrl=null;
+let running=false, raf=0, last=0, speed=+(SAFE_STORE.getItem('rc71-vtp-speed')||40), current=null, pdfUrl=null;
 const speeds=[10,20,30,40,55,70,90,120,160,220];
-function clampSpeed(){speed=Math.max(10,Math.min(220,speed));localStorage.setItem('rc71-vtp-speed',String(speed));speedLabel.textContent=speed+' px/s'}
+function clampSpeed(){speed=Math.max(10,Math.min(220,speed));SAFE_STORE.setItem('rc71-vtp-speed',String(speed));speedLabel.textContent=speed+' px/s'}
 function stop(){running=false;cancelAnimationFrame(raf);raf=0;last=0;pause.textContent='▶ Auto Scroll'}
 function tick(t){if(!running)return;if(!last)last=t;const dt=Math.min(80,t-last);last=t;vp.scrollTop+=speed*dt/1000; if(vp.scrollTop+vp.clientHeight>=vp.scrollHeight-2){stop();status.textContent='Selesai • semua halaman telah dibaca';return}raf=requestAnimationFrame(tick)}
 function start(){if(vp.scrollHeight<=vp.clientHeight+2)return;running=true;pause.textContent='Ⅱ Jeda';last=0;raf=requestAnimationFrame(tick)}
@@ -4434,9 +3813,9 @@ async function renderPdf(d){
  try{
   const lib=await ensurePdfJs();
   const bytes=await toBlob(d).arrayBuffer();
-  const pdf=await lib.getDocument({data:bytes,disableWorker:true}).promise;
+  const pdf=await lib.getDocument({data:bytes}).promise;
   pages.innerHTML='';
-  const tabletPortrait=window.matchMedia('(orientation:portrait) and (min-width:768px)').matches; const maxW=Math.max(320,Math.min(window.innerWidth*(tabletPortrait?.82:(innerWidth>innerHeight?.94:.86)),1250));
+  const maxW=Math.max(320,Math.min(window.innerWidth*(innerWidth>innerHeight?.86:.94),1250));
   for(let n=1;n<=pdf.numPages;n++){
    const page=await pdf.getPage(n);
    const base=page.getViewport({scale:1});
@@ -4467,8 +3846,7 @@ function findPdfFromTarget(target){
  }
  return null;
 }
-async function getDocs(){const db=await window.RC71ImportStorage.openDB();return new Promise((resolve,reject)=>{const q=db.transaction('documents','readonly').objectStore('documents').getAll();q.onsuccess=()=>resolve(q.result||[]);q.onerror=()=>reject(q.error)})}
-async function openCurrentReaderPdf(){try{const name=$('rc71PdfTitle')?.textContent?.trim();const docs=await getDocs();const d=docs.find(x=>(x.name||'')===name);if(d)await open(d);else throw new Error('PDF tidak ditemukan di penyimpanan impor.')}catch(err){console.error(err);alert('Teleprompter PDF gagal dibuka: '+err.message)}}
+async function getDocs(){return new Promise((resolve,reject)=>{const r=indexedDB.open('RC71_IMPORT_STORAGE',3);r.onsuccess=()=>{const db=r.result;const q=db.transaction('documents','readonly').objectStore('documents').getAll();q.onsuccess=()=>resolve(q.result||[]);q.onerror=()=>reject(q.error)};r.onerror=()=>reject(r.error)})}
 async function openByName(name){const docs=await getDocs();const d=docs.find(x=>(x.name||'')===name);if(d)await open(d);else alert('File PDF tidak ditemukan di penyimpanan impor.')}
 // Capture before the old text-extraction Teleprompter handlers. This preserves the PDF page exactly, including its original colors.
 document.addEventListener('click',async e=>{
@@ -4478,10 +3856,9 @@ document.addEventListener('click',async e=>{
  e.preventDefault();e.stopImmediatePropagation();
  try{
   if(tpBtn){const name=findPdfFromTarget(tpBtn);if(name)await openByName(name)}
-  else {await openCurrentReaderPdf()}
+  else {const name=$('rc71PdfTitle')?.textContent?.trim();const docs=await getDocs();const d=docs.find(x=>(x.name||'')===name);if(d)await open(d)}
  }catch(err){console.error(err);alert('Teleprompter PDF gagal dibuka: '+err.message)}
 },true);
-$('rc71PdfTpBtn')?.addEventListener('click',openCurrentReaderPdf);
 pause.onclick=toggle;
 $('rc71VtpSlow').onclick=()=>{speed-=10;clampSpeed()};
 $('rc71VtpFast').onclick=()=>{speed+=10;clampSpeed()};
@@ -4496,51 +3873,10 @@ window.RC71VisualPDFTeleprompter={open,close,start,stop};
 })();
 </script>
 
-
-<script id="rc71-ipad-ios-pdf-script">
-(()=>{
-'use strict';
-const isIPad=/iPad|Macintosh/.test(navigator.userAgent)&&('ontouchend' in document);
-if(!isIPad)return;
-// iPadOS Safari: keep the PDF as a visual canvas, but cap rendering dimensions to avoid
-// unnecessary Retina memory pressure and yield between pages for smoother scrolling.
-const originalGetContext=HTMLCanvasElement.prototype.getContext;
-// Do not replace canvas rendering APIs globally. Instead expose a small marker used by
-// the existing renderer and provide a stable viewport resize handler.
-document.documentElement.dataset.platform='ipad-ios';
-window.RC71_IPAD_IOS_PDF={enabled:true,maxCssWidth:1120,maxCanvasPixels:12500000};
-
-const fit=()=>{
- const vp=document.getElementById('rc71VtpViewport');
- if(!vp)return;
- vp.style.webkitOverflowScrolling='touch';
- vp.style.touchAction='pan-y pinch-zoom';
-};
-window.addEventListener('orientationchange',()=>setTimeout(fit,250),{passive:true});
-window.addEventListener('resize',()=>setTimeout(fit,100),{passive:true});
-fit();
-
-// iPad Safari has no reliable requestFullscreen() for a generic div. The existing
-// fullscreen button already has a CSS fallback; make that fallback explicit for PDF TP.
-const full=document.getElementById('rc71VtpFull');
-const ov=document.getElementById('rc71PdfVisualTpOverlay');
-if(full&&ov){
- full.addEventListener('click',async e=>{
-   if(!document.fullscreenElement && !document.webkitFullscreenElement && !ov.classList.contains('rc71-ipad-fullscreen-fallback')){
-     // Let the original handler run first. If Safari declines it, the next frame uses CSS fullscreen.
-     setTimeout(()=>{
-       if(!document.fullscreenElement&&!document.webkitFullscreenElement){
-         ov.classList.add('rc71-ipad-fullscreen-fallback');
-         document.body.style.overflow='hidden';
-         full.textContent='⛶ Keluar Fullscreen';
-       }
-     },120);
-   }
- },{capture:false});
+<script id="rc71-pwa-register">
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 }
-const close=document.getElementById('rc71VtpClose');
-if(close)close.addEventListener('click',()=>{ov?.classList.remove('rc71-ipad-fullscreen-fallback');document.body.style.overflow='';},{passive:true});
-})();
 </script>
 </body>
 </html>

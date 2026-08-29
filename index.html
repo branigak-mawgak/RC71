@@ -11,12 +11,14 @@ Do not alter the Waqi'ah 74–96 numbering/content without a new revision.
 <!-- RC54 STABLE CANONICAL: legacy patch cleanup; canonical gallery + editor retained. -->
 <!DOCTYPE html>
 <!-- RC46 -->
-<html lang="id" data-build="personal-v1.0-rc54-stable-canonical">
+<html lang="id" data-build="RC71-V7.0-iPad-10.9-GitHub">
 <head>
+<meta name="description" content="Amalan Muslim RC71 V7.0 iPad 10.9 Edition">
+
 <meta name="amalan-build" content="RC54-STABLE-CANONICAL">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Amalan Muslim — RC71 V6.1.4 PDF PWA iPad FIX IMPORT</title>
+<title>Amalan Muslim RC71 V7.0 — iPad 10.9 Edition</title>
 <script id="tuned-safe-storage">
 (function(){
   'use strict';
@@ -36,14 +38,6 @@ Do not alter the Waqi'ah 74–96 numbering/content without a new revision.
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta content="telephone=no" name="format-detection"/>
 <meta content="light dark" name="color-scheme"/>
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="application-name" content="Amalan Muslim RC71">
-<meta name="apple-mobile-web-app-title" content="Amalan Muslim">
-<meta name="format-detection" content="telephone=no">
 <meta content="#0c6b4f" name="theme-color"/><style>
 :root{--bg:#edf4ef;--paper:#fffdf6;--ink:#18221d;--muted:#6a756f;--accent:#0c6b4f;--accent2:#d2a84a;--line:#d7e3dc;--shadow:0 14px 40px rgba(0,0,0,.18);--fs:20px;--c1:#0b6b50;--c2:#2456a6;--c3:#7b3fa1;--c4:#9a5a12;--c5:#9b2c2c}
 html[data-theme="dark"]{--bg:#101512;--paper:#18201c;--ink:#eef5f0;--muted:#aab7af;--accent:#6ad6ad;--accent2:#e3c36c;--line:#34433a;--c1:#7de0b8;--c2:#8eb7ff;--c3:#d2a2f0;--c4:#f2c56f;--c5:#ff9b9b}html[data-theme="sepia"]{--bg:#e8dcc4;--paper:#f7efd9;--ink:#463824;--muted:#806f55;--accent:#7b4f26;--accent2:#b1873a;--line:#d8c9aa;--c1:#386641;--c2:#365f91;--c3:#765084;--c4:#8a5b18;--c5:#873f3f}
@@ -1018,290 +1012,16 @@ body.rc71-native-pip-active{
 }
 </style>
 
-<script>
-(function(){
-  try {
-    if(location.protocol==='file:') document.documentElement.classList.add('rc71-local-file');
-  } catch(e){}
-})();
-</script>
-
-<style id="rc71-v7-ipad-reading-layout">
-/* RC71 V7 — iPad reading layout + non-overlapping ayah numbering.
-   Reference target: wide portrait reader and full-width landscape reader,
-   with a dedicated number column so text can never sit underneath the badge. */
-html,body{max-width:100vw!important;overflow-x:hidden!important}
-
-/* iPad portrait: use almost the entire available reading width. */
-@media (min-width:700px) and (orientation:portrait){
-  .reader-wrap{
-    width:100vw!important;
-    max-width:100vw!important;
-    padding:14px 16px calc(92px + env(safe-area-inset-bottom))!important;
-    overflow-x:hidden!important;
-  }
-  .book{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:24px clamp(22px,3.2vw,38px) 48px!important;
-    border-radius:16px!important;
-  }
-  .chapter{width:100%!important;max-width:none!important}
-  .para{width:100%!important;max-width:none!important;padding:10px 8px!important}
-  .para.ayah{
-    display:grid!important;
-    grid-template-columns:44px minmax(0,1fr)!important;
-    column-gap:12px!important;
-    align-items:start!important;
-    padding-left:0!important;
-    padding-right:8px!important;
-  }
-  .para.ayah .ayah-no{
-    position:static!important;
-    grid-column:1!important;
-    grid-row:1!important;
-    width:34px!important;
-    height:34px!important;
-    min-width:34px!important;
-    margin:2px 0 0 0!important;
-    justify-self:center!important;
-  }
-  .para.ayah > :not(.ayah-no){grid-column:2!important;min-width:0!important}
-}
-
-/* iPad landscape: reading area fills the screen up to the right navigation. */
-@media (min-width:700px) and (orientation:landscape){
-  :root{--rc71-ipad-nav-width:82px}
-  .reader-wrap,#reader{
-    width:calc(100vw - var(--rc71-ipad-nav-width) - 10px)!important;
-    max-width:none!important;
-    padding:8px 8px calc(70px + env(safe-area-inset-bottom)) 10px!important;
-    overflow-x:hidden!important;
-  }
-  .book{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:20px clamp(22px,2.4vw,38px) 42px!important;
-    border-radius:10px!important;
-  }
-  .chapter{width:100%!important;max-width:none!important}
-  .para{width:100%!important;max-width:none!important;padding:10px 8px!important}
-  .para.ayah{
-    display:grid!important;
-    grid-template-columns:46px minmax(0,1fr)!important;
-    column-gap:14px!important;
-    align-items:start!important;
-    padding-left:0!important;
-    padding-right:8px!important;
-  }
-  .para.ayah .ayah-no{
-    position:static!important;
-    grid-column:1!important;
-    grid-row:1!important;
-    width:34px!important;
-    height:34px!important;
-    min-width:34px!important;
-    margin:2px 0 0 0!important;
-    justify-self:center!important;
-  }
-  .para.ayah > :not(.ayah-no){grid-column:2!important;min-width:0!important}
-}
-
-/* Desktop/non-iPad remains conservative; the iPad rules above are the only
-   breakpoint-specific expansion. */
-.para.ayah .ayah-no{z-index:1!important;flex:none!important}
-</style>
-
-
-<style id="rc71-v8-ipad-reading-final">
-/* RC71 V8 FINAL — iPad reading layout
-   1) Portrait: reading paper nearly fills the iPad width.
-   2) Landscape: reading area extends to the left edge of the right navigation rail.
-   3) Ayah number is a dedicated flex column; text starts after the number and wraps only in its own column.
-   4) iPad-specific padding/margins are deliberately compact for maximum reading area. */
-
-@media (min-width:700px) and (orientation:portrait){
-  .reader-wrap{
-    width:100%!important;
-    max-width:none!important;
-    padding:8px 10px calc(76px + env(safe-area-inset-bottom))!important;
-    overflow-x:hidden!important;
-  }
-  .book{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:18px 18px 42px!important;
-    border-radius:12px!important;
-  }
-  .chapter{width:100%!important;max-width:none!important;padding-top:10px!important}
-  .chapter h2{padding:10px 0 8px!important;margin:0!important}
-  .para{
-    width:100%!important;
-    max-width:none!important;
-    margin:0 0 7px!important;
-    padding:8px 4px!important;
-    line-height:1.65!important;
-  }
-  .para.ayah{
-    display:flex!important;
-    align-items:flex-start!important;
-    gap:12px!important;
-    padding-left:0!important;
-    padding-right:4px!important;
-    min-width:0!important;
-  }
-  .para.ayah .ayah-no{
-    position:static!important;
-    flex:0 0 34px!important;
-    width:34px!important;
-    min-width:34px!important;
-    height:34px!important;
-    margin:1px 0 0 0!important;
-    display:grid!important;
-    place-items:center!important;
-  }
-  .para.ayah{
-    overflow-wrap:anywhere!important;
-    word-break:normal!important;
-  }
-}
-
-@media (min-width:700px) and (orientation:landscape){
-  :root{--rc71-right-nav-reserve:72px}
-  .reader-wrap,
-  #reader{
-    width:calc(100% - var(--rc71-right-nav-reserve))!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:6px 6px 12px 8px!important;
-    overflow-x:hidden!important;
-  }
-  .book{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:16px 20px 34px!important;
-    border-radius:10px!important;
-  }
-  .chapter{width:100%!important;max-width:none!important;padding-top:8px!important}
-  .chapter h2{padding:8px 0 7px!important;margin:0!important}
-  .para{
-    width:100%!important;
-    max-width:none!important;
-    margin:0 0 5px!important;
-    padding:7px 4px!important;
-    line-height:1.58!important;
-  }
-  .para.ayah{
-    display:flex!important;
-    align-items:flex-start!important;
-    gap:14px!important;
-    padding-left:0!important;
-    padding-right:4px!important;
-    min-width:0!important;
-    overflow-wrap:anywhere!important;
-    word-break:normal!important;
-  }
-  .para.ayah .ayah-no{
-    position:static!important;
-    flex:0 0 36px!important;
-    width:36px!important;
-    min-width:36px!important;
-    height:36px!important;
-    margin:0!important;
-    display:grid!important;
-    place-items:center!important;
-  }
-  /* In fullscreen the actual right rail is ~58px wide. */
-  body.app-fullscreen .reader-wrap,
-  html:fullscreen .reader-wrap,
-  html:-webkit-full-screen .reader-wrap{
-    width:calc(100% - 70px)!important;
-    padding-right:4px!important;
-  }
-}
-
-/* The direct text after .ayah-no becomes an anonymous flex item.  These rules
-   prevent it from shrinking under the number and keep long words inside the text column. */
-.para.ayah{min-width:0!important;}
-.para.ayah > .ayah-no{z-index:1!important;}
-</style>
-
-
-<style id="rc71-paragraph-cleanup">
-/* RC71 paragraph cleanup — compact spacing + stable Latin wrapping */
-.para{
-  line-height:1.45!important;
-  margin:0 0 3px!important;
-  padding:3px 8px!important;
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-  white-space:normal!important;
-}
-.para.semanticized{}
-.semantic{
-  padding:0 1px!important;
-  font-weight:600!important;
-  white-space:normal!important;
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-}
-.ayah{padding-left:42px!important;}
-.ayah-no{top:5px!important;}
-@media(min-width:760px){
-  .para{padding:3px 8px!important;}
-}
-</style>
-
-<style id="rc71-paragraph-cleanup-final">
-/* RC71 FINAL — compact paragraphs / stable semantic phrase flow on iPad */
-.para{
-  margin-top:0!important;
-  margin-bottom:1px!important;
-  padding-top:1px!important;
-  padding-bottom:1px!important;
-  padding-left:4px!important;
-  padding-right:4px!important;
-  line-height:1.38!important;
-  text-align:left!important;
-  letter-spacing:normal!important;
-  word-spacing:normal!important;
-  white-space:normal!important;
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-}
-.para .semantic{
-  display:inline!important;
-  margin:0!important;
-  padding:0!important;
-  letter-spacing:normal!important;
-  word-spacing:normal!important;
-  white-space:normal!important;
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-  vertical-align:baseline!important;
-}
-.para .semantic + .semantic{margin-left:0!important}
-.para.ayah{row-gap:0!important}
-@media (min-width:700px) and (orientation:portrait){
-  .para{margin-bottom:1px!important;padding-top:1px!important;padding-bottom:1px!important;line-height:1.38!important}
-}
-@media (min-width:700px) and (orientation:landscape){
-  .para{margin-bottom:1px!important;padding-top:1px!important;padding-bottom:1px!important;line-height:1.38!important}
-}
-</style>
 </head>
-<body data-revision="RC71-V7-IPAD-WIDE-READING-NONOVERLAP" data-amalan-build="RC71-V7-IPAD-WIDE-READING-NONOVERLAP">
+<body data-revision="RC71-V6.1.9-NAV-SC-FINETUNE" data-amalan-build="RC71-V6.1.9-NAV-SC-FINETUNE">
 <button aria-label="Smart Counter manual" id="manualSmartCounterBtn" title="Smart Counter Manual" type="button">🔢</button><button aria-label="Kurangi satu hitungan" class="counter-undo" id="counterUndo" type="button">↶ Kurangi</button>
 <button aria-label="Lanjutkan Auto Fokus dan tutup Smart Counter" class="counter-continue" id="counterContinue" type="button">▶ Lanjut Auto Fokus</button>
 <button aria-label="Tambah hitungan dzikir" class="counter-fab" id="counterFab" type="button"><span class="counter-value" id="counterValue">0 / 33</span><span class="counter-mini-progress"><i id="counterProgress"></i></span><span class="counter-label" id="counterLabel">Dzikir</span><span class="counter-hint">Ketuk +1</span></button>
 <nav aria-label="Kontrol Smart Counter" class="smart-counter-controls" id="smartCounterControls">
-<button aria-label="Jeda Smart Counter" class="stop" id="scStop" title="Stop / Jeda" type="button">Ⅱ</button>
-<button aria-label="Tambah hitungan" id="scNext" title="+1 hitungan" type="button">＋1</button>
-<button aria-label="Reset 0 dan keluar Smart Counter" class="exit" id="scExit" title="Reset 0 &amp; Exit" type="button">↺</button>
+<button aria-label="Kurangi 1" id="scMinus" title="−1" type="button">−1</button>
+<button aria-label="Tambah 1" id="scPlus" title="+1" type="button">＋1</button>
+<button aria-label="Reset ke 0" id="scReset" title="Reset 0" type="button">↺0</button>
+<button aria-label="Keluar Smart Counter" class="exit" id="scExit" title="Keluar" type="button">✕</button>
 </nav>
 <div aria-live="polite" class="counter-toast" id="counterToast">Selesai</div>
 <div class="progress"><i id="bar"></i></div><div class="app"><header><button aria-label="Buka menu" class="icon" id="menuBtn">☰</button><h1>Amalan Muslim</h1><button aria-label="Bookmark" class="icon" id="bookmarkBtn">🔖</button><button aria-label="Layar penuh" class="icon" id="appFullscreenBtn" title="Layar penuh">⛶</button><button aria-label="Ganti tema" class="icon" id="themeBtn">◐</button></header><main class="reader-wrap" id="reader"><article class="book"><section class="chapter" id="tawasulan" data-title="TAWASULAN">
@@ -1325,7 +1045,7 @@ html,body{max-width:100vw!important;overflow-x:hidden!important}
 <div class="cover-actions"><button class="action primary" data-nav-target="beranda" type="button">Buka Beranda</button></div>
 </section><section class="chapter" id="beranda"><h2>Beranda</h2>
 <div class="resume-card" id="resumeCard"><b>📖 Lanjutkan Bacaan</b><span id="resumeText">Belum ada posisi tersimpan.</span><br/><small id="resumeTime"></small><br/><button class="action primary" id="resumeHomeBtn" style="margin-top:9px">▶ Lanjutkan</button></div>
-<div class="home-grid"><button class="home-card ready" data-menu-id="panduan-ziarah" onclick="goTo('panduan-ziarah')"><span class="emoji">🕌</span><b>Panduan Ziarah Kubur</b><span>Salam, siram air, dan tabur bunga</span></button><button class="home-card ready" data-menu-id="tawasulan" onclick="goTo('tawasulan')"><span class="emoji">📿</span><b>TAWASULAN</b><span>Bacaan Tawassul</span></button><button class="home-card ready" data-menu-id="surat-yasin-ziarah" onclick="goTo('surat-yasin-ziarah')"><span class="emoji">📖</span><b>Surat Yasin</b><span>83 ayat • Ritual Ziarah</span></button><button class="home-card ready" data-menu-id="tahlil-ziarah" onclick="goTo('tahlil-ziarah')"><span class="emoji">📿</span><b>Tahlil</b><span>Bacaan Tahlil • Ritual Ziarah</span></button><button class="home-card ready" data-menu-id="surat-waqiah" onclick="goTo('surat-waqiah')"><span class="emoji">🌾</span><b>Surat Al-Waqi’ah</b><span>96 ayat</span></button><button class="home-card ready" data-menu-id="surat-mulk" onclick="goTo('surat-mulk')"><span class="emoji">🌙</span><b>Surat Al-Mulk</b><span>30 ayat</span></button><button class="home-card ready" data-menu-id="doa-1" onclick="goTo('doa-1')"><span class="emoji">🤲</span><b>Doa Setelah Sholat</b><span>Bacaan pilihan</span></button><button class="home-card ready" data-menu-id="doa-2" onclick="goTo('doa-2')"><span class="emoji">⭐</span><b>Doa Hajat</b><span>Bacaan pilihan</span></button><button class="home-card ready" data-menu-id="yasin-waqiah-tabarok" onclick="goTo('yasin-waqiah-tabarok')"><span class="emoji">📚</span><b>Yasin Waqiah Tabarok</b><span>Yasin • Al-Waqi’ah • Al-Mulk</span></button><button class="home-card ready" data-menu-id="library-bacaan" onclick="goTo('library-bacaan')"><span class="emoji">📚</span><b>Library Bacaan</b><span>Koleksi bacaan</span></button><button class="home-card ready" data-menu-id="galeri-foto" onclick="goTo('galeri-foto')"><span class="emoji">🎞️</span><b>Media Galeri</b><span>Foto, Audio &amp; Video</span></button><button class="home-card ready" data-menu-id="catatan" onclick="goTo('catatan')"><span class="emoji">📝</span><b>Catatan</b><span>Catatan pribadi</span></button></div><div class="repeat-demo" id="ziarah-playlist"><b>Mulai Cepat</b><small>Pilih bacaan yang akan dibuka.</small><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn" onclick="goTo('panduan-ziarah')" type="button">Panduan Ziarah</button><button class="btn" onclick="goTo('surat-yasin-ziarah')" type="button">📖 Yasin</button><button class="btn" onclick="goTo('tahlil-ziarah')" type="button">📿 Tahlil</button></div></div></section><section class="chapter" id="panduan-ziarah">
+<div class="home-grid"><button class="home-card ready" data-menu-id="panduan-ziarah" onclick="goTo('panduan-ziarah')"><span class="emoji">🕌</span><b>Panduan Ziarah Kubur</b><span>Salam, siram air, dan tabur bunga</span></button><button class="home-card ready" data-menu-id="tawasulan" onclick="goTo('tawasulan')"><span class="emoji">📿</span><b>TAWASULAN</b><span>Bacaan Tawassul</span></button><button class="home-card ready" data-menu-id="surat-yasin-ziarah" onclick="goTo('surat-yasin-ziarah')"><span class="emoji">📖</span><b>Surat Yasin</b><span>83 ayat • Ritual Ziarah</span></button><button class="home-card ready" data-menu-id="tahlil-ziarah" onclick="goTo('tahlil-ziarah')"><span class="emoji">📿</span><b>Tahlil</b><span>Bacaan Tahlil • Ritual Ziarah</span></button><button class="home-card ready" data-menu-id="doa-tahlil" onclick="goTo('doa-tahlil')"><span class="emoji">🤲</span><b>Doa Tahlil</b><span>Bacaan Doa Tahlil</span></button><button class="home-card ready" data-menu-id="surat-waqiah" onclick="goTo('surat-waqiah')"><span class="emoji">🌾</span><b>Surat Al-Waqi’ah</b><span>96 ayat</span></button><button class="home-card ready" data-menu-id="surat-mulk" onclick="goTo('surat-mulk')"><span class="emoji">🌙</span><b>Surat Al-Mulk</b><span>30 ayat</span></button><button class="home-card ready" data-menu-id="doa-1" onclick="goTo('doa-1')"><span class="emoji">🤲</span><b>Doa Umum</b><span>Bacaan pilihan</span></button><button class="home-card ready" data-menu-id="doa-2" onclick="goTo('doa-2')"><span class="emoji">⭐</span><b>Doa Hajat</b><span>Bacaan pilihan</span></button><button class="home-card ready" data-menu-id="yasin-waqiah-tabarok" onclick="goTo('yasin-waqiah-tabarok')"><span class="emoji">📚</span><b>Yasin Waqiah Tabarok</b><span>Yasin • Al-Waqi’ah • Al-Mulk</span></button><button class="home-card ready" data-menu-id="library-bacaan" onclick="goTo('library-bacaan')"><span class="emoji">📚</span><b>Library Bacaan</b><span>Koleksi bacaan</span></button><button class="home-card ready" data-menu-id="galeri-foto" onclick="goTo('galeri-foto')"><span class="emoji">🎞️</span><b>Galeri Foto</b><span>Foto, Audio &amp; Video</span></button><button class="home-card ready" data-menu-id="catatan" onclick="goTo('catatan')"><span class="emoji">📝</span><b>Catatan</b><span>Catatan pribadi</span></button></div><div class="repeat-demo" id="ziarah-playlist"><b>Mulai Cepat</b><small>Pilih bacaan yang akan dibuka.</small><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn" onclick="goTo('panduan-ziarah')" type="button">Panduan Ziarah</button><button class="btn" onclick="goTo('surat-yasin-ziarah')" type="button">📖 Yasin</button><button class="btn" onclick="goTo('tahlil-ziarah')" type="button">📿 Tahlil</button></div></div></section><section class="chapter" id="panduan-ziarah">
 <h2>Panduan Ziarah Kubur</h2>
 <div class="ziarah-prayer-block para" data-chapter="panduan-ziarah">
 <h3>1. Salam Masuk Area Pemakaman</h3>
@@ -1344,7 +1064,7 @@ html,body{max-width:100vw!important;overflow-x:hidden!important}
 </div>
 <div class="repeat-demo" style="margin-top:16px"><b>📖 Lanjutkan Ritual</b><small>Buka Surat Yasin atau Tahlil tanpa meninggalkan alur Ritual Ziarah.</small><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:9px"><button class="action primary" data-nav-target="surat-yasin-ziarah" type="button">📖 Buka Yasin</button><button class="action primary" data-nav-target="tahlil-ziarah" type="button">📿 Buka Tahlil</button></div></div>
 <div class="chapter-nav-row"><button class="action" data-nav-target="beranda" type="button">Daftar Isi</button></div>
-</section><section class="chapter" id="surat-yasin-ziarah"><h2>Surat Yasin</h2><span class="surah-status">RITUAL ZIARAH • 83 AYAT • PENOMORAN DIPERTAHANKAN</span><div class="repeat-demo" style="margin:12px 0 18px"><b>📿 Ritual Ziarah</b><small>Surat Yasin untuk ritual ziarah. Mode Fokus, Auto Fokus, Auto Scroll, Karaoke, dan Smart Counter tetap tersedia.</small></div><h3 style="color:var(--accent);margin:18px 0 10px">📖 Surat Yasin</h3><p class="para latin" data-chapter="surat-yasin-ziarah">Surat Yasin</p><p class="para latin ayah" data-ayah="1" data-chapter="surat-yasin-ziarah"><span class="ayah-no">1</span>Yaa Siin</p><p class="para latin ayah" data-ayah="2" data-chapter="surat-yasin-ziarah"><span class="ayah-no">2</span>Wal Qur'AaniL haKiim</p><p class="para latin ayah" data-ayah="3" data-chapter="surat-yasin-ziarah"><span class="ayah-no">3</span>inNaka laminal MursaLiin</p><p class="para latin ayah" data-ayah="4" data-chapter="surat-yasin-ziarah"><span class="ayah-no">4</span>‘ALaa ShiRooThim MustaQiim</p><p class="para latin ayah" data-ayah="5" data-chapter="surat-yasin-ziarah"><span class="ayah-no">5</span>TanZiilal ‘aZiizirRohiim</p><p class="para latin ayah" data-ayah="6" data-chapter="surat-yasin-ziarah"><span class="ayah-no">6</span>LitundZiro Qoumam Maa UndZiro AaBaa ‘Uhum Fahum GhoofiLuun</p><p class="para latin ayah" data-ayah="7" data-chapter="surat-yasin-ziarah"><span class="ayah-no">7</span>Laqod HaqQoL QouLu ‘ALaa AktSarihim Fahum Laa Yuq’miNuun</p><p class="para latin ayah" data-ayah="8" data-chapter="surat-yasin-ziarah"><span class="ayah-no">8</span>inNaa Ja‘alNaa Fii 'AqNaaqihim AGhLaalan Fahiya ilal AdZQooni Fahum Muq'mahuun</p><p class="para latin ayah" data-ayah="9" data-chapter="surat-yasin-ziarah"><span class="ayah-no">9</span>Wa Ja‘alNaa MimBaini aiDiihim SadDau Wa min Kholfihim SadDan Fa 'AGhSyaiNaahum Fahum Laa YubShiRuun</p><p class="para latin ayah" data-ayah="10" data-chapter="surat-yasin-ziarah"><span class="ayah-no">10</span>Wa SaWaa’un ‘alaihim A’andZar Tahum Amlam TundZirHum Laa Yuq’miNuun</p><p class="para latin ayah" data-ayah="11" data-chapter="surat-yasin-ziarah"><span class="ayah-no">11</span>in-NaMaa TundZiru ManitTaba ‘AdZ-dZikro Wa KhoSyiyar RohMaana BilGhoib; Fabasy-Syirhu Bima FiroTiu Wa Ajring KaRiim</p><p class="para latin ayah" data-ayah="12" data-chapter="surat-yasin-ziarah"><span class="ayah-no">12</span>inNaa Nahnu Nuhyil MauTaa WanakTubu Maa QodDaMuu Wa AatSaaroHum Wa Kulla Syai’in ahShoi-Naahu Fii iMaamim MuBiin</p><p class="para latin ayah" data-ayah="13" data-chapter="surat-yasin-ziarah"><span class="ayah-no">13</span>WaDhriB LaHum MatSalan Ash-haabaL Qoryati idZ Jaa‘aHaL MursaLuun</p><p class="para latin ayah" data-ayah="14" data-chapter="surat-yasin-ziarah"><span class="ayah-no">14</span>idZ ArsalNaa ilaihi MutSnaini FakadZ-dZaBuu HuMaa Fa ‘AzZazNaa Bi-tSaaLitSin FaQooLuu inNaa ilaikum MursaLuun</p><p class="para latin ayah" data-ayah="15" data-chapter="surat-yasin-ziarah"><span class="ayah-no">15</span>QooLuu Maa Antum illaa  BaSyarum MitSluna Wa Maa AnzaLar RohMaanu MinSyai’in inAntum illaa  TakdZiBuun</p><p class="para latin ayah" data-ayah="16" data-chapter="surat-yasin-ziarah"><span class="ayah-no">16</span>QooLuu RobBuNaa Yaq’lamu inNaa ilaikum lamur SaLuun</p><p class="para latin ayah" data-ayah="17" data-chapter="surat-yasin-ziarah"><span class="ayah-no">17</span>Wa Maa ‘alaiNaa illal BaLaaGhuL MuBiin</p><p class="para latin ayah" data-ayah="18" data-chapter="surat-yasin-ziarah"><span class="ayah-no">18</span>QooLuu inNaa taThoiyarNaa Bikum; Lail-lam TanTahuu lanar Juman-Nakum Wa Layamas-SanNakum MinNaa ‘adZaabun Aliim</p><p class="para latin ayah" data-ayah="19" data-chapter="surat-yasin-ziarah"><span class="ayah-no">19</span>QooLuu Thoo'irukum Ma‘Akum A’in dZukKirtum BaL Antum Qoumum MusriFuun</p><p class="para latin ayah" data-ayah="20" data-chapter="surat-yasin-ziarah"><span class="ayah-no">20</span>Wa Jaa'Amin AqShol MaDiinati Rojului Yas‘Aa Qoola Yaa Qoumit Tabi‘uL MursaLiin</p><p class="para latin ayah" data-ayah="21" data-chapter="surat-yasin-ziarah"><span class="ayah-no">21</span>itTabi'Uu MaLLaa Yas’alukum Ajrou Wa Hum MuhtaDuun</p><p class="para latin ayah" data-ayah="22" data-chapter="surat-yasin-ziarah"><span class="ayah-no">22</span>Wa Maa Liya Laa Aq‘Budul LadZii FaThoroNii Wa ilaihi Turja'Uun</p><p class="para latin ayah" data-ayah="23" data-chapter="surat-yasin-ziarah"><span class="ayah-no">23</span>A’atTaKhidZu MinDuunihii Aalihatan iiyuridnir RohMaanu BiDhurRiL Laa TuGhni ‘AnNii SyaFaa ‘Atuhum Syai'au Wa Laa YunqidZuun</p><p class="para latin ayah" data-ayah="24" data-chapter="surat-yasin-ziarah"><span class="ayah-no">24</span>inNii idZal LaFii DhoLaaLin MuBiin</p><p class="para latin ayah" data-ayah="25" data-chapter="surat-yasin-ziarah"><span class="ayah-no">25</span>inNii Aamantu BirobBikum Fasma'Uun</p><p class="para latin ayah" data-ayah="26" data-chapter="surat-yasin-ziarah"><span class="ayah-no">26</span>Qiilad Khulil JanNah; Qoola Yaa Laita QouMii Yaq‘laMuun</p><p class="para latin ayah" data-ayah="27" data-chapter="surat-yasin-ziarah"><span class="ayah-no">27</span>BiMaa Ghofaro Lii RobBii Waj'AaLaNii MinaL MukroMiim</p><p class="para latin ayah" data-ayah="28" data-chapter="surat-yasin-ziarah"><span class="ayah-no">28</span>Wa Maa AnzaLNaa ‘aLaa Qoumihii MimBa’dihii min Jundim Minas-SaMaa’i Wa Maa KunNaa MunZiLiin</p><p class="para latin ayah" data-ayah="29" data-chapter="surat-yasin-ziarah"><span class="ayah-no">29</span>in Kaanat illaa  Shoihatau Waahidatan Fa’idZaaHum KhoomiDuun</p><p class="para latin ayah" data-ayah="30" data-chapter="surat-yasin-ziarah"><span class="ayah-no">30</span>Yaa Hasrotan ‘alal ‘iBaad; Maa Yaq’Tiihim MirRoSuuLin illaa  KaaNuu Bihii YasTahZi’uun</p><p class="para latin ayah" data-ayah="31" data-chapter="surat-yasin-ziarah"><span class="ayah-no">31</span>Alam YaRou Kam AHlakNaa QoBlaHum MinaL QuRuuni AnNahum ilaihim Laa Yarji'Un</p><p class="para latin ayah" data-ayah="32" data-chapter="surat-yasin-ziarah"><span class="ayah-no">32</span>Wa in Kullul lamMaa JaMii‘ul LadaiNaa MuhDhoRuun</p><p class="para latin ayah" data-ayah="33" data-chapter="surat-yasin-ziarah"><span class="ayah-no">33</span>Wa Aayatul LaHumul ArDhul Maitatu AhyaiNaaHaa Wa AKhrojNaa MinHaa habBan FaminHu Yaq’kuLuun</p><p class="para latin ayah" data-ayah="34" data-chapter="surat-yasin-ziarah"><span class="ayah-no">34</span>Waj'AalNaa FiiHaa JanNaatim MinNaKhiiliu Wa Aq‘Naabiu Wa FajJarNaa FiiHaa Minal ‘uYuun</p><p class="para latin ayah" data-ayah="35" data-chapter="surat-yasin-ziarah"><span class="ayah-no">35</span>Liyaq’kuLuu min tSamarihii Wa Maa ‘Amilat-hu AiDiihim; AfaLaa YaSykuRuun</p><p class="para latin ayah" data-ayah="36" data-chapter="surat-yasin-ziarah"><span class="ayah-no">36</span>SuBhaanal-LadZii KhoLaqoL azWaaja KullaHaa Mim-Maa  TunBituL ArDhu Wa min AnfuSihim Wa Mim-maa  Laa Yaq‘laMuun</p><p class="para latin ayah" data-ayah="37" data-chapter="surat-yasin-ziarah"><span class="ayah-no">37</span>Wa Aayatul LaHumul Lailu NasLaKhu Minhun NaHaaro FaidZaaHum MuZhliMuun</p><p class="para latin ayah" data-ayah="38" data-chapter="surat-yasin-ziarah"><span class="ayah-no">38</span>Wasy Syamsu TajRii Limus TaqorRiL LaHaa; dZaaLika TaqDiiruL ‘AZiiziL ‘ALiim</p><p class="para latin ayah" data-ayah="39" data-chapter="surat-yasin-ziarah"><span class="ayah-no">39</span>Wal Qomaro QodDarNaaHu MaNaazila HatTaa ‘Aadakal ‘UrJuuniL QoDiim</p><p class="para latin ayah" data-ayah="40" data-chapter="surat-yasin-ziarah"><span class="ayah-no">40</span>Lasy Syamsu YambaGhii LaHaa An TudrikaL Qomaro Wa LaaL LaiLu SaaBiqun NaHaar; Wa Kullun Fii Falakin YasBahuun</p><p class="para latin ayah" data-ayah="41" data-chapter="surat-yasin-ziarah"><span class="ayah-no">41</span>Wa Aayatul LaHum AnNaa hamalNaa dZurRiiya taHum Filfulkil MaSyhuun</p><p class="para latin ayah" data-ayah="42" data-chapter="surat-yasin-ziarah"><span class="ayah-no">42</span>Wa KhoLaqNaa LaHum min MitSlihii Maa YarkaBuun</p><p class="para latin ayah" data-ayah="43" data-chapter="surat-yasin-ziarah"><span class="ayah-no">43</span>Wa in-NaSyaq’ NuGhRiq-Hum FaLaa ShoRiiKho LaHum Wa Laa Hum Yung QodZuun</p><p class="para latin ayah" data-ayah="44" data-chapter="surat-yasin-ziarah"><span class="ayah-no">44</span>illaa  Rohmatam MinNaa WamaTaa‘an ilaa hiin</p><p class="para latin ayah" data-ayah="45" data-chapter="surat-yasin-ziarah"><span class="ayah-no">45</span>Wa idZaa Qiila LaHumut-TaQuu MaaBaina AidiKum Wa Maa KholFakum La‘allakum TurhaMuun</p><p class="para latin ayah" data-ayah="46" data-chapter="surat-yasin-ziarah"><span class="ayah-no">46</span>Wa Maa taq’Tiihim min Aayatin min AaYaati RobBihim illaa  KaaNuu ‘AnHaa Muq‘riDhiin</p><p class="para latin ayah" data-ayah="47" data-chapter="surat-yasin-ziarah"><span class="ayah-no">47</span>Wa idZaa Qiila LaHum AnfiQuu Mim-Maa RoZaqo Kumulloohu Qoolal LadZiina KafaRuu, Lil LadZiina AamaNuu AnuThoq‘imu Mallau YaSy'Aa Ulloohu AThoq‘amah; in Antum illaa Fii DhoLaalin MuBiin</p><p class="para latin ayah" data-ayah="48" data-chapter="surat-yasin-ziarah"><span class="ayah-no">48</span>Wa YaQuuLuuna MaTaa HaadZal Waq‘du in Kuntum ShoodiQiin</p><p class="para latin ayah" data-ayah="49" data-chapter="surat-yasin-ziarah"><span class="ayah-no">49</span>Maa Yang ZhuRuuna illaa  Shoihatau Waahidatan Taq’Khu dZuhum Wa Hum YaKhiSh ShiMuun</p><p class="para latin ayah" data-ayah="50" data-chapter="surat-yasin-ziarah"><span class="ayah-no">50</span>FaLaa YastaThii-'Uuna TauShiyaTau Wa Laa iLaa AHLiHiM Yarji'Uun</p><p class="para latin ayah" data-ayah="51" data-chapter="surat-yasin-ziarah"><span class="ayah-no">51</span>Wa NufiKho Fish-Shuuri Fa'idZaaHum Minal AjDaatSi iLaa RobBihim YansiLuun</p><p class="para latin ayah" data-ayah="52" data-chapter="surat-yasin-ziarah"><span class="ayah-no">52</span>QooLuu Yaa WailaNaa man Ba‘AtSaNaa Mim MarqodiNaa; HaadZaa Maa Wa‘Adar RohMaanu Wa ShodaqoL MursaLuun</p><p class="para latin ayah" data-ayah="53" data-chapter="surat-yasin-ziarah"><span class="ayah-no">53</span>in Kaanat illaa  Shoihatau Waahidatan Fa'idZaaHum JaMii‘ul LadaiNaa Muh DhoRuun</p><p class="para latin ayah" data-ayah="54" data-chapter="surat-yasin-ziarah"><span class="ayah-no">54</span>Falyauma Laa-tuZhlamu Nafsun Syai'au WaLaa TujZauna illaa Maa Kuntum Taq‘maLuun</p><p class="para latin ayah" data-ayah="55" data-chapter="surat-yasin-ziarah"><span class="ayah-no">55</span>inNa ash-haabal JanNati Yauma Fii Syugulin FaaKihuun</p><p class="para latin ayah" data-ayah="56" data-chapter="surat-yasin-ziarah"><span class="ayah-no">56</span>Hum Wa AzWaa JuHum Fii ZhiLaalin ‘alal ARooiki MutTaki'Uun</p><p class="para latin ayah" data-ayah="57" data-chapter="surat-yasin-ziarah"><span class="ayah-no">57</span>LaHum Fii Haa FaakiHatun Wa LaHum Maa Yad Da‘Uun</p><p class="para latin ayah" data-ayah="58" data-chapter="surat-yasin-ziarah"><span class="ayah-no">58</span>SaLaamun Qoulam MirRobBir Rohiim</p><p class="para latin ayah" data-ayah="59" data-chapter="surat-yasin-ziarah"><span class="ayah-no">59</span>WamTaazuL Yauma AiyuHaL MujriMuun</p><p class="para latin ayah" data-ayah="60" data-chapter="surat-yasin-ziarah"><span class="ayah-no">60</span>Alam A‘had ilaikum Yaa baNii Aadama 'AaLaa Taq‘budusy SyaiThoon; inNahu Lakum ‘aDuuWum MuBiin</p><p class="para latin ayah" data-ayah="61" data-chapter="surat-yasin-ziarah"><span class="ayah-no">61</span>Wa Aniq’buDuuNii HaadZaa ShiRooThum MusTaQiim</p><p class="para latin ayah" data-ayah="62" data-chapter="surat-yasin-ziarah"><span class="ayah-no">62</span>Wa Laqod aDholla Minkum Jibillan KatSiiro; Afalam TaKuuNuu Taq‘QiLuun</p><p class="para latin ayah" data-ayah="63" data-chapter="surat-yasin-ziarah"><span class="ayah-no">63</span>HaadZiHii JaHanNamul LaTii Kuntum Tuuq‘aDuun</p><p class="para latin ayah" data-ayah="64" data-chapter="surat-yasin-ziarah"><span class="ayah-no">64</span>iShlauhaL Yauma biMaa Kuntum TakfuRuun</p><p class="para latin ayah" data-ayah="65" data-chapter="surat-yasin-ziarah"><span class="ayah-no">65</span>Al-yauma NaKhtimu ‘AaLaa afWaahihim WaTukal LiimuNaa AiDiihim Wa TaSyhadu ArjuluHum BiMaa KaaNuu YaksiBuun</p><p class="para latin ayah" data-ayah="66" data-chapter="surat-yasin-ziarah"><span class="ayah-no">66</span>WaLau NaSyaa’U LaThomasNaa ‘ALaa Aq‘yunihim FasTabaQuSh ShiRooTho Fa-AnNaa YubShiRuun</p><p class="para latin ayah" data-ayah="67" data-chapter="surat-yasin-ziarah"><span class="ayah-no">67</span>Walau NaSyaa‘U LamasaKh-NaaHum ‘aLaa maKaanatihim FamasTaThoo'Uu MuDhiiyau Wa Laa Yarji'Uun</p><p class="para latin ayah" data-ayah="68" data-chapter="surat-yasin-ziarah"><span class="ayah-no">68</span>Wa Man Nu'am Mirhu Nunak-Kishu FilKholqi AfaLaa Yaq‘QiLuun</p><p class="para latin ayah" data-ayah="69" data-chapter="surat-yasin-ziarah"><span class="ayah-no">69</span>Wa Maa ‘allamNaa Husy-Syiq‘ro Wa Maa Yamba-GhilaH inHuwa illaa  dZikRuu Wa Qur'Aanun MuBiin</p><p class="para latin ayah" data-ayah="70" data-chapter="surat-yasin-ziarah"><span class="ayah-no">70</span>LiyundZiro MangKaana haiYau WayahiqQoL Qoulu ‘alal KaafiRiin</p><p class="para latin ayah" data-ayah="71" data-chapter="surat-yasin-ziarah"><span class="ayah-no">71</span>Awalam YaRou AnNaa KhoLaqNaa LaHum Mim-Maa ‘Amilat AiDiiNaa an‘Aaman FaHum LaHaa Maalikun</p><p class="para latin ayah" data-ayah="72" data-chapter="surat-yasin-ziarah"><span class="ayah-no">72</span>Wa dZallalNaa HaaLaHum FaminHaa RoKuuBuHum Wa MinHaa Yaq’kuLuun</p><p class="para latin ayah" data-ayah="73" data-chapter="surat-yasin-ziarah"><span class="ayah-no">73</span>Wa LaHum Fiihaa MaNaaFi‘u Wa MaSyaaribu, AfaLaa YaSyKuRuun</p><p class="para latin ayah" data-ayah="74" data-chapter="surat-yasin-ziarah"><span class="ayah-no">74</span>Wat-TaKhodZuu min DuunillaaHi AalihataL Laq'aLLaa-Hum YunShoRuun</p><p class="para latin ayah" data-ayah="75" data-chapter="surat-yasin-ziarah"><span class="ayah-no">75</span>Laa Yas TaThii'Uuna NaShRoHum WaHum LaHum Jundum MuhDhoRuun</p><p class="para latin ayah" data-ayah="76" data-chapter="surat-yasin-ziarah"><span class="ayah-no">76</span>FaLaa Yah-Zunka QouluHum inNaa Naq‘lamu Maa Yusir Ruuna Wa Maa Yuq‘LiNuun</p><p class="para latin ayah" data-ayah="77" data-chapter="surat-yasin-ziarah"><span class="ayah-no">77</span>Awalam Yarol inSaanu AnNaa KhoLaqNaahu MinNuTh Fatin FaidZaa Huwa KhoShiimun MuBiin</p><p class="para latin ayah" data-ayah="78" data-chapter="surat-yasin-ziarah"><span class="ayah-no">78</span>Wa Dhoroba LaNaa MatSalan WanaSiya Kholqoh; Qoola MaiYuhyiL ‘iZhooma Wahiya roMiim</p><p class="para latin ayah" data-ayah="79" data-chapter="surat-yasin-ziarah"><span class="ayah-no">79</span>Qul YuhYiihaL LadZii anSyaq'aHaa Auwala MarRoh Wa Huwa Bikulli KholQin ‘aLiim</p><p class="para latin ayah" data-ayah="80" data-chapter="surat-yasin-ziarah"><span class="ayah-no">80</span>Al-LadZii  Ja‘ala Lakum Minasy Syajaril AKhDhori Naaron Fa 'idZaa Antum MinHu TuuQiiDuun</p><p class="para latin ayah" data-ayah="81" data-chapter="surat-yasin-ziarah"><span class="ayah-no">81</span>Awalaisal-LadZii KhoLaqos SaMaaWaati Wal 'ArDho BiQoodirin ‘aLaa AiYaKh-luqo MitSLaHum; BaLaa WaHuwaL KhoLLaaquL ‘ALiim</p><p class="para latin ayah" data-ayah="82" data-chapter="surat-yasin-ziarah"><span class="ayah-no">82</span>inNaMaa AmruHu idZaa ARooda Syai’an AiYaQuula LaHu Kun Fa yaKuun</p><p class="para latin ayah" data-ayah="83" data-chapter="surat-yasin-ziarah"><span class="ayah-no">83</span>FasuBhaanaL-LadZii Biyadihii MaLaKuutu Kulli Syai’in Wa ilaihi Turjaq'Uun</p><div class="chapter-nav-row"><button class="action" data-nav-target="panduan-ziarah" type="button">← Ritual Ziarah</button><button class="action" data-nav-target="tahlil-ziarah" type="button">Tahlil →</button><button class="action" data-nav-target="beranda" type="button">Daftar Isi</button></div></section><section class="chapter" id="tahlil-ziarah"><h2>Tahlil</h2><span class="surah-status">RITUAL ZIARAH • BACAAN TAHLIL</span><div class="repeat-demo" style="margin:12px 0 18px"><b>📿 Ritual Ziarah</b><small>Bacaan Tahlil untuk ritual ziarah. Mode Fokus, Auto Fokus, Auto Scroll, Karaoke, dan Smart Counter tetap tersedia.</small></div><h3 style="color:var(--accent);margin:18px 0 10px">📿 Tahlil</h3><p class="para latin" data-chapter="tahlil-ziarah">A’uudZu BillaaHi Minasy SyaiThoonir RoJiim. BismillaaHir RohMaanir Rohiim. Qul Hu Walloohu Ahad, Alloohush-Shomad, Lam Yalid Walam YuuLad, Walam Yakullahuu Kufuwan Ahad (3X)</p><p class="para latin" data-chapter="tahlil-ziarah">Laa illaaHa ilallooHu Walloohu Akbar WalillaaHil Hamdu</p><p class="para latin" data-chapter="tahlil-ziarah">BismillaaHir RohMaanir Rohiim. Qul A’udZu Birob-Bil FaLaq, min SyarRi Maa HoLaq, Wamin SyarRi Ghoosiqin idZaa Waqob, Wamin SyarRin Naf-Faa tSaati Fil ‘Uqod, Wamin SyarRi Haasidin idZaa Hasad. Laa illaaHa   ilallooHu Walloohu Akbar WalillaaHil Hamdu</p><p class="para latin" data-chapter="tahlil-ziarah">BismillaaHir RohMaanir Rohiim. Qul A’udZu BirobBin Naas, Malikin-Naas, illaa hin-Naas, min SyarRil Was-Waasil Hon-Naas, AlladZii Yuwas-Wisu Fii Shudurin-Naas, Minal Jin-Nati Wan-Naas. Laa illaaHa   ilallooHu Walloohu Akbar WalillaaHil Hamdu</p><p class="para latin" data-chapter="tahlil-ziarah">BismillaaHir RohMaanir Rohiim. Alhamdu lillaaHi RobBil ‘AaLaMiin, ArRohMaanir Rohiim, Maaliki YaumidDiin, iiYaaka Naq’budu Wa iiYaaKa Nasta’iin, ihdinaSh ShiRooThol Mustaqiim, ShiRooThol LadZiina An ‘Amta ‘alaihim Ghoiril MaGh-Dhuubi ‘alaihim WaLaaDh DhooLiin. RobBiGhfirLii WaliWaa Lidaiya Walil Mukminina Aamin.</p><p class="para latin" data-chapter="tahlil-ziarah">BismillaaHir RohMaanir Rohiim. Alif-Laam-Miim. dZaalikal KiTaabuLaa Royiba Fii hii Hudal Lil Mutaqiin. Al LadZiina Yuq’ MiNuuna Bil Ghoibi Wa Yuqii MuunaSh ShoLaata Wa Mim-Maa Rozaq Naahum Yun FiQuun.</p><p class="para latin" data-chapter="tahlil-ziarah">Wal-LadZiina Yuq’ MiNuuna BiMaa Unzila ilaika Wa Maa Unzila min Qoblika Wa Bil ‘AahirotiHum Yuu QiNuun. ULaa 'ika ‘AqLaa Hudam MirRob-BiHim Wa ULaa ‘ika Humul Muflihuun</p><p class="para latin" data-chapter="tahlil-ziarah">Wa illaa Hukum illaaHu Waahidul Laa illaaHa illaa Huwar RohMaanur Rohiim.</p><p class="para latin" data-chapter="tahlil-ziarah">Alloohu Laa illaaHa illaa Huwal Haiyul QoiYuum, Laa Taq’ HudZuhuu SinaTuuw Wa Laa Naum, Lahuu Maa Fis-SaMaaWaati Wa ma Fil ArDh. Man dZal-LadZii Yasy Fa’u ‘indahuu illaa Bi idZnih, Yaq’lamu Maa Baina ‘AiDiihim Wa Maa Holfahum. Wa Laa YuhiiThuuna BiSyai-im min ‘ilmihii illaa BiMaa Syaa’ Wasi’a KurSiiyuhus SaMaa Waati Wal ‘ArDh, Wa Laa Ya ‘Uuduhuu hifZhu HuMaa Wahuwal ‘ALiiyul ‘AZhiim</p><p class="para latin" data-chapter="tahlil-ziarah">lillaaHi Maa Fis-SaMaaWaati Wa Maa Fiil ArDh, Wa in TubDuu Maa Fii Ang-Fusikum Au-Tuh-Fuuhu Yuhaas Bikum Bihillah, FayaGh-Firuu Limai-YaSyaa’u Wa Yu’adz-dZibu MaiyaSyaa’u Walloohu ‘ALaa Kulli Syai’ing QoDiir</p><p class="para latin" data-chapter="tahlil-ziarah">Aamanar RoSuulu BiMaa Unzila ilaihi Mir Robbihii Wal Muuq’miNuun, Kullun Aamana BillaaHi WamaLaa ikatihi, Wa Kutubihii, Warusulih, Laa NufarRiqu Bayina Ahadim-MirRusulih, Wa QooLuu Samiq’Naa Wa AThoq’Naa, Ghufronaka RobBaNaa Wa-ilaikal MaShiir</p><p class="para latin" data-chapter="tahlil-ziarah">Laa Yukal-Liful-Loohu Nafsan illaa Wus ’Ahaa, Lahaa Maa Kasabat, Wa‘ALaihaa Maaq-Tasabat.</p><p class="para latin" data-chapter="tahlil-ziarah">RobBaNaa Laa Tuq ‘AahidZ-Naa in NaSiiNaa Au-AhThoqNaa.</p><p class="para latin" data-chapter="tahlil-ziarah">RobBaNaa Wa Laa Tahmil ‘AlaiNaa iShrong KaMaa Hamal Tahuu 'Alal-LadZiina Ming QobliNaa. RobBaNaa Wa Laa Tuham-MilNaa, Maa Laa Thooqota LaNaa Bihi,</p><p class="para latin" data-chapter="tahlil-ziarah">Waq'fu 'An-Naa WaGhFir LaNaa WarhamNaa 7x</p><p class="para latin" data-chapter="tahlil-ziarah">Anta MauLaaNaa Faan ShurNaa ‘Aqlal Qoumil KaafiRiin. Birohmatika Yaa Arhamar RohiiMiin.</p><p class="para latin" data-chapter="tahlil-ziarah">irhamNaa Yaa Arhamar RoohiMiin 7x</p><p class="para latin" data-chapter="tahlil-ziarah">Rohmatulloohi Wa Barokatuh 'Alaikum Ahlal Bait, inNahuu HaMiidum MaJiid. inNaMaa YuRiidulloohu LiyudZ hiba 'Angkumur Rij-sa Ahlal Baiti Wa YuThoh-hirokum TaTh-hiiRoo.</p><p class="para latin" data-chapter="tahlil-ziarah">innallooha Wa MaLaa ikatahuu YuShol-Luuna Alla NaBiiyi Yaa Aiyuhal LadZiina AamaNuu Shollu Alaihi Wa Sallimu TasLiiMaan.</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa  Sholli AfDholash ShoLaati 'Alaa As'adi MaKhLuu-Qootika Nuuril HuDaa SaiyidiNaa Wa MauLaaNaa MuhamMadiu Wa 'Alaa Aalihii Wa ShohBihii Wa Sallim 'Adada Maq'LuuMaatika Wa MiDaada Kali Maatika KullaMaa dZaka RokadZ dZaa-Kiruna Wa Ghofala 'AndZikrikal GhoofiLuun</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa Sholli AfDholash ShoLaati 'Alaa As'adi MaKhLuu-Qootika Syamsid Dhuhaa SaiyidiNaa Wa MauLaaNaa MuhamMadiu Wa 'Alaa Aalihii Wa ShohBihii Wa Sallim 'Adada Maq'LuuMaatika Wa MiDaada KaliMaatika KullaMaa dZakaro-KadZ dZaa-Kiruna Wa Ghofala 'AndZikrikal GhoofiLuun</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa  Sholli AfDholash ShoLaati 'Alaa As'adi MaKhLuu-Qootika Badrid DuJaa SaiyidiNaa Wa MauLaaNaa MuhamMadiu Wa 'Alaa Aalihii Wa ShohBihii Wa Sallim 'Adada Maq'LuuMaatika Wa MiDaada Kali Maatika KullaMaa dZakaro-KadZ dZaa-Kiruna Wa Ghofala 'AndZikrikal GhoofiLuun</p><p class="para latin" data-chapter="tahlil-ziarah">Wasalim Wa RoDhiyalloohu TaBaaroka Wa Ta'AaLaa 'An SaaDaatiNaa, Ash-haabi RoSuulillaaHi Ajma'iin.</p><p class="para latin" data-chapter="tahlil-ziarah">Wa Hasbunalloohi Waniq’mal WaKiil, Niq’mal MauLaa Waniq’ Man NaShiir. Wa Laa Haula WaLaa Quuwata illaa BillaaHil 'ALiiyil 'AZhiim.</p><p class="para latin" data-chapter="tahlil-ziarah">AstaGhfirulloohal 'AdZiim 7X</p><p class="para latin" data-chapter="tahlil-ziarah">AfDholudZ dZikri Faq' lam An-Nahuu, Laa illaaHa illallooHu Haiyum Maujuud. Laa illaaHa illallooHu Haiyum Ma'Buud. Laa illaaHa illallooHu Haiyum Baaaq.</p><p class="para latin" data-chapter="tahlil-ziarah">Laa illaaHa illallooH 100x</p><p class="para latin" data-chapter="tahlil-ziarah">Laa illaaHa illallooH, MuhamMadur RoSuululloohi Shollalloohu 'Alaihi Wasallam.</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa Sholli 'Alaa SaiyidiNaa MuhamMad, AlloohumMa  Sholli 'Alaihi Wasallim. 2X</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa Sholli 'Alaa SaiyidiNaa MuhamMad, Yaa RobBi Sholli 'Alaihi Wasallim</p><p class="para latin" data-chapter="tahlil-ziarah">SuBhaanal-Loohi Wa Bi hamdihii, SuBhaanal-Loohil 'AdZiim 33X</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa Sholli 'Alaa HaBiibika SaiyidiNaa MuhamMadiu Wa 'Alaa Aalihii Wa ShohBihii Wasallim 2X</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa ShollI 'Alaa RoSuulika Wa HaBiibika SaiyidiNaa MuhamMadiu Wa 'ALaa Aalihii Wa ShohBihii Wa Baarik Wa Sallim Ajma'in - Al Faatihah</p><p class="para latin" data-chapter="tahlil-ziarah">RobBiGhfirLii Wa LiWaali daiya Walil MukmiNiina AaMiin</p><div class="chapter-nav-row"><button class="action" data-nav-target="panduan-ziarah" type="button">← Ritual Ziarah</button><button class="action" data-nav-target="surat-yasin-ziarah" type="button">← Yasin</button><button class="action" data-nav-target="beranda" type="button">Daftar Isi</button></div></section><section class="chapter" id="surat-waqiah"><h2>Surat Al-Waqi'ah</h2><span class="surah-status">96 AYAT • MODE HAFALAN AKTIF</span><p class="para ayah latin" data-ayah="1" data-chapter="surat-waqiah"><span class="ayah-no">1</span>iDzaa Waqo‘atiL Waaqi‘ah</p><p class="para ayah latin" data-ayah="2" data-chapter="surat-waqiah"><span class="ayah-no">2</span>Laisa Liwaqo‘ati Haa KaaDzibah</p><p class="para ayah latin" data-ayah="3" data-chapter="surat-waqiah"><span class="ayah-no">3</span>Khoofi Dhotur Roofi‘ah</p><p class="para ayah latin" data-ayah="4" data-chapter="surat-waqiah"><span class="ayah-no">4</span>iDzaa RujjatiL ArDhu Rojjaa</p><p class="para ayah latin" data-ayah="5" data-chapter="surat-waqiah"><span class="ayah-no">5</span>Wa BusSatiL jiBaaLu BasSaa</p><p class="para ayah latin" data-ayah="6" data-chapter="surat-waqiah"><span class="ayah-no">6</span>FaKaanat HaBaa'am Mumbats-tSaa</p><p class="para ayah latin" data-ayah="7" data-chapter="surat-waqiah"><span class="ayah-no">7</span>Wa Kuntum AzWaajan tSaLaatSah</p><p class="para ayah latin" data-ayah="8" data-chapter="surat-waqiah"><span class="ayah-no">8</span>Fa 'aSh-haabuL MaiManati Maa 'aSh-haabuL MaiManah</p><p class="para ayah latin" data-ayah="9" data-chapter="surat-waqiah"><span class="ayah-no">9</span>Wa ‘aSh-haabul MaSy'amati Maa 'aSh-haabul MaSy'amah</p><p class="para ayah latin" data-ayah="10" data-chapter="surat-waqiah"><span class="ayah-no">10</span>Was-SaabiQuu Nas-SaabiQuun</p><p class="para ayah latin" data-ayah="11" data-chapter="surat-waqiah"><span class="ayah-no">11</span>ULaa-ikal MuqorRoBuun</p><p class="para ayah latin" data-ayah="12" data-chapter="surat-waqiah"><span class="ayah-no">12</span>Fii JanNaatin Na‘iim</p><p class="para ayah latin" data-ayah="13" data-chapter="surat-waqiah"><span class="ayah-no">13</span>Tsullatum Minal AuwaLiin</p><p class="para ayah latin" data-ayah="14" data-chapter="surat-waqiah"><span class="ayah-no">14</span>Wa QoLiiLum MinaL AaKhiriin</p><p class="para ayah latin" data-ayah="15" data-chapter="surat-waqiah"><span class="ayah-no">15</span>‘ALaa Sururim MauDhuunah</p><p class="para ayah latin" data-ayah="16" data-chapter="surat-waqiah"><span class="ayah-no">16</span>MutTaki-iina ‘alaiHaa MutaQoobiLiin</p><p class="para ayah latin" data-ayah="17" data-chapter="surat-waqiah"><span class="ayah-no">17</span>YaThuufu ‘alaiHim WilDaanum Mukhol LaDuun</p><p class="para ayah latin" data-ayah="18" data-chapter="surat-waqiah"><span class="ayah-no">18</span>Bi-akWaaBiu Wa aBaariqo Wa Kaq’sim Mim Ma‘iin</p><p class="para ayah latin" data-ayah="19" data-chapter="surat-waqiah"><span class="ayah-no">19</span>Laa YuShod-Da'Unna ‘AnHaa Wa Laa YunziFuun</p><p class="para ayah latin" data-ayah="20" data-chapter="surat-waqiah"><span class="ayah-no">20</span>Wa Faa Kihatim MimMaa YataKhoi YaRuun</p><p class="para ayah latin" data-ayah="21" data-chapter="surat-waqiah"><span class="ayah-no">21</span>Wa Lahmi Thoirim MimMaa YaSyTahuun</p><p class="para ayah latin" data-ayah="22" data-chapter="surat-waqiah"><span class="ayah-no">22</span>Wa huurun ‘iin</p><p class="para ayah latin" data-ayah="23" data-chapter="surat-waqiah"><span class="ayah-no">23</span>Ka’am-tSaalil Luq’luq’il MakNuun</p><p class="para ayah latin" data-ayah="24" data-chapter="surat-waqiah"><span class="ayah-no">24</span>JaZaaa'Am biMaa KaaNuu Yaq‘maLuun</p><p class="para ayah latin" data-ayah="25" data-chapter="surat-waqiah"><span class="ayah-no">25</span>Laa Yasma'Uuna FiiHaa LagWau Wa Laa Taq’tSiiMaa</p><p class="para ayah latin" data-ayah="26" data-chapter="surat-waqiah"><span class="ayah-no">26</span>iLLaa Qiilan SaLaaman SaLaaMaa</p><p class="para ayah latin" data-ayah="27" data-chapter="surat-waqiah"><span class="ayah-no">27</span>Wa 'aSh-haabul yaMiini Maa 'aSh-haabul yaMiin</p><p class="para ayah latin" data-ayah="28" data-chapter="surat-waqiah"><span class="ayah-no">28</span>Fii siDrim Makh-Duud</p><p class="para ayah latin" data-ayah="29" data-chapter="surat-waqiah"><span class="ayah-no">29</span>Wa Tholhin Man-Dhuud</p><p class="para ayah latin" data-ayah="30" data-chapter="surat-waqiah"><span class="ayah-no">30</span>Wa Zhillin Mam-Duud</p><p class="para ayah latin" data-ayah="31" data-chapter="surat-waqiah"><span class="ayah-no">31</span>Wa Maa-im MasKuub</p><p class="para ayah latin" data-ayah="32" data-chapter="surat-waqiah"><span class="ayah-no">32</span>Wa Faa KiHatin KatSiiroh</p><p class="para ayah latin" data-ayah="33" data-chapter="surat-waqiah"><span class="ayah-no">33</span>Laa MaqThu 'AtiuWa Laa MamNuu‘ah</p><p class="para ayah latin" data-ayah="34" data-chapter="surat-waqiah"><span class="ayah-no">34</span>Wa FuruSyin marFuu‘ah</p><p class="para ayah latin" data-ayah="35" data-chapter="surat-waqiah"><span class="ayah-no">35</span>inNaa anSyaq’Naa-HunNa inSyaa'AAn</p><p class="para ayah latin" data-ayah="36" data-chapter="surat-waqiah"><span class="ayah-no">36</span>Fa ja‘aLNaa-HunNa abKaaRoo</p><p class="para ayah latin" data-ayah="37" data-chapter="surat-waqiah"><span class="ayah-no">37</span>‘Uruban AtRooBaa</p><p class="para ayah latin" data-ayah="38" data-chapter="surat-waqiah"><span class="ayah-no">38</span>Li 'aSh-haaBiL YaMiin</p><p class="para ayah latin" data-ayah="39" data-chapter="surat-waqiah"><span class="ayah-no">39</span>Tsullatum Minal AuwaLiin</p><p class="para ayah latin" data-ayah="40" data-chapter="surat-waqiah"><span class="ayah-no">40</span>Wa Tsullatum Minal AakhiRiin</p><p class="para ayah latin" data-ayah="41" data-chapter="surat-waqiah"><span class="ayah-no">41</span>Wa 'aSh-haabusy-SyiMaali Maa'aSh-haabusy SyiMaaL</p><p class="para ayah latin" data-ayah="42" data-chapter="surat-waqiah"><span class="ayah-no">42</span>Fii SaMuumiu Wa haMiim</p><p class="para ayah latin" data-ayah="43" data-chapter="surat-waqiah"><span class="ayah-no">43</span>Wa Zhillin MiiYahmum</p><p class="para ayah latin" data-ayah="44" data-chapter="surat-waqiah"><span class="ayah-no">44</span>Laa BaariDiu Wa Laa KaRiim</p><p class="para ayah latin" data-ayah="45" data-chapter="surat-waqiah"><span class="ayah-no">45</span>in-Nahum KaaNuu QoBla Dzaalika mutroFiin</p><p class="para ayah latin" data-ayah="46" data-chapter="surat-waqiah"><span class="ayah-no">46</span>Wa KaaNuu YuShirRuuna ‘alal hintSil 'aDhiim</p><p class="para ayah latin" data-ayah="47" data-chapter="surat-waqiah"><span class="ayah-no">47</span>Wa KaaNuu yaQuuLuuna A'iDzaa MitNaa WakunNaa tuRooBau wa ‘iZhooman A'inNaa lamaB 'UutSuun</p><p class="para ayah latin" data-ayah="48" data-chapter="surat-waqiah"><span class="ayah-no">48</span>Awa AaBaa unal AuwaLuun</p><p class="para ayah latin" data-ayah="49" data-chapter="surat-waqiah"><span class="ayah-no">49</span>Qul inNal AuwaLiina wal-AakhiRiina</p><p class="para ayah latin" data-ayah="50" data-chapter="surat-waqiah"><span class="ayah-no">50</span>Lamaj-Muu 'Uuna iLaa MiiQooti Yaumim Maq‘Luum</p><p class="para ayah latin" data-ayah="51" data-chapter="surat-waqiah"><span class="ayah-no">51</span>TsumMa inNakum AiyuHadh Dhoool Luunal Mukadz DziBuun</p><p class="para ayah latin" data-ayah="52" data-chapter="surat-waqiah"><span class="ayah-no">52</span>La’AakiLuuna Min Syajarim Min ZaqQuum</p><p class="para ayah latin" data-ayah="53" data-chapter="surat-waqiah"><span class="ayah-no">53</span>Fa Maa Li-Uuna MinHAL BuThuun</p><p class="para ayah latin" data-ayah="54" data-chapter="surat-waqiah"><span class="ayah-no">54</span>Fa Syaari Buuna ‘alaiHi Minal haMiim</p><p class="para ayah latin" data-ayah="55" data-chapter="surat-waqiah"><span class="ayah-no">55</span>Fa Syaari Buuna SyurbaL Hiim</p><p class="para ayah latin" data-ayah="56" data-chapter="surat-waqiah"><span class="ayah-no">56</span>HaaDzaa NuzuluHum Yaumad-Diin</p><p class="para ayah latin" data-ayah="57" data-chapter="surat-waqiah"><span class="ayah-no">57</span>Nahnu KholaqNaakum Falau Laa TuShod-DiQuun</p><p class="para ayah latin" data-ayah="58" data-chapter="surat-waqiah"><span class="ayah-no">58</span>Afaro 'aitum Maa TumNuun</p><p class="para ayah latin" data-ayah="59" data-chapter="surat-waqiah"><span class="ayah-no">59</span>A 'Antum TakhLuQuu naHu Am-NahnuL Khooliqun</p><p class="para ayah latin" data-ayah="60" data-chapter="surat-waqiah"><span class="ayah-no">60</span>Nahnu Qod-DarNaa BainaKumul Mauta waMaa Nahnu Bimas BuuQiin</p><p class="para ayah latin" data-ayah="61" data-chapter="surat-waqiah"><span class="ayah-no">61</span>‘ALaa an NubadDila AmtSaalakum Wa NunSyiq'akum FiiMaa Laataq‘laMuun</p><p class="para ayah latin" data-ayah="62" data-chapter="surat-waqiah"><span class="ayah-no">62</span>WalaQod ‘AlimTumul NaSy'atal UuLaa FaLau Laa TaDzakKaRuun</p><p class="para ayah latin" data-ayah="63" data-chapter="surat-waqiah"><span class="ayah-no">63</span>Afaro 'Aitum Maa Tahru-tSuun</p><p class="para ayah latin" data-ayah="64" data-chapter="surat-waqiah"><span class="ayah-no">64</span>A 'Antum Tazro ‘UunaHu am Nahnuz-Zaari'Uun</p><p class="para ayah latin" data-ayah="65" data-chapter="surat-waqiah"><span class="ayah-no">65</span>Lau NaSyaa'u laja‘alNaaHu HuThooman FaZholtum Tafak KaHuun</p><p class="para ayah latin" data-ayah="66" data-chapter="surat-waqiah"><span class="ayah-no">66</span>inNaa lamugh RoMuun</p><p class="para ayah latin" data-ayah="67" data-chapter="surat-waqiah"><span class="ayah-no">67</span>Bal Nahnu MahRuuMuun</p><p class="para ayah latin" data-ayah="68" data-chapter="surat-waqiah"><span class="ayah-no">68</span>Afaro 'Aitumul Maa 'Al-laDzii taSyroBuun</p><p class="para ayah latin" data-ayah="69" data-chapter="surat-waqiah"><span class="ayah-no">69</span>A-'Antum Anzal TuMuuHu Minal Muzni Am NahnuL MunziLuun</p><p class="para ayah latin" data-ayah="70" data-chapter="surat-waqiah"><span class="ayah-no">70</span>Lau naSyaa'U ja‘alNaaHu uJaaJaan FalauLaa taSyKuRuun</p><p class="para ayah latin" data-ayah="71" data-chapter="surat-waqiah"><span class="ayah-no">71</span>Afaro 'Aitumun NaaroL LaTii TuuRuun</p><p class="para ayah latin" data-ayah="72" data-chapter="surat-waqiah"><span class="ayah-no">72</span>A'Antum an Syaq’tum SyajarotaHaa am nahnul MunSyiuun</p><p class="para ayah latin" data-ayah="73" data-chapter="surat-waqiah"><span class="ayah-no">73</span>Nahnu Ja‘alNaaHaa TadzKiirotau WamaTaa‘al lil MuqWiiin</p><p class="para ayah latin" data-ayah="74" data-chapter="surat-waqiah"><span class="ayah-no">74</span>FasabBih BismiRobBikaL ‘aZhiim suBhanallooH Wal hamdulillaH Wa laa illaaHa illallooH AllooHu Akbar laa haula Wa laa Quwwata illaa billaa Hil aLiiYiiL aZhiim 7X.</p><p class="para latin waqiah-extra" data-chapter="surat-waqiah">Ya han-Nan YaMan-Nan, Ya FatTah Ya RozZak, Ya GhoNii Ya Mughni AghniNii 7X.</p><p class="para ayah latin" data-ayah="75" data-chapter="surat-waqiah"><span class="ayah-no">75</span>FaLaa Uqsimu Bima Waaqi‘in-NuJuum</p><p class="para ayah latin" data-ayah="76" data-chapter="surat-waqiah"><span class="ayah-no">76</span>Wa inNahu Laqosamul Lau Taq‘laMuuna ‘aZhiim</p><p class="para ayah latin" data-ayah="77" data-chapter="surat-waqiah"><span class="ayah-no">77</span>inNaHu Laqur-Aanun kaRiim</p><p class="para ayah latin" data-ayah="78" data-chapter="surat-waqiah"><span class="ayah-no">78</span>Fii kiTaaBim makNuun</p><p class="para ayah latin" data-ayah="79" data-chapter="surat-waqiah"><span class="ayah-no">79</span>Laa YamasSuHuu illaL muThoH HaRuun</p><p class="para ayah latin" data-ayah="80" data-chapter="surat-waqiah"><span class="ayah-no">80</span>Tanziilum MirRobBiL ‘AalaMiin</p><p class="para ayah latin" data-ayah="81" data-chapter="surat-waqiah"><span class="ayah-no">81</span>Afa BihaaDzaL haDiitSi Antum MuD-HiNuun</p><p class="para ayah latin" data-ayah="82" data-chapter="surat-waqiah"><span class="ayah-no">82</span>WaTaj‘aLuuna RizQokum AnNakum Tukadz DziBuun</p><p class="para ayah latin" data-ayah="83" data-chapter="surat-waqiah"><span class="ayah-no">83</span>FalauLaa iDzaa BalaGhotiL hulQuum</p><p class="para ayah latin" data-ayah="84" data-chapter="surat-waqiah"><span class="ayah-no">84</span>Wa Antum hiina'iDzin TanZhuRuun</p><p class="para ayah latin" data-ayah="85" data-chapter="surat-waqiah"><span class="ayah-no">85</span>Wa nahnu aqrobu ilaiHi mingkum wa laakillaa TuBShiRuun</p><p class="para ayah latin" data-ayah="86" data-chapter="surat-waqiah"><span class="ayah-no">86</span>FalauLaa in Kuntum Ghoiro maDiiNiin</p><p class="para ayah latin" data-ayah="87" data-chapter="surat-waqiah"><span class="ayah-no">87</span>Tarji'UunaHaa in Kuntum ShoodiQiin</p><p class="para ayah latin" data-ayah="88" data-chapter="surat-waqiah"><span class="ayah-no">88</span>Fa amMaa in Kaana Minal MuqorRoBiin</p><p class="para ayah latin" data-ayah="89" data-chapter="surat-waqiah"><span class="ayah-no">89</span>Farouhuu WaroihaaNuu Wa jan-Natu na‘iim</p><p class="para ayah latin" data-ayah="90" data-chapter="surat-waqiah"><span class="ayah-no">90</span>Wa amMaa in Kaana Min 'aSh-haabiL yaMiin</p><p class="para ayah latin" data-ayah="91" data-chapter="surat-waqiah"><span class="ayah-no">91</span>Fa saLaamul Laka Min 'aSh-haabiL yaMiin</p><p class="para ayah latin" data-ayah="92" data-chapter="surat-waqiah"><span class="ayah-no">92</span>Wa amMaa in Kaana Minal Mukadz-DziBiinadh DhooLLiin</p><p class="para ayah latin" data-ayah="93" data-chapter="surat-waqiah"><span class="ayah-no">93</span>Fa Nuzulum Min haMiim</p><p class="para ayah latin" data-ayah="94" data-chapter="surat-waqiah"><span class="ayah-no">94</span>Wa TaShliyatu Jahiim</p><p class="para ayah latin" data-ayah="95" data-chapter="surat-waqiah"><span class="ayah-no">95</span>inNa HaaDzaa LaHuwa haqQuL yaQiin</p><p class="para ayah latin" data-ayah="96" data-chapter="surat-waqiah"><span class="ayah-no">96</span>FasabBih BismiRobBikaL ‘aZhiim suBhanallooH Wal hamdulillaH Wa laa illaaHa illallooH AllooHu Akbar laa haula Wa laa Quwwata illaa billaa Hil aLiiYiiL aZhiim 7X.</p><p class="para latin waqiah-extra" data-chapter="surat-waqiah">Ya han-Nan YaMan-Nan, Ya FatTah Ya RozZak, Ya GhoNii Ya Mughni AghniNii 7X.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa AkfiNii Bihalaal-ika ‘An Haroomika, Wa AghniNii Bi Fadhlika AmMan SiWaaka ...... (7X)</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma innii As’aluka Bihaqqi Suurati al-WAAQI‘ah Wa AsRooriHaa, Wa AnWaariHaa, An TarzuqoNii Rizqon Waasi‘an halaalan Thoyyiban, Min Ghoiri Kaddin, Wa laa Nashabin, Wa laa Man-nin, Wa laa Ta‘abin, Wa Tuyas-Siro Lii Umuurii KullaHaa, Wa Taqdhiya hawaa’ijii, innaka ‘Alaa Kulli Syai’iin Qodiir.</p><p class="para latin" data-chapter="surat-waqiah">Waftah Lii Abwaaba Rizqika Mina As-Samaa’i Wal-Ardhi, Wa Baarik Lii Fiimaa Rozaqtanii.</p><p class="para latin" data-chapter="surat-waqiah">AlloohumMa Yaa Alloohu Yaa ‘Aliiyu Yaa ‘AZhiimu Yaa haliimu Yaa ‘Aliim. Anta RobBii, Wa ’ilmuka hasBii, Faniq’mar RobBu-RobBii, Waniq’mal hasBu-hasBii, TanShuru Man-TaSya'u, Wa Antal ‘aZiizur Rohiim.</p><p class="para latin" data-chapter="surat-waqiah">ALLOOHUMMA inNaa NasAluka Salaamatan Fid-Dun-YaaWal-Akhiroh, Wal-‘Aafiyatan Fil Jasadi, Wash-Shihhatan Fil-Badani, Wa Ziyaa Datan Fil ‘ilmi, Wa Barokatan Fir-Rizqi, Wat-Taubatan Qoblal Maut, War-Rohmatan ‘indal-Maut, Wal-Maghfirotan ba‘dal-maut. Alloohumma hawwin ‘alaiNaa fii Sakaraatil-maut, Wa NajjiNaa minan-naar, Wal ‘Aqfwa ‘indal-hisaab.</p><h3 class="subhead">Doa Setelah Al-Waqi'ah</h3><p class="para latin" data-chapter="surat-waqiah">AllooHumMa inNi As 'Aluka Bi AnNi Asyhadu AnNaka Antalloohu, Laa illaaHa illaa Anta; antal AhaduSh Shomad AlladZi Lam Yalid Wa Lam Yulad Wa Lam Yakul Lahu Kufuwan Ahad.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa Sholli 'Alaa Sayyidina MuhamMadin Sholatan Tuwassi'u BiHaa 'Alainal Arzaaqo, Watuhas Sinu BiHaa Lanal Akhlaaqo Wa 'Alaa 'AaliHi WaShohbi Wasallim</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma innii As’aluka Rizqon Thoyyiban, Wa ‘ilman NAAFI‘an, Wa ‘Amalan Mutaqob-balan, Wa Qolban Khooshi‘an, Wa Lisaanan dZaakiron, Wa Badanan ‘Alal-Balaa’i Shoobiron.</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma in Kaana Rizqunaa Fii As-Samaa’i Fa Anzilhu,</p><p class="para latin" data-chapter="surat-waqiah">Wa in Kaana Fil-ardhi Fa Akhrij-HU,</p><p class="para latin" data-chapter="surat-waqiah">Wa in Kaana Ba‘iidan FAqorribu,</p><p class="para latin" data-chapter="surat-waqiah">Wa in Kanna qoliilan faka-tsirhu,</p><p class="para latin" data-chapter="surat-waqiah">Wa in Kaana KatSiiron Fa Baarik Lanaa Fiih, Birohmatika Yaa Arhamar-Roohimīn.</p><p class="para latin" data-chapter="surat-waqiah">AlloohumMa In Kaana Maa Ad‘Uu Bihi MusTahiilan Fa Anta al Qoodiru SuBhaanaka, Laa Yuq‘Jizuka Syai'un Fil Ardhi, wa Laa Fis SaMaa-i.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa in Kaana SyarRon, Faj‘alhu Khoiron, WarzuqNii Bihi Yaa Alloohu, Yaa Mudab-Biral layli Wan-NaHaar.</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma Yassir Lanaa Kulla Shoq‘Bin, Wahlul kulla ‘Uqdatin, Wa Naj-jinaa Min Kulli ham-min, Wa Ghommin, Wa Karbin.</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma laa sahla illaa maa Ja‘Altahuu sahla, wa anta Taj ‘Alul hazna idza Syiq’ta sahla</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma iqdhi, wa naffis Kuroobanaa, Wakfinaa Maa Aham-Manaa Wa Maa Aghom-Manaa</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa Sahil Lii Mathlabi, Wa Yassir Lii MaqShiDii, WarzuqNii Bitaskhiirin Minka, Waj ‘Al Khuthuwaatii MuBaarokah, Waftah Lii Abwaaba Fadhlik, Wa Baarik Lii Fii RizQii Wa‘umRii, Waj‘Alnii Mina asSaa‘i-Diina Al Muflihiin.</p><p class="para latin" data-chapter="surat-waqiah">Baddil Dhiqii farojan, Wa ‘Ajzii QuWWatan, Wa Ahlaamii WAAQI‘an. Wa AkhrijNii Min hawlii iLaa hawLik, Wa Min DHOQ'Fii iLaa QuuWatika.</p><p class="para latin" data-chapter="surat-waqiah">Wa Kulla Maa Ataman-Naahu Min AmRii AiyaKuuna, Fa inNaHu Laa Faa‘ila LiMaa TuRiiduHu siWaak. Wa Laa Yuq‘jizuka Syai'un, Wa Laa YaSh‘Ubu ‘alaik.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa al Khofiiyyi Anaa Muhtaajun Dzaliilun, Wa Anta Al-Qowiyyul Ghoniyy</p><p class="para latin" data-chapter="surat-waqiah">AlloohumMa Yaa Sarii‘al-hiSaab, Yaa Syadiidal ‘iQoob, Yaa GhoFuur, Yaa Rohiim. Wa Yaa Khooliqo Kulli Syai’, Yaa Faathiros Samaawaati Wal-ardh,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Faaliqol Wan-Nawaa, Yaa Faaliqol ishBaah.</p><p class="para latin" data-chapter="surat-waqiah">Yaa Waliyyal hasaNaat, Yaa Daafi‘as Sayi’aat,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Ghoofirol KhoThii’aat, Yaa Saatirol-awroot,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Maani‘AL Baliyyaah. Yaa Muqiilal ‘AtSaRoot,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Muhyiyal AmWaat, Yaa Munawwiral Ardhi Was-SaMaaWaati. iqdhii haajaTii Fii Haadzihis-Saa‘Aat.</p><p class="para latin" data-chapter="surat-waqiah">Yaa ilaaHal AwwaLiina Wal-AakhiRiin,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Badi‘As-SaMaaWaati Wal Ardh,</p><p class="para latin" data-chapter="surat-waqiah">Yaa dZal-Jalaali wal-ihRoom. Wa Shollalloohu ‘alaa SaiyidiNaa MuhamMadin Wa ‘Alaa Aalihi Wa Shohbihi Ajma’iin. Walhamdu Lillaahi Robbil ‘Aalamiin.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa Tajallaa Lii Bi-iroodaTika Yaa AllooH, Wa Qudrotika, Wa haulika, Wa Quwwatika, Wa QohHarika, Wa JabBaarika, inNama AmruHu idZa aRooda Syaian Aiyaquula Lahu Kun Fayakun</p><p class="para latin" data-chapter="surat-waqiah">Wa Tajallaa ‘Alaiya Bi Anwaari rohmatika, Wa Asroori qudrotika, Waftah Lii Abwaaba Fadhlika, Wa Ahyi Qolbii Binuuri ma‘rifatika, Waj‘alnii Minal Mukhlishiina Fii Mahab-Batika, WarzuqNii Bi_Qodhoika, Birohmatika Yaa Arhamar Roohimiin.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa RobBaNaa Anzil 'Alaina Maa' idatam Minas Samaa'i Takuunu LaNaa 'iidal Lil-AwaliNaa Wal AakhiriNaa Wa ayatam minka warzuqNaa Wa 'anta Khoirur Rooziqin 3X</p><p class="para latin" data-chapter="surat-waqiah">Wamai Yattaqillaaha Yaj'al Lahu MakhroJaa. WaYar ZuQHu min haitSu Laa YahTasiB, Wamai YatawakKal Alalloohi FaHuwa hasbuH, innaLLooHa Baaligu AmriH,</p><p class="para latin" data-chapter="surat-waqiah">Qod Ja'AlallooHu LikuLi Syaiin QodRoo</p><p class="para latin" data-chapter="surat-waqiah">RobBi inNi Maghluubun FaantaShir, Wajbur QolBiiyal Munkasir, Wajma' Syamliiyal MundaSyir, inNaka Antar Rohmanul Muqtadiru,</p><p class="para latin" data-chapter="surat-waqiah">ikfiNii Yaa KaaFii, Wa 'Anaal 'Abdu Al-muftaQiir, Wa Kafa BillaaHi Waliiyaau Wa Kafa BillaaHi NaShiiroo,</p><p class="para latin" data-chapter="surat-waqiah">inNasy-Syirka Ladhulmun Adhiim, Wamal-LooHu YuRiidu Dhulman lil 'ibaad, Faquthi'a Daa Birul Qoumil LadZiina DholaMuu, Wal hamdu LillaHi RobBil 'AalaMiin</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa RobBaNaa Taqobal MinNaa inNaka Antas SaMii’ul ‘Aliim, Watub ‘AlaiNaa inNaka Antat TauWaabur Rohiim. Wa SholallooHu 'Alaa Saiyidina MuhamMad Wa 'Alaa AaliHii Wa ShohBiiHii Wabarik Wasallim. Walhamdu LillaaHir RobBil ‘AalaMiin</p></section><section class="chapter" id="surat-mulk"><h2>Surat Al-Mulk</h2><span class="surah-status">30 AYAT • MODE HAFALAN AKTIF</span><p class="para ayah latin" data-ayah="1" data-chapter="surat-mulk"><span class="ayah-no">1</span>TaBaarokaL LaDzii BiyadiHiL Mulku Wa Huwa ‘aLaa KuLLi Syai'in qoDiir</p><p class="para ayah latin" data-ayah="2" data-chapter="surat-mulk"><span class="ayah-no">2</span>Al-ladzii KholaqoL Mauta WaL haYaata LiyaBlu Wakum AiYukum Ahsanu ‘AmaLaa; Wa HuwaL ‘aZiizuL GhoFuur</p><p class="para ayah latin" data-ayah="3" data-chapter="surat-mulk"><span class="ayah-no">3</span>Al-ladzii Kholaqo saB‘A saMaaWaaTin ThiBaaqo; Maa taRooFii Kholqir RohMaani Min taFaaWut; Farji‘il BaShoro HalTaRoo Min FuThuur</p><p class="para ayah latin" data-ayah="4" data-chapter="surat-mulk"><span class="ayah-no">4</span>Tsum-Marji‘iL BaShoro KarRotaini YanQoliB ilaikal BaShoru Khoosi'Au Wa Huwa haSiir</p><p class="para ayah latin" data-ayah="5" data-chapter="surat-mulk"><span class="ayah-no">5</span>Walaqod ZaiyanNaas-SaMaa-adDunYaa bimaShoo Biiha Waja‘alNaaHaa ruJuumal Lisy-SyaYaa Thiin; Wa Aq‘tadNaa LaHum ‘aDzaaBas Sa’iir</p><p class="para ayah latin" data-ayah="6" data-chapter="surat-mulk"><span class="ayah-no">6</span>Walil LaDziina KafaRuu BirobBiHim ‘aDzaabu jaHanNama waBiq’saL MaShiir</p><p class="para ayah latin" data-ayah="7" data-chapter="surat-mulk"><span class="ayah-no">7</span>iDzaa ulQuu FiiHaa Sami‘Uu LaHaa SyahiQou waHiya taFuur</p><p class="para ayah latin" data-ayah="8" data-chapter="surat-mulk"><span class="ayah-no">8</span>TaKaadu Tamaiyazu MinaL Ghoizh; KullaMaa ulqiya FiiHaa Faujun sa 'AlaHum KhozanatuHaa, alam yaq’tikum naDziir</p><p class="para ayah latin" data-ayah="9" data-chapter="surat-mulk"><span class="ayah-no">9</span>QooLuu baLaaqod Jaa'aNaa naDziirun Fakadz-DzaBNaa WaQuLNaa Maa Naz-Zalalloohu Min Syai'in in antum illaa Fii DhoLaalin kaBiir</p><p class="para ayah latin" data-ayah="10" data-chapter="surat-mulk"><span class="ayah-no">10</span>WaQooLuu Lau KunNaa nasMa’u Au na’qiLu Maa KunNaa Fii aSh-haabis Sa’iir</p><p class="para ayah latin" data-ayah="11" data-chapter="surat-mulk"><span class="ayah-no">11</span>Faaq’taroFuu biDzam biHim fasuhQoLLi 'aSh-haabis Sa’iir</p><p class="para ayah latin" data-ayah="12" data-chapter="surat-mulk"><span class="ayah-no">12</span>inNal-LaDziina YakhSyauna RobBaHum BilGhoibi LaHum MafiroTuu wa Ajrung kaBiir</p><p class="para ayah latin" data-ayah="13" data-chapter="surat-mulk"><span class="ayah-no">13</span>Wa-AsirRuu Qoulakum aWiiJ-HaRuubih; inNaHuu ‘aliimun biDzaatish ShuDuur</p><p class="para ayah latin" data-ayah="14" data-chapter="surat-mulk"><span class="ayah-no">14</span>ALaa Yaq’lamu man Kholaqo waHuwal-laThiiful KhoBiir</p><p class="para ayah latin" data-ayah="15" data-chapter="surat-mulk"><span class="ayah-no">15</span>Huwal-LaDzii Jaq’ala lakumul arDho DzaLuulan FaamSyuu Fii maNaakibiHaa wakuLuu mirRizqih; Wa'ilaiHin NuSyuur</p><p class="para ayah latin" data-ayah="16" data-chapter="surat-mulk"><span class="ayah-no">16</span>‘A-amintum Man fisSaMaa’i AiyakhSifa bikumul arDho fa'iDzaa hiyataMuuur</p><p class="para ayah latin" data-ayah="17" data-chapter="surat-mulk"><span class="ayah-no">17</span>Am amintum Man fisSaMaa’i aiyurSila ‘alaikum haaShiban; Fasataq’ laMuuna Kaifa naDziir</p><p class="para ayah latin" data-ayah="18" data-chapter="surat-mulk"><span class="ayah-no">18</span>WalaQod KadzDzabal LaDziina Min QoBLiHim faKaifa Kaana NaKiir</p><p class="para ayah latin" data-ayah="19" data-chapter="surat-mulk"><span class="ayah-no">19</span>Awalam Yarow ilath-Thoiri FauqoHum ShoooFFaatiu Wayaq'bidh; Maa yumsikuhunNaa illarRohMaan; inNaHuu bikulli Syaiing baShiir</p><p class="para ayah latin" data-ayah="20" data-chapter="surat-mulk"><span class="ayah-no">20</span>AmMan HaaDzal LaDzii Huwa jundul Lakum yan Shurukum MinDuunir RohMaa; inil KaafiRuuna illaa Fii GhuRuur</p><p class="para ayah latin" data-ayah="21" data-chapter="surat-mulk"><span class="ayah-no">21</span>AmMan HaaDzal LaDzii yarzuQukum in Amsaka Rizqoh; bal LajJuu Fii ‘UTuuWiu wanuFuur</p><p class="para ayah latin" data-ayah="22" data-chapter="surat-mulk"><span class="ayah-no">22</span>Afamai yamSyii MukibBan ‘aLaa waJHiHii ahDaa amMai yamSyii saWiiyan ‘aLaa ShiRootim MustaQiim</p><p class="para ayah latin" data-ayah="23" data-chapter="surat-mulk"><span class="ayah-no">23</span>Qul Huwal LaDzii anSyaq’akum Wajaq’ala Lakumus Sam’A Wal aBShooro Wal af’idah; QoLiiLaam Maa taSyKuRuun</p><p class="para ayah latin" data-ayah="24" data-chapter="surat-mulk"><span class="ayah-no">24</span>Qul Huwal-LaDzii Dzaro-Akum Fil arDhi Wa ilaiHi tuhSyaRuun</p><p class="para ayah latin" data-ayah="25" data-chapter="surat-mulk"><span class="ayah-no">25</span>WayaQuu Luuna maTaa HaaDzaL waq’du in Kuntum ShoodiQiin</p><p class="para ayah latin" data-ayah="26" data-chapter="surat-mulk"><span class="ayah-no">26</span>Qul inNamal ‘ilmu ‘indallooHi wa inNaMaa aNaa naDziirum MuBiin</p><p class="para ayah latin" data-ayah="27" data-chapter="surat-mulk"><span class="ayah-no">27</span>FaLaam Maa Roq'auhu zulfatan Siii’at wuJuuHul-LaDziina kafaRuu waQiila HaaDzal-LaDzii kuntum biHii tadDa’uun</p><p class="para ayah latin" data-ayah="28" data-chapter="surat-mulk"><span class="ayah-no">28</span>Qul aro’aitum in ahlaka niyallooHu wamam-Ma’iya AuRohimaNaa, famai yuJiirul KaafiRiina min ‘aDzaabin aLiim</p><p class="para ayah latin" data-ayah="29" data-chapter="surat-mulk"><span class="ayah-no">29</span>Qul Huwar RohMaanu AamanNaa biHi wa ‘alaiHi tawak- KalNaa; Fasataq’ laMuuna man Huwa fii DhoLaalim muBiin</p><p class="para ayah latin" data-ayah="30" data-chapter="surat-mulk"><span class="ayah-no">30</span>Qul aro’aitum in 'aSh-baha Maa ’ukum Ghouron famai yaq’Tiikum biMaa’im Ma’iin</p><h3 class="subhead">Doa Setelah Al-Mulk</h3><p class="para latin" data-chapter="surat-mulk">Allahumma Aj’alna Mim-Man Yatlu Suratul Al Mulk,</p><p class="para latin" data-chapter="surat-mulk">Wa Yantafi’u Biha, Wa Yuq’minu Bi Ayatiha, Wa Yaq’malu Bimuh kamiha, Wa Yatajan-nabu Mutasya bihiha, Waj’alna Nuron Lana Fi Quburina, Wa Muq’nisatan Lana Fi Wahdatina, Wa Syafi’atan Lana Yaumal Qiyamah.</p><p class="para latin" data-chapter="surat-mulk">Allahumma Naj-jina Min ‘Azabil Qobri, Wa Min ‘Azabil Jahan-Nam, Wa Min Fitnatil Mahya Wal Mamat, Wa Min Fitnatil Masihid Dajjal, Wa adkhilnal Jan-nata Ma’al Abroor, Ya ‘Azizu Ya Ghoffar, Ya RobBal ‘Alamin.</p></section><section class="chapter" id="yasin-waqiah-tabarok">
+</section><section class="chapter" id="surat-yasin-ziarah"><h2>Surat Yasin</h2><span class="surah-status">RITUAL ZIARAH • 83 AYAT • PENOMORAN DIPERTAHANKAN</span><div class="repeat-demo" style="margin:12px 0 18px"><b>📿 Ritual Ziarah</b><small>Surat Yasin untuk ritual ziarah. Mode Fokus, Auto Fokus, Auto Scroll, Karaoke, dan Smart Counter tetap tersedia.</small></div><h3 style="color:var(--accent);margin:18px 0 10px">📖 Surat Yasin</h3><p class="para latin" data-chapter="surat-yasin-ziarah">Surat Yasin</p><p class="para latin ayah" data-ayah="1" data-chapter="surat-yasin-ziarah"><span class="ayah-no">1</span>Yaa Siin</p><p class="para latin ayah" data-ayah="2" data-chapter="surat-yasin-ziarah"><span class="ayah-no">2</span>Wal Qur'AaniL haKiim</p><p class="para latin ayah" data-ayah="3" data-chapter="surat-yasin-ziarah"><span class="ayah-no">3</span>inNaka laminal MursaLiin</p><p class="para latin ayah" data-ayah="4" data-chapter="surat-yasin-ziarah"><span class="ayah-no">4</span>‘ALaa ShiRooThim MustaQiim</p><p class="para latin ayah" data-ayah="5" data-chapter="surat-yasin-ziarah"><span class="ayah-no">5</span>TanZiilal ‘aZiizirRohiim</p><p class="para latin ayah" data-ayah="6" data-chapter="surat-yasin-ziarah"><span class="ayah-no">6</span>LitundZiro Qoumam Maa UndZiro AaBaa ‘Uhum Fahum GhoofiLuun</p><p class="para latin ayah" data-ayah="7" data-chapter="surat-yasin-ziarah"><span class="ayah-no">7</span>Laqod HaqQoL QouLu ‘ALaa AktSarihim Fahum Laa Yuq’miNuun</p><p class="para latin ayah" data-ayah="8" data-chapter="surat-yasin-ziarah"><span class="ayah-no">8</span>inNaa Ja‘alNaa Fii 'AqNaaqihim AGhLaalan Fahiya ilal AdZQooni Fahum Muq'mahuun</p><p class="para latin ayah" data-ayah="9" data-chapter="surat-yasin-ziarah"><span class="ayah-no">9</span>Wa Ja‘alNaa MimBaini aiDiihim SadDau Wa min Kholfihim SadDan Fa 'AGhSyaiNaahum Fahum Laa YubShiRuun</p><p class="para latin ayah" data-ayah="10" data-chapter="surat-yasin-ziarah"><span class="ayah-no">10</span>Wa SaWaa’un ‘alaihim A’andZar Tahum Amlam TundZirHum Laa Yuq’miNuun</p><p class="para latin ayah" data-ayah="11" data-chapter="surat-yasin-ziarah"><span class="ayah-no">11</span>in-NaMaa TundZiru ManitTaba ‘AdZ-dZikro Wa KhoSyiyar RohMaana BilGhoib; Fabasy-Syirhu Bima FiroTiu Wa Ajring KaRiim</p><p class="para latin ayah" data-ayah="12" data-chapter="surat-yasin-ziarah"><span class="ayah-no">12</span>inNaa Nahnu Nuhyil MauTaa WanakTubu Maa QodDaMuu Wa AatSaaroHum Wa Kulla Syai’in ahShoi-Naahu Fii iMaamim MuBiin</p><p class="para latin ayah" data-ayah="13" data-chapter="surat-yasin-ziarah"><span class="ayah-no">13</span>WaDhriB LaHum MatSalan Ash-haabaL Qoryati idZ Jaa‘aHaL MursaLuun</p><p class="para latin ayah" data-ayah="14" data-chapter="surat-yasin-ziarah"><span class="ayah-no">14</span>idZ ArsalNaa ilaihi MutSnaini FakadZ-dZaBuu HuMaa Fa ‘AzZazNaa Bi-tSaaLitSin FaQooLuu inNaa ilaikum MursaLuun</p><p class="para latin ayah" data-ayah="15" data-chapter="surat-yasin-ziarah"><span class="ayah-no">15</span>QooLuu Maa Antum illaa  BaSyarum MitSluna Wa Maa AnzaLar RohMaanu MinSyai’in inAntum illaa  TakdZiBuun</p><p class="para latin ayah" data-ayah="16" data-chapter="surat-yasin-ziarah"><span class="ayah-no">16</span>QooLuu RobBuNaa Yaq’lamu inNaa ilaikum lamur SaLuun</p><p class="para latin ayah" data-ayah="17" data-chapter="surat-yasin-ziarah"><span class="ayah-no">17</span>Wa Maa ‘alaiNaa illal BaLaaGhuL MuBiin</p><p class="para latin ayah" data-ayah="18" data-chapter="surat-yasin-ziarah"><span class="ayah-no">18</span>QooLuu inNaa taThoiyarNaa Bikum; Lail-lam TanTahuu lanar Juman-Nakum Wa Layamas-SanNakum MinNaa ‘adZaabun Aliim</p><p class="para latin ayah" data-ayah="19" data-chapter="surat-yasin-ziarah"><span class="ayah-no">19</span>QooLuu Thoo'irukum Ma‘Akum A’in dZukKirtum BaL Antum Qoumum MusriFuun</p><p class="para latin ayah" data-ayah="20" data-chapter="surat-yasin-ziarah"><span class="ayah-no">20</span>Wa Jaa'Amin AqShol MaDiinati Rojului Yas‘Aa Qoola Yaa Qoumit Tabi‘uL MursaLiin</p><p class="para latin ayah" data-ayah="21" data-chapter="surat-yasin-ziarah"><span class="ayah-no">21</span>itTabi'Uu MaLLaa Yas’alukum Ajrou Wa Hum MuhtaDuun</p><p class="para latin ayah" data-ayah="22" data-chapter="surat-yasin-ziarah"><span class="ayah-no">22</span>Wa Maa Liya Laa Aq‘Budul LadZii FaThoroNii Wa ilaihi Turja'Uun</p><p class="para latin ayah" data-ayah="23" data-chapter="surat-yasin-ziarah"><span class="ayah-no">23</span>A’atTaKhidZu MinDuunihii Aalihatan iiyuridnir RohMaanu BiDhurRiL Laa TuGhni ‘AnNii SyaFaa ‘Atuhum Syai'au Wa Laa YunqidZuun</p><p class="para latin ayah" data-ayah="24" data-chapter="surat-yasin-ziarah"><span class="ayah-no">24</span>inNii idZal LaFii DhoLaaLin MuBiin</p><p class="para latin ayah" data-ayah="25" data-chapter="surat-yasin-ziarah"><span class="ayah-no">25</span>inNii Aamantu BirobBikum Fasma'Uun</p><p class="para latin ayah" data-ayah="26" data-chapter="surat-yasin-ziarah"><span class="ayah-no">26</span>Qiilad Khulil JanNah; Qoola Yaa Laita QouMii Yaq‘laMuun</p><p class="para latin ayah" data-ayah="27" data-chapter="surat-yasin-ziarah"><span class="ayah-no">27</span>BiMaa Ghofaro Lii RobBii Waj'AaLaNii MinaL MukroMiim</p><p class="para latin ayah" data-ayah="28" data-chapter="surat-yasin-ziarah"><span class="ayah-no">28</span>Wa Maa AnzaLNaa ‘aLaa Qoumihii MimBa’dihii min Jundim Minas-SaMaa’i Wa Maa KunNaa MunZiLiin</p><p class="para latin ayah" data-ayah="29" data-chapter="surat-yasin-ziarah"><span class="ayah-no">29</span>in Kaanat illaa  Shoihatau Waahidatan Fa’idZaaHum KhoomiDuun</p><p class="para latin ayah" data-ayah="30" data-chapter="surat-yasin-ziarah"><span class="ayah-no">30</span>Yaa Hasrotan ‘alal ‘iBaad; Maa Yaq’Tiihim MirRoSuuLin illaa  KaaNuu Bihii YasTahZi’uun</p><p class="para latin ayah" data-ayah="31" data-chapter="surat-yasin-ziarah"><span class="ayah-no">31</span>Alam YaRou Kam AHlakNaa QoBlaHum MinaL QuRuuni AnNahum ilaihim Laa Yarji'Un</p><p class="para latin ayah" data-ayah="32" data-chapter="surat-yasin-ziarah"><span class="ayah-no">32</span>Wa in Kullul lamMaa JaMii‘ul LadaiNaa MuhDhoRuun</p><p class="para latin ayah" data-ayah="33" data-chapter="surat-yasin-ziarah"><span class="ayah-no">33</span>Wa Aayatul LaHumul ArDhul Maitatu AhyaiNaaHaa Wa AKhrojNaa MinHaa habBan FaminHu Yaq’kuLuun</p><p class="para latin ayah" data-ayah="34" data-chapter="surat-yasin-ziarah"><span class="ayah-no">34</span>Waj'AalNaa FiiHaa JanNaatim MinNaKhiiliu Wa Aq‘Naabiu Wa FajJarNaa FiiHaa Minal ‘uYuun</p><p class="para latin ayah" data-ayah="35" data-chapter="surat-yasin-ziarah"><span class="ayah-no">35</span>Liyaq’kuLuu min tSamarihii Wa Maa ‘Amilat-hu AiDiihim; AfaLaa YaSykuRuun</p><p class="para latin ayah" data-ayah="36" data-chapter="surat-yasin-ziarah"><span class="ayah-no">36</span>SuBhaanal-LadZii KhoLaqoL azWaaja KullaHaa Mim-Maa  TunBituL ArDhu Wa min AnfuSihim Wa Mim-maa  Laa Yaq‘laMuun</p><p class="para latin ayah" data-ayah="37" data-chapter="surat-yasin-ziarah"><span class="ayah-no">37</span>Wa Aayatul LaHumul Lailu NasLaKhu Minhun NaHaaro FaidZaaHum MuZhliMuun</p><p class="para latin ayah" data-ayah="38" data-chapter="surat-yasin-ziarah"><span class="ayah-no">38</span>Wasy Syamsu TajRii Limus TaqorRiL LaHaa; dZaaLika TaqDiiruL ‘AZiiziL ‘ALiim</p><p class="para latin ayah" data-ayah="39" data-chapter="surat-yasin-ziarah"><span class="ayah-no">39</span>Wal Qomaro QodDarNaaHu MaNaazila HatTaa ‘Aadakal ‘UrJuuniL QoDiim</p><p class="para latin ayah" data-ayah="40" data-chapter="surat-yasin-ziarah"><span class="ayah-no">40</span>Lasy Syamsu YambaGhii LaHaa An TudrikaL Qomaro Wa LaaL LaiLu SaaBiqun NaHaar; Wa Kullun Fii Falakin YasBahuun</p><p class="para latin ayah" data-ayah="41" data-chapter="surat-yasin-ziarah"><span class="ayah-no">41</span>Wa Aayatul LaHum AnNaa hamalNaa dZurRiiya taHum Filfulkil MaSyhuun</p><p class="para latin ayah" data-ayah="42" data-chapter="surat-yasin-ziarah"><span class="ayah-no">42</span>Wa KhoLaqNaa LaHum min MitSlihii Maa YarkaBuun</p><p class="para latin ayah" data-ayah="43" data-chapter="surat-yasin-ziarah"><span class="ayah-no">43</span>Wa in-NaSyaq’ NuGhRiq-Hum FaLaa ShoRiiKho LaHum Wa Laa Hum Yung QodZuun</p><p class="para latin ayah" data-ayah="44" data-chapter="surat-yasin-ziarah"><span class="ayah-no">44</span>illaa  Rohmatam MinNaa WamaTaa‘an ilaa hiin</p><p class="para latin ayah" data-ayah="45" data-chapter="surat-yasin-ziarah"><span class="ayah-no">45</span>Wa idZaa Qiila LaHumut-TaQuu MaaBaina AidiKum Wa Maa KholFakum La‘allakum TurhaMuun</p><p class="para latin ayah" data-ayah="46" data-chapter="surat-yasin-ziarah"><span class="ayah-no">46</span>Wa Maa taq’Tiihim min Aayatin min AaYaati RobBihim illaa  KaaNuu ‘AnHaa Muq‘riDhiin</p><p class="para latin ayah" data-ayah="47" data-chapter="surat-yasin-ziarah"><span class="ayah-no">47</span>Wa idZaa Qiila LaHum AnfiQuu Mim-Maa RoZaqo Kumulloohu Qoolal LadZiina KafaRuu, Lil LadZiina AamaNuu AnuThoq‘imu Mallau YaSy'Aa Ulloohu AThoq‘amah; in Antum illaa Fii DhoLaalin MuBiin</p><p class="para latin ayah" data-ayah="48" data-chapter="surat-yasin-ziarah"><span class="ayah-no">48</span>Wa YaQuuLuuna MaTaa HaadZal Waq‘du in Kuntum ShoodiQiin</p><p class="para latin ayah" data-ayah="49" data-chapter="surat-yasin-ziarah"><span class="ayah-no">49</span>Maa Yang ZhuRuuna illaa  Shoihatau Waahidatan Taq’Khu dZuhum Wa Hum YaKhiSh ShiMuun</p><p class="para latin ayah" data-ayah="50" data-chapter="surat-yasin-ziarah"><span class="ayah-no">50</span>FaLaa YastaThii-'Uuna TauShiyaTau Wa Laa iLaa AHLiHiM Yarji'Uun</p><p class="para latin ayah" data-ayah="51" data-chapter="surat-yasin-ziarah"><span class="ayah-no">51</span>Wa NufiKho Fish-Shuuri Fa'idZaaHum Minal AjDaatSi iLaa RobBihim YansiLuun</p><p class="para latin ayah" data-ayah="52" data-chapter="surat-yasin-ziarah"><span class="ayah-no">52</span>QooLuu Yaa WailaNaa man Ba‘AtSaNaa Mim MarqodiNaa; HaadZaa Maa Wa‘Adar RohMaanu Wa ShodaqoL MursaLuun</p><p class="para latin ayah" data-ayah="53" data-chapter="surat-yasin-ziarah"><span class="ayah-no">53</span>in Kaanat illaa  Shoihatau Waahidatan Fa'idZaaHum JaMii‘ul LadaiNaa Muh DhoRuun</p><p class="para latin ayah" data-ayah="54" data-chapter="surat-yasin-ziarah"><span class="ayah-no">54</span>Falyauma Laa-tuZhlamu Nafsun Syai'au WaLaa TujZauna illaa Maa Kuntum Taq‘maLuun</p><p class="para latin ayah" data-ayah="55" data-chapter="surat-yasin-ziarah"><span class="ayah-no">55</span>inNa ash-haabal JanNati Yauma Fii Syugulin FaaKihuun</p><p class="para latin ayah" data-ayah="56" data-chapter="surat-yasin-ziarah"><span class="ayah-no">56</span>Hum Wa AzWaa JuHum Fii ZhiLaalin ‘alal ARooiki MutTaki'Uun</p><p class="para latin ayah" data-ayah="57" data-chapter="surat-yasin-ziarah"><span class="ayah-no">57</span>LaHum Fii Haa FaakiHatun Wa LaHum Maa Yad Da‘Uun</p><p class="para latin ayah" data-ayah="58" data-chapter="surat-yasin-ziarah"><span class="ayah-no">58</span>SaLaamun Qoulam MirRobBir Rohiim</p><p class="para latin ayah" data-ayah="59" data-chapter="surat-yasin-ziarah"><span class="ayah-no">59</span>WamTaazuL Yauma AiyuHaL MujriMuun</p><p class="para latin ayah" data-ayah="60" data-chapter="surat-yasin-ziarah"><span class="ayah-no">60</span>Alam A‘had ilaikum Yaa baNii Aadama 'AaLaa Taq‘budusy SyaiThoon; inNahu Lakum ‘aDuuWum MuBiin</p><p class="para latin ayah" data-ayah="61" data-chapter="surat-yasin-ziarah"><span class="ayah-no">61</span>Wa Aniq’buDuuNii HaadZaa ShiRooThum MusTaQiim</p><p class="para latin ayah" data-ayah="62" data-chapter="surat-yasin-ziarah"><span class="ayah-no">62</span>Wa Laqod aDholla Minkum Jibillan KatSiiro; Afalam TaKuuNuu Taq‘QiLuun</p><p class="para latin ayah" data-ayah="63" data-chapter="surat-yasin-ziarah"><span class="ayah-no">63</span>HaadZiHii JaHanNamul LaTii Kuntum Tuuq‘aDuun</p><p class="para latin ayah" data-ayah="64" data-chapter="surat-yasin-ziarah"><span class="ayah-no">64</span>iShlauhaL Yauma biMaa Kuntum TakfuRuun</p><p class="para latin ayah" data-ayah="65" data-chapter="surat-yasin-ziarah"><span class="ayah-no">65</span>Al-yauma NaKhtimu ‘AaLaa afWaahihim WaTukal LiimuNaa AiDiihim Wa TaSyhadu ArjuluHum BiMaa KaaNuu YaksiBuun</p><p class="para latin ayah" data-ayah="66" data-chapter="surat-yasin-ziarah"><span class="ayah-no">66</span>WaLau NaSyaa’U LaThomasNaa ‘ALaa Aq‘yunihim FasTabaQuSh ShiRooTho Fa-AnNaa YubShiRuun</p><p class="para latin ayah" data-ayah="67" data-chapter="surat-yasin-ziarah"><span class="ayah-no">67</span>Walau NaSyaa‘U LamasaKh-NaaHum ‘aLaa maKaanatihim FamasTaThoo'Uu MuDhiiyau Wa Laa Yarji'Uun</p><p class="para latin ayah" data-ayah="68" data-chapter="surat-yasin-ziarah"><span class="ayah-no">68</span>Wa Man Nu'am Mirhu Nunak-Kishu FilKholqi AfaLaa Yaq‘QiLuun</p><p class="para latin ayah" data-ayah="69" data-chapter="surat-yasin-ziarah"><span class="ayah-no">69</span>Wa Maa ‘allamNaa Husy-Syiq‘ro Wa Maa Yamba-GhilaH inHuwa illaa  dZikRuu Wa Qur'Aanun MuBiin</p><p class="para latin ayah" data-ayah="70" data-chapter="surat-yasin-ziarah"><span class="ayah-no">70</span>LiyundZiro MangKaana haiYau WayahiqQoL Qoulu ‘alal KaafiRiin</p><p class="para latin ayah" data-ayah="71" data-chapter="surat-yasin-ziarah"><span class="ayah-no">71</span>Awalam YaRou AnNaa KhoLaqNaa LaHum Mim-Maa ‘Amilat AiDiiNaa an‘Aaman FaHum LaHaa Maalikun</p><p class="para latin ayah" data-ayah="72" data-chapter="surat-yasin-ziarah"><span class="ayah-no">72</span>Wa dZallalNaa HaaLaHum FaminHaa RoKuuBuHum Wa MinHaa Yaq’kuLuun</p><p class="para latin ayah" data-ayah="73" data-chapter="surat-yasin-ziarah"><span class="ayah-no">73</span>Wa LaHum Fiihaa MaNaaFi‘u Wa MaSyaaribu, AfaLaa YaSyKuRuun</p><p class="para latin ayah" data-ayah="74" data-chapter="surat-yasin-ziarah"><span class="ayah-no">74</span>Wat-TaKhodZuu min DuunillaaHi AalihataL Laq'aLLaa-Hum YunShoRuun</p><p class="para latin ayah" data-ayah="75" data-chapter="surat-yasin-ziarah"><span class="ayah-no">75</span>Laa Yas TaThii'Uuna NaShRoHum WaHum LaHum Jundum MuhDhoRuun</p><p class="para latin ayah" data-ayah="76" data-chapter="surat-yasin-ziarah"><span class="ayah-no">76</span>FaLaa Yah-Zunka QouluHum inNaa Naq‘lamu Maa Yusir Ruuna Wa Maa Yuq‘LiNuun</p><p class="para latin ayah" data-ayah="77" data-chapter="surat-yasin-ziarah"><span class="ayah-no">77</span>Awalam Yarol inSaanu AnNaa KhoLaqNaahu MinNuTh Fatin FaidZaa Huwa KhoShiimun MuBiin</p><p class="para latin ayah" data-ayah="78" data-chapter="surat-yasin-ziarah"><span class="ayah-no">78</span>Wa Dhoroba LaNaa MatSalan WanaSiya Kholqoh; Qoola MaiYuhyiL ‘iZhooma Wahiya roMiim</p><p class="para latin ayah" data-ayah="79" data-chapter="surat-yasin-ziarah"><span class="ayah-no">79</span>Qul YuhYiihaL LadZii anSyaq'aHaa Auwala MarRoh Wa Huwa Bikulli KholQin ‘aLiim</p><p class="para latin ayah" data-ayah="80" data-chapter="surat-yasin-ziarah"><span class="ayah-no">80</span>Al-LadZii  Ja‘ala Lakum Minasy Syajaril AKhDhori Naaron Fa 'idZaa Antum MinHu TuuQiiDuun</p><p class="para latin ayah" data-ayah="81" data-chapter="surat-yasin-ziarah"><span class="ayah-no">81</span>Awalaisal-LadZii KhoLaqos SaMaaWaati Wal 'ArDho BiQoodirin ‘aLaa AiYaKh-luqo MitSLaHum; BaLaa WaHuwaL KhoLLaaquL ‘ALiim</p><p class="para latin ayah" data-ayah="82" data-chapter="surat-yasin-ziarah"><span class="ayah-no">82</span>inNaMaa AmruHu idZaa ARooda Syai’an AiYaQuula LaHu Kun Fa yaKuun</p><p class="para latin ayah" data-ayah="83" data-chapter="surat-yasin-ziarah"><span class="ayah-no">83</span>FasuBhaanaL-LadZii Biyadihii MaLaKuutu Kulli Syai’in Wa ilaihi Turjaq'Uun</p><div class="chapter-nav-row"><button class="action" data-nav-target="panduan-ziarah" type="button">← Ritual Ziarah</button><button class="action" data-nav-target="tahlil-ziarah" type="button">Tahlil →</button><button class="action" data-nav-target="beranda" type="button">Daftar Isi</button></div></section><section class="chapter" id="tahlil-ziarah"><h2>Tahlil</h2><span class="surah-status">RITUAL ZIARAH • BACAAN TAHLIL</span><div class="repeat-demo" style="margin:12px 0 18px"><b>📿 Ritual Ziarah</b><small>Bacaan Tahlil untuk ritual ziarah. Mode Fokus, Auto Fokus, Auto Scroll, Karaoke, dan Smart Counter tetap tersedia.</small></div><h3 style="color:var(--accent);margin:18px 0 10px">📿 Tahlil</h3><p class="para latin" data-chapter="tahlil-ziarah">A’uudZu BillaaHi Minasy SyaiThoonir RoJiim. BismillaaHir RohMaanir Rohiim. Qul Hu Walloohu Ahad, Alloohush-Shomad, Lam Yalid Walam YuuLad, Walam Yakullahuu Kufuwan Ahad (3X)</p><p class="para latin" data-chapter="tahlil-ziarah">Laa illaaHa ilallooHu Walloohu Akbar WalillaaHil Hamdu</p><p class="para latin" data-chapter="tahlil-ziarah">BismillaaHir RohMaanir Rohiim. Qul A’udZu Birob-Bil FaLaq, min SyarRi Maa HoLaq, Wamin SyarRi Ghoosiqin idZaa Waqob, Wamin SyarRin Naf-Faa tSaati Fil ‘Uqod, Wamin SyarRi Haasidin idZaa Hasad. Laa illaaHa   ilallooHu Walloohu Akbar WalillaaHil Hamdu</p><p class="para latin" data-chapter="tahlil-ziarah">BismillaaHir RohMaanir Rohiim. Qul A’udZu BirobBin Naas, Malikin-Naas, illaa hin-Naas, min SyarRil Was-Waasil Hon-Naas, AlladZii Yuwas-Wisu Fii Shudurin-Naas, Minal Jin-Nati Wan-Naas. Laa illaaHa   ilallooHu Walloohu Akbar WalillaaHil Hamdu</p><p class="para latin" data-chapter="tahlil-ziarah">BismillaaHir RohMaanir Rohiim. Alhamdu lillaaHi RobBil ‘AaLaMiin, ArRohMaanir Rohiim, Maaliki YaumidDiin, iiYaaka Naq’budu Wa iiYaaKa Nasta’iin, ihdinaSh ShiRooThol Mustaqiim, ShiRooThol LadZiina An ‘Amta ‘alaihim Ghoiril MaGh-Dhuubi ‘alaihim WaLaaDh DhooLiin. RobBiGhfirLii WaliWaa Lidaiya Walil Mukminina Aamin.</p><p class="para latin" data-chapter="tahlil-ziarah">BismillaaHir RohMaanir Rohiim. Alif-Laam-Miim. dZaalikal KiTaabuLaa Royiba Fii hii Hudal Lil Mutaqiin. Al LadZiina Yuq’ MiNuuna Bil Ghoibi Wa Yuqii MuunaSh ShoLaata Wa Mim-Maa Rozaq Naahum Yun FiQuun.</p><p class="para latin" data-chapter="tahlil-ziarah">Wal-LadZiina Yuq’ MiNuuna BiMaa Unzila ilaika Wa Maa Unzila min Qoblika Wa Bil ‘AahirotiHum Yuu QiNuun. ULaa 'ika ‘AqLaa Hudam MirRob-BiHim Wa ULaa ‘ika Humul Muflihuun</p><p class="para latin" data-chapter="tahlil-ziarah">Wa illaa Hukum illaaHu Waahidul Laa illaaHa illaa Huwar RohMaanur Rohiim.</p><p class="para latin" data-chapter="tahlil-ziarah">Alloohu Laa illaaHa illaa Huwal Haiyul QoiYuum, Laa Taq’ HudZuhuu SinaTuuw Wa Laa Naum, Lahuu Maa Fis-SaMaaWaati Wa ma Fil ArDh. Man dZal-LadZii Yasy Fa’u ‘indahuu illaa Bi idZnih, Yaq’lamu Maa Baina ‘AiDiihim Wa Maa Holfahum. Wa Laa YuhiiThuuna BiSyai-im min ‘ilmihii illaa BiMaa Syaa’ Wasi’a KurSiiyuhus SaMaa Waati Wal ‘ArDh, Wa Laa Ya ‘Uuduhuu hifZhu HuMaa Wahuwal ‘ALiiyul ‘AZhiim</p><p class="para latin" data-chapter="tahlil-ziarah">lillaaHi Maa Fis-SaMaaWaati Wa Maa Fiil ArDh, Wa in TubDuu Maa Fii Ang-Fusikum Au-Tuh-Fuuhu Yuhaas Bikum Bihillah, FayaGh-Firuu Limai-YaSyaa’u Wa Yu’adz-dZibu MaiyaSyaa’u Walloohu ‘ALaa Kulli Syai’ing QoDiir</p><p class="para latin" data-chapter="tahlil-ziarah">Aamanar RoSuulu BiMaa Unzila ilaihi Mir Robbihii Wal Muuq’miNuun, Kullun Aamana BillaaHi WamaLaa ikatihi, Wa Kutubihii, Warusulih, Laa NufarRiqu Bayina Ahadim-MirRusulih, Wa QooLuu Samiq’Naa Wa AThoq’Naa, Ghufronaka RobBaNaa Wa-ilaikal MaShiir</p><p class="para latin" data-chapter="tahlil-ziarah">Laa Yukal-Liful-Loohu Nafsan illaa Wus ’Ahaa, Lahaa Maa Kasabat, Wa‘ALaihaa Maaq-Tasabat.</p><p class="para latin" data-chapter="tahlil-ziarah">RobBaNaa Laa Tuq ‘AahidZ-Naa in NaSiiNaa Au-AhThoqNaa.</p><p class="para latin" data-chapter="tahlil-ziarah">RobBaNaa Wa Laa Tahmil ‘AlaiNaa iShrong KaMaa Hamal Tahuu 'Alal-LadZiina Ming QobliNaa. RobBaNaa Wa Laa Tuham-MilNaa, Maa Laa Thooqota LaNaa Bihi,</p><p class="para latin" data-chapter="tahlil-ziarah">Waq'fu 'An-Naa WaGhFir LaNaa WarhamNaa 7x</p><p class="para latin" data-chapter="tahlil-ziarah">Anta MauLaaNaa Faan ShurNaa ‘Aqlal Qoumil KaafiRiin. Birohmatika Yaa Arhamar RohiiMiin.</p><p class="para latin" data-chapter="tahlil-ziarah">irhamNaa Yaa Arhamar RoohiMiin 7x</p><p class="para latin" data-chapter="tahlil-ziarah">Rohmatulloohi Wa Barokatuh 'Alaikum Ahlal Bait, inNahuu HaMiidum MaJiid. inNaMaa YuRiidulloohu LiyudZ hiba 'Angkumur Rij-sa Ahlal Baiti Wa YuThoh-hirokum TaTh-hiiRoo.</p><p class="para latin" data-chapter="tahlil-ziarah">innallooha Wa MaLaa ikatahuu YuShol-Luuna Alla NaBiiyi Yaa Aiyuhal LadZiina AamaNuu Shollu Alaihi Wa Sallimu TasLiiMaan.</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa  Sholli AfDholash ShoLaati 'Alaa As'adi MaKhLuu-Qootika Nuuril HuDaa SaiyidiNaa Wa MauLaaNaa MuhamMadiu Wa 'Alaa Aalihii Wa ShohBihii Wa Sallim 'Adada Maq'LuuMaatika Wa MiDaada Kali Maatika KullaMaa dZaka RokadZ dZaa-Kiruna Wa Ghofala 'AndZikrikal GhoofiLuun</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa Sholli AfDholash ShoLaati 'Alaa As'adi MaKhLuu-Qootika Syamsid Dhuhaa SaiyidiNaa Wa MauLaaNaa MuhamMadiu Wa 'Alaa Aalihii Wa ShohBihii Wa Sallim 'Adada Maq'LuuMaatika Wa MiDaada KaliMaatika KullaMaa dZakaro-KadZ dZaa-Kiruna Wa Ghofala 'AndZikrikal GhoofiLuun</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa  Sholli AfDholash ShoLaati 'Alaa As'adi MaKhLuu-Qootika Badrid DuJaa SaiyidiNaa Wa MauLaaNaa MuhamMadiu Wa 'Alaa Aalihii Wa ShohBihii Wa Sallim 'Adada Maq'LuuMaatika Wa MiDaada Kali Maatika KullaMaa dZakaro-KadZ dZaa-Kiruna Wa Ghofala 'AndZikrikal GhoofiLuun</p><p class="para latin" data-chapter="tahlil-ziarah">Wasalim Wa RoDhiyalloohu TaBaaroka Wa Ta'AaLaa 'An SaaDaatiNaa, Ash-haabi RoSuulillaaHi Ajma'iin.</p><p class="para latin" data-chapter="tahlil-ziarah">Wa Hasbunalloohi Waniq’mal WaKiil, Niq’mal MauLaa Waniq’ Man NaShiir. Wa Laa Haula WaLaa Quuwata illaa BillaaHil 'ALiiyil 'AZhiim.</p><p class="para latin" data-chapter="tahlil-ziarah">AstaGhfirulloohal 'AdZiim 7X</p><p class="para latin" data-chapter="tahlil-ziarah">AfDholudZ dZikri Faq' lam An-Nahuu, Laa illaaHa illallooHu Haiyum Maujuud. Laa illaaHa illallooHu Haiyum Ma'Buud. Laa illaaHa illallooHu Haiyum Baaaq.</p><p class="para latin" data-chapter="tahlil-ziarah">Laa illaaHa illallooH 100x</p><p class="para latin" data-chapter="tahlil-ziarah">Laa illaaHa illallooH, MuhamMadur RoSuululloohi Shollalloohu 'Alaihi Wasallam.</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa Sholli 'Alaa SaiyidiNaa MuhamMad, AlloohumMa  Sholli 'Alaihi Wasallim. 2X</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa Sholli 'Alaa SaiyidiNaa MuhamMad, Yaa RobBi Sholli 'Alaihi Wasallim</p><p class="para latin" data-chapter="tahlil-ziarah">SuBhaanal-Loohi Wa Bi hamdihii, SuBhaanal-Loohil 'AdZiim 33X</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa Sholli 'Alaa HaBiibika SaiyidiNaa MuhamMadiu Wa 'Alaa Aalihii Wa ShohBihii Wasallim 2X</p><p class="para latin" data-chapter="tahlil-ziarah">AlloohumMa ShollI 'Alaa RoSuulika Wa HaBiibika SaiyidiNaa MuhamMadiu Wa 'ALaa Aalihii Wa ShohBihii Wa Baarik Wa Sallim Ajma'in - Al Faatihah</p><p class="para latin" data-chapter="tahlil-ziarah">RobBiGhfirLii Wa LiWaali daiya Walil MukmiNiina AaMiin</p><div class="chapter-nav-row"><button class="action" data-nav-target="panduan-ziarah" type="button">← Ritual Ziarah</button><button class="action" data-nav-target="surat-yasin-ziarah" type="button">← Yasin</button><button class="action" data-nav-target="beranda" type="button">Daftar Isi</button></div></section><section class="chapter" id="doa-tahlil"><h2>Doa Tahlil</h2><span class="surah-status">DOA TAHLIL • BACAAN RITUAL</span><div class="repeat-demo" style="margin:12px 0 18px"><b>🤲 Doa Tahlil</b><small>Bacaan Doa Tahlil. Warna frasa mengikuti standar bacaan warna-warni, dengan Mode Fokus, Auto Fokus, Auto Scroll, Karaoke, dan Smart Counter tetap tersedia.</small></div><p class="para latin" data-chapter="doa-tahlil" data-doa-index="1">A&#x27;uudZubillaaHi Minasy SyaiThoonir RoJiim, BismillaaHir Rohmanir Rohiim,</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="2">Al hamdu lillaaHil LadZi lam YatTaKhiu WaLadau Wa lam Yakul LaHuu SyaRiiku Fil Mulk, Wa lam Yakul Lahuu WaLii Yum MinadZ dZulli WakabBirhu Takbiro</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="3">AlloohumMa anta robBUNAA Laa illaaHa illaa Anta. KhoLaqtaNaa Wa Nahnu &#x27;ibaaduka, Wa Nahnu &#x27;Alaa Ahdika Wa Wa&#x27;dika MastaThoq&#x27;NAA, Na&#x27;uudZubika min SyarRi Maa Shonaq&#x27;naa,</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="4">naBuu&#x27;u laka Bini&#x27;matika &#x27;AlaiNaa, Wa nABuu&#x27;u BidZuNuubiNaa, Fagh-FirLaNaa Fa inNaHuu Laa YaGhfirudZ dZuNuuba illaa Anta.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="5">AlloohumMa Yaa Alloohu Yaa ‘ALiiyu Yaa ‘AZhiimu Yaa haLiimu Yaa ‘ALiim. Anta RobBii, Wa ’ilmuka hasBii, Faniq’mar RobBu-RobBii, Waniq’mal hasBu-hasBii, TanShuru Man-TaSya&#x27;u, Wa Antal ‘aZiizur Rohiim.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="6">Wa illaa hukum illaaHu Waahidul Laa illaaHa illaa Huwar RohMaanur Rohiim. Alloohu Laa illaaHa illaa Huwal haiyul QoiYuum,</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="7">AlloohumMa inNi As &#x27;Aluka Bi AnNi ASyhadu AnNaka Antalloohu, Laa illaaHa   illaa Anta,  antal AhaduSh Shomad, AlladZi lam Yalid Wa lam YuLad, Wa lam Yakul Lahu Kufuwan Ahad.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="8">AlloohumMa TaqobBal Wa AuShil tSaWaaba maa Qoro’Naahu Minal Qur&#x27;aanil &#x27;AZhiim. Wa Maa HallalNaa, Wa Maa SabBahNaa, Wa MastaGhFarNaa, Wa Maa TaShoddaqoNaa, Wa Maa ShollaiNaa, &#x27;Alaa SaiyidiNaa MuhamMadin  Shollallohu &#x27;Alaihi Wasallam. Hadiiyatam Minna, Wa Shilatan, Wa Rohmatan, Naazilatan, Wa barokatan Syaa-Milah</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="9">iLaa ArWaahi JaMii&#x27;il Ahlil QuBuuri, Minal MusliMiina Wal MusliMaat, Wal MukmiNiina Wal MukmiNaat, min MaSyaariqil ArDhi, Wa MaGhoori-Bihaa, BarRihaa Wa Bahrihaa, KhuShuuShon iLaa ABaa’iNaa (Wa UmMaHaatiNaa), Wa Aj-Daa-DiNaa, Wa Jad-Daatina</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="10">Wa Khush-Shol KhuShuuShon  iLaa haDhroti</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="11">Bapak Soemadji  bin Kardi Adisukarto</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="12">ibu Sukilah binti Martam Wongso Prawiro</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="13">Bapak Sido Utomo bin Karto Sidi</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="14">Bapak Moedjono bin Mbah KabuL Karnadi</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="15">iLaa Manij-Tamaq&#x27;Naa haaHuNaa BisaBaa-bihii Wa Liajlih.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="16">AlloohumMaGhFir Lahu, WarhamHu, Wa &#x27;Aafihi Wafu&#x27;AnHu. Wa Akrim NuzuLaHu, Wagh-SilHu Bil Maa&#x27;i, Wat-tSalji, Wal Barod.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="17">AlloohumMa NawWir  Qobrohu, Wa WasSi&#x27; Mud-KhoLaHu.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="18">AlloohumMaj&#x27;al Qobrihi RouDhotam min RiYaaDhil JanNah. Wa Laa Taj&#x27;al Qobrihi  hufrotam Min hufarin-Naar. Waftah Lahu Fii Qobrihi Baaban ilal Jannah. AlloohumMa tSabBitHu &#x27;indas Su-Aal.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="19">Alloohumma &#x27;idz-Hu Min &#x27;aZaabil Qobri. Wa Min Fitnatil Qobri. Wa Min &#x27;adZaabin Naar.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="20">AlloohumMarfa&#x27; DaroJaataHu Fil MahDiiYiin. WakhLuf-Hu Fii &#x27;aqibiHim, Fil GhoobiRiin. Waghfir LaNaa Wa Lahu Yaa Robbal &#x27;Aalamiin.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="21">AlloohumMaj&#x27;alHu Ma&#x27;an  NabiiYiina, Wash Shid-DiiQiina, Wasy SyuHaDaa&#x27;i, Wash Shoolihiin.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="22">AlloohumMa Yaa Ahad Sholli &#x27;Alaa Ahmad. AlloohumMa Yaa Ahad Sholli &#x27;Alaa MuhamMad. AlloohumMa Yaa Ahad Sholli &#x27;alal MahDii. KhoLiiFatika Yaa Allooh Yaa Ahad.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="23">AlloohumMa Anzilir Rohmatan, Wal MaGhfirotan, &#x27;Alaa Ahlil QuBuuri Min Ahli, Laa illaaHa illallooHu MuhamMadur RoSuulullooh.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="24">Yaa Muhaiminu Yaa SaLaam, SallimNaa Wal MusliMiin Fid-DunYaa Wal AaKhiroh, Birohmatika Yaa Arhamar RoohiMiin.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="25">AlloohumMa  inNaa Nas’aluka RiDhooka Wal JanNah, Wa Na&#x27;uudZu Bika min SaKhoThika WanNaar.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="26">AlloohumMar-hamHu Bil Qur&#x27;Aanil &#x27;AZhiimir Rohmatan, Waasi&#x27;atan, WaGhfir LaHu MaGhfirotan, Jaami&#x27;atan, Yaa Maalikad DunYaa Wal AaKhiroti Yaa RobBal &#x27;AalaMiin.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="27">AlloohumMaj&#x27;al Lil Qur&#x27;Aanil &#x27;AZhiim, Fii Qobrihii Muq&#x27;nisan, Wa Fiil QiYaamati Syaafi&#x27;an, Wa Fiil HaSyri DhiYaa&#x27;an, Wa Zhillan, Wa DaLiilan, Wafi MiiZaani Roojihan, Wa &#x27;Alaa ShiRooThi Nuuron, Wa Qooidan, Wa &#x27;Anin-Naari Sitron, Wa hiJaaban, Wa Fiil JanNati RoFiiqon</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="28">AlloohumMa  Anzil Fii  Qobrihii Rohmatan, WaDh-DhiYaa&#x27;A, Wan-Nuuro, Wal Bahjata, War-Rouha, War-Roihaana,  Was-SuRuuro, Min YaumiNaa HadZaa, iLaa Yaumil Baq&#x27;tSi, WanuSyuuri inNaka Malikun RobBun GhoFuur.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="29">RobBaNaa Atmim LaNaa Nuur-RoNaa WaGhfir LaNaa inNaka &#x27;Alaa Kulli Syai’ing qoDiir</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="30">RobBaNaa FaaGh Fir LaNaa dZuNuu BaNaa, Wa Kafir ‘AnNaa Saiyiq ‘AatiNaa Wa Tawaf-FaNaa Maq’al AbRoor</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="31">RobBana Wa AatiNaa Maa Wa ’AdtaNaa ‘AqLaa RoSuulika Wa Laa TuKh-ZiNaa Yaumal QiYaamaH</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="32">RobBaNaa AatiNaa Milladunka Rohmatau Wahaiyik LaNaa min AmriNaa RoSyaDaa</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="33">RobBaNaa... RobBaNaa... RobBaNaa...  AatiNaa Fid DunYaa hasanaH, Wa Fil AaKhiroti hasanatau WaqiNaa AdZaaban Naar, WaqiNaa AdZaaban Naar, WaqiNaa AdZaaban Naar</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="34">WaSholalloohu &#x27;Alaa SaiyidiNaa MuhamMadin, Wa &#x27;aLaa Aalihii WaShohBihi Wasallam.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="35">SuBhaana RobBika RobBil &#x27;izZati &#x27;AmMaa YaShiFuun. WasaLaamun &#x27;alal MursaLiin. Wal HamdulillaaHi RobBil &#x27;AalaMiin Al-Faatihah.</p><p class="para latin" data-chapter="doa-tahlil" data-doa-index="36">RobBiGhfirLii Wa liWaalidaiya Walil MukmiNiina AaMiin..... AaMiin ..... AaMiin ..... YRA</p><div class="chapter-nav-row"><button class="action" data-nav-target="tahlil-ziarah">← Tahlil</button><button class="action" data-nav-target="surat-waqiah">Surat Al-Waqi’ah →</button><button class="action" data-nav-target="beranda">Daftar Isi</button></div></section><section class="chapter" id="surat-waqiah"><h2>Surat Al-Waqi'ah</h2><span class="surah-status">96 AYAT • MODE HAFALAN AKTIF</span><p class="para ayah latin" data-ayah="1" data-chapter="surat-waqiah"><span class="ayah-no">1</span>iDzaa Waqo‘atiL Waaqi‘ah</p><p class="para ayah latin" data-ayah="2" data-chapter="surat-waqiah"><span class="ayah-no">2</span>Laisa Liwaqo‘ati Haa KaaDzibah</p><p class="para ayah latin" data-ayah="3" data-chapter="surat-waqiah"><span class="ayah-no">3</span>Khoofi Dhotur Roofi‘ah</p><p class="para ayah latin" data-ayah="4" data-chapter="surat-waqiah"><span class="ayah-no">4</span>iDzaa RujjatiL ArDhu Rojjaa</p><p class="para ayah latin" data-ayah="5" data-chapter="surat-waqiah"><span class="ayah-no">5</span>Wa BusSatiL jiBaaLu BasSaa</p><p class="para ayah latin" data-ayah="6" data-chapter="surat-waqiah"><span class="ayah-no">6</span>FaKaanat HaBaa'am Mumbats-tSaa</p><p class="para ayah latin" data-ayah="7" data-chapter="surat-waqiah"><span class="ayah-no">7</span>Wa Kuntum AzWaajan tSaLaatSah</p><p class="para ayah latin" data-ayah="8" data-chapter="surat-waqiah"><span class="ayah-no">8</span>Fa 'aSh-haabuL MaiManati Maa 'aSh-haabuL MaiManah</p><p class="para ayah latin" data-ayah="9" data-chapter="surat-waqiah"><span class="ayah-no">9</span>Wa ‘aSh-haabul MaSy'amati Maa 'aSh-haabul MaSy'amah</p><p class="para ayah latin" data-ayah="10" data-chapter="surat-waqiah"><span class="ayah-no">10</span>Was-SaabiQuu Nas-SaabiQuun</p><p class="para ayah latin" data-ayah="11" data-chapter="surat-waqiah"><span class="ayah-no">11</span>ULaa-ikal MuqorRoBuun</p><p class="para ayah latin" data-ayah="12" data-chapter="surat-waqiah"><span class="ayah-no">12</span>Fii JanNaatin Na‘iim</p><p class="para ayah latin" data-ayah="13" data-chapter="surat-waqiah"><span class="ayah-no">13</span>Tsullatum Minal AuwaLiin</p><p class="para ayah latin" data-ayah="14" data-chapter="surat-waqiah"><span class="ayah-no">14</span>Wa QoLiiLum MinaL AaKhiriin</p><p class="para ayah latin" data-ayah="15" data-chapter="surat-waqiah"><span class="ayah-no">15</span>‘ALaa Sururim MauDhuunah</p><p class="para ayah latin" data-ayah="16" data-chapter="surat-waqiah"><span class="ayah-no">16</span>MutTaki-iina ‘alaiHaa MutaQoobiLiin</p><p class="para ayah latin" data-ayah="17" data-chapter="surat-waqiah"><span class="ayah-no">17</span>YaThuufu ‘alaiHim WilDaanum Mukhol LaDuun</p><p class="para ayah latin" data-ayah="18" data-chapter="surat-waqiah"><span class="ayah-no">18</span>Bi-akWaaBiu Wa aBaariqo Wa Kaq’sim Mim Ma‘iin</p><p class="para ayah latin" data-ayah="19" data-chapter="surat-waqiah"><span class="ayah-no">19</span>Laa YuShod-Da'Unna ‘AnHaa Wa Laa YunziFuun</p><p class="para ayah latin" data-ayah="20" data-chapter="surat-waqiah"><span class="ayah-no">20</span>Wa Faa Kihatim MimMaa YataKhoi YaRuun</p><p class="para ayah latin" data-ayah="21" data-chapter="surat-waqiah"><span class="ayah-no">21</span>Wa Lahmi Thoirim MimMaa YaSyTahuun</p><p class="para ayah latin" data-ayah="22" data-chapter="surat-waqiah"><span class="ayah-no">22</span>Wa huurun ‘iin</p><p class="para ayah latin" data-ayah="23" data-chapter="surat-waqiah"><span class="ayah-no">23</span>Ka’am-tSaalil Luq’luq’il MakNuun</p><p class="para ayah latin" data-ayah="24" data-chapter="surat-waqiah"><span class="ayah-no">24</span>JaZaaa'Am biMaa KaaNuu Yaq‘maLuun</p><p class="para ayah latin" data-ayah="25" data-chapter="surat-waqiah"><span class="ayah-no">25</span>Laa Yasma'Uuna FiiHaa LagWau Wa Laa Taq’tSiiMaa</p><p class="para ayah latin" data-ayah="26" data-chapter="surat-waqiah"><span class="ayah-no">26</span>iLLaa Qiilan SaLaaman SaLaaMaa</p><p class="para ayah latin" data-ayah="27" data-chapter="surat-waqiah"><span class="ayah-no">27</span>Wa 'aSh-haabul yaMiini Maa 'aSh-haabul yaMiin</p><p class="para ayah latin" data-ayah="28" data-chapter="surat-waqiah"><span class="ayah-no">28</span>Fii siDrim Makh-Duud</p><p class="para ayah latin" data-ayah="29" data-chapter="surat-waqiah"><span class="ayah-no">29</span>Wa Tholhin Man-Dhuud</p><p class="para ayah latin" data-ayah="30" data-chapter="surat-waqiah"><span class="ayah-no">30</span>Wa Zhillin Mam-Duud</p><p class="para ayah latin" data-ayah="31" data-chapter="surat-waqiah"><span class="ayah-no">31</span>Wa Maa-im MasKuub</p><p class="para ayah latin" data-ayah="32" data-chapter="surat-waqiah"><span class="ayah-no">32</span>Wa Faa KiHatin KatSiiroh</p><p class="para ayah latin" data-ayah="33" data-chapter="surat-waqiah"><span class="ayah-no">33</span>Laa MaqThu 'AtiuWa Laa MamNuu‘ah</p><p class="para ayah latin" data-ayah="34" data-chapter="surat-waqiah"><span class="ayah-no">34</span>Wa FuruSyin marFuu‘ah</p><p class="para ayah latin" data-ayah="35" data-chapter="surat-waqiah"><span class="ayah-no">35</span>inNaa anSyaq’Naa-HunNa inSyaa'AAn</p><p class="para ayah latin" data-ayah="36" data-chapter="surat-waqiah"><span class="ayah-no">36</span>Fa ja‘aLNaa-HunNa abKaaRoo</p><p class="para ayah latin" data-ayah="37" data-chapter="surat-waqiah"><span class="ayah-no">37</span>‘Uruban AtRooBaa</p><p class="para ayah latin" data-ayah="38" data-chapter="surat-waqiah"><span class="ayah-no">38</span>Li 'aSh-haaBiL YaMiin</p><p class="para ayah latin" data-ayah="39" data-chapter="surat-waqiah"><span class="ayah-no">39</span>Tsullatum Minal AuwaLiin</p><p class="para ayah latin" data-ayah="40" data-chapter="surat-waqiah"><span class="ayah-no">40</span>Wa Tsullatum Minal AakhiRiin</p><p class="para ayah latin" data-ayah="41" data-chapter="surat-waqiah"><span class="ayah-no">41</span>Wa 'aSh-haabusy-SyiMaali Maa'aSh-haabusy SyiMaaL</p><p class="para ayah latin" data-ayah="42" data-chapter="surat-waqiah"><span class="ayah-no">42</span>Fii SaMuumiu Wa haMiim</p><p class="para ayah latin" data-ayah="43" data-chapter="surat-waqiah"><span class="ayah-no">43</span>Wa Zhillin MiiYahmum</p><p class="para ayah latin" data-ayah="44" data-chapter="surat-waqiah"><span class="ayah-no">44</span>Laa BaariDiu Wa Laa KaRiim</p><p class="para ayah latin" data-ayah="45" data-chapter="surat-waqiah"><span class="ayah-no">45</span>in-Nahum KaaNuu QoBla Dzaalika mutroFiin</p><p class="para ayah latin" data-ayah="46" data-chapter="surat-waqiah"><span class="ayah-no">46</span>Wa KaaNuu YuShirRuuna ‘alal hintSil 'aDhiim</p><p class="para ayah latin" data-ayah="47" data-chapter="surat-waqiah"><span class="ayah-no">47</span>Wa KaaNuu yaQuuLuuna A'iDzaa MitNaa WakunNaa tuRooBau wa ‘iZhooman A'inNaa lamaB 'UutSuun</p><p class="para ayah latin" data-ayah="48" data-chapter="surat-waqiah"><span class="ayah-no">48</span>Awa AaBaa unal AuwaLuun</p><p class="para ayah latin" data-ayah="49" data-chapter="surat-waqiah"><span class="ayah-no">49</span>Qul inNal AuwaLiina wal-AakhiRiina</p><p class="para ayah latin" data-ayah="50" data-chapter="surat-waqiah"><span class="ayah-no">50</span>Lamaj-Muu 'Uuna iLaa MiiQooti Yaumim Maq‘Luum</p><p class="para ayah latin" data-ayah="51" data-chapter="surat-waqiah"><span class="ayah-no">51</span>TsumMa inNakum AiyuHadh Dhoool Luunal Mukadz DziBuun</p><p class="para ayah latin" data-ayah="52" data-chapter="surat-waqiah"><span class="ayah-no">52</span>La’AakiLuuna Min Syajarim Min ZaqQuum</p><p class="para ayah latin" data-ayah="53" data-chapter="surat-waqiah"><span class="ayah-no">53</span>Fa Maa Li-Uuna MinHAL BuThuun</p><p class="para ayah latin" data-ayah="54" data-chapter="surat-waqiah"><span class="ayah-no">54</span>Fa Syaari Buuna ‘alaiHi Minal haMiim</p><p class="para ayah latin" data-ayah="55" data-chapter="surat-waqiah"><span class="ayah-no">55</span>Fa Syaari Buuna SyurbaL Hiim</p><p class="para ayah latin" data-ayah="56" data-chapter="surat-waqiah"><span class="ayah-no">56</span>HaaDzaa NuzuluHum Yaumad-Diin</p><p class="para ayah latin" data-ayah="57" data-chapter="surat-waqiah"><span class="ayah-no">57</span>Nahnu KholaqNaakum Falau Laa TuShod-DiQuun</p><p class="para ayah latin" data-ayah="58" data-chapter="surat-waqiah"><span class="ayah-no">58</span>Afaro 'aitum Maa TumNuun</p><p class="para ayah latin" data-ayah="59" data-chapter="surat-waqiah"><span class="ayah-no">59</span>A 'Antum TakhLuQuu naHu Am-NahnuL Khooliqun</p><p class="para ayah latin" data-ayah="60" data-chapter="surat-waqiah"><span class="ayah-no">60</span>Nahnu Qod-DarNaa BainaKumul Mauta waMaa Nahnu Bimas BuuQiin</p><p class="para ayah latin" data-ayah="61" data-chapter="surat-waqiah"><span class="ayah-no">61</span>‘ALaa an NubadDila AmtSaalakum Wa NunSyiq'akum FiiMaa Laataq‘laMuun</p><p class="para ayah latin" data-ayah="62" data-chapter="surat-waqiah"><span class="ayah-no">62</span>WalaQod ‘AlimTumul NaSy'atal UuLaa FaLau Laa TaDzakKaRuun</p><p class="para ayah latin" data-ayah="63" data-chapter="surat-waqiah"><span class="ayah-no">63</span>Afaro 'Aitum Maa Tahru-tSuun</p><p class="para ayah latin" data-ayah="64" data-chapter="surat-waqiah"><span class="ayah-no">64</span>A 'Antum Tazro ‘UunaHu am Nahnuz-Zaari'Uun</p><p class="para ayah latin" data-ayah="65" data-chapter="surat-waqiah"><span class="ayah-no">65</span>Lau NaSyaa'u laja‘alNaaHu HuThooman FaZholtum Tafak KaHuun</p><p class="para ayah latin" data-ayah="66" data-chapter="surat-waqiah"><span class="ayah-no">66</span>inNaa lamugh RoMuun</p><p class="para ayah latin" data-ayah="67" data-chapter="surat-waqiah"><span class="ayah-no">67</span>Bal Nahnu MahRuuMuun</p><p class="para ayah latin" data-ayah="68" data-chapter="surat-waqiah"><span class="ayah-no">68</span>Afaro 'Aitumul Maa 'Al-laDzii taSyroBuun</p><p class="para ayah latin" data-ayah="69" data-chapter="surat-waqiah"><span class="ayah-no">69</span>A-'Antum Anzal TuMuuHu Minal Muzni Am NahnuL MunziLuun</p><p class="para ayah latin" data-ayah="70" data-chapter="surat-waqiah"><span class="ayah-no">70</span>Lau naSyaa'U ja‘alNaaHu uJaaJaan FalauLaa taSyKuRuun</p><p class="para ayah latin" data-ayah="71" data-chapter="surat-waqiah"><span class="ayah-no">71</span>Afaro 'Aitumun NaaroL LaTii TuuRuun</p><p class="para ayah latin" data-ayah="72" data-chapter="surat-waqiah"><span class="ayah-no">72</span>A'Antum an Syaq’tum SyajarotaHaa am nahnul MunSyiuun</p><p class="para ayah latin" data-ayah="73" data-chapter="surat-waqiah"><span class="ayah-no">73</span>Nahnu Ja‘alNaaHaa TadzKiirotau WamaTaa‘al lil MuqWiiin</p><p class="para ayah latin" data-ayah="74" data-chapter="surat-waqiah"><span class="ayah-no">74</span>FasabBih BismiRobBikaL ‘aZhiim suBhanallooH Wal hamdulillaH Wa laa illaaHa illallooH AllooHu Akbar laa haula Wa laa Quwwata illaa billaa Hil aLiiYiiL aZhiim 7X.</p><p class="para latin waqiah-extra" data-chapter="surat-waqiah">Ya han-Nan YaMan-Nan, Ya FatTah Ya RozZak, Ya GhoNii Ya Mughni AghniNii 7X.</p><p class="para ayah latin" data-ayah="75" data-chapter="surat-waqiah"><span class="ayah-no">75</span>FaLaa Uqsimu Bima Waaqi‘in-NuJuum</p><p class="para ayah latin" data-ayah="76" data-chapter="surat-waqiah"><span class="ayah-no">76</span>Wa inNahu Laqosamul Lau Taq‘laMuuna ‘aZhiim</p><p class="para ayah latin" data-ayah="77" data-chapter="surat-waqiah"><span class="ayah-no">77</span>inNaHu Laqur-Aanun kaRiim</p><p class="para ayah latin" data-ayah="78" data-chapter="surat-waqiah"><span class="ayah-no">78</span>Fii kiTaaBim makNuun</p><p class="para ayah latin" data-ayah="79" data-chapter="surat-waqiah"><span class="ayah-no">79</span>Laa YamasSuHuu illaL muThoH HaRuun</p><p class="para ayah latin" data-ayah="80" data-chapter="surat-waqiah"><span class="ayah-no">80</span>Tanziilum MirRobBiL ‘AalaMiin</p><p class="para ayah latin" data-ayah="81" data-chapter="surat-waqiah"><span class="ayah-no">81</span>Afa BihaaDzaL haDiitSi Antum MuD-HiNuun</p><p class="para ayah latin" data-ayah="82" data-chapter="surat-waqiah"><span class="ayah-no">82</span>WaTaj‘aLuuna RizQokum AnNakum Tukadz DziBuun</p><p class="para ayah latin" data-ayah="83" data-chapter="surat-waqiah"><span class="ayah-no">83</span>FalauLaa iDzaa BalaGhotiL hulQuum</p><p class="para ayah latin" data-ayah="84" data-chapter="surat-waqiah"><span class="ayah-no">84</span>Wa Antum hiina'iDzin TanZhuRuun</p><p class="para ayah latin" data-ayah="85" data-chapter="surat-waqiah"><span class="ayah-no">85</span>Wa nahnu aqrobu ilaiHi mingkum wa laakillaa TuBShiRuun</p><p class="para ayah latin" data-ayah="86" data-chapter="surat-waqiah"><span class="ayah-no">86</span>FalauLaa in Kuntum Ghoiro maDiiNiin</p><p class="para ayah latin" data-ayah="87" data-chapter="surat-waqiah"><span class="ayah-no">87</span>Tarji'UunaHaa in Kuntum ShoodiQiin</p><p class="para ayah latin" data-ayah="88" data-chapter="surat-waqiah"><span class="ayah-no">88</span>Fa amMaa in Kaana Minal MuqorRoBiin</p><p class="para ayah latin" data-ayah="89" data-chapter="surat-waqiah"><span class="ayah-no">89</span>Farouhuu WaroihaaNuu Wa jan-Natu na‘iim</p><p class="para ayah latin" data-ayah="90" data-chapter="surat-waqiah"><span class="ayah-no">90</span>Wa amMaa in Kaana Min 'aSh-haabiL yaMiin</p><p class="para ayah latin" data-ayah="91" data-chapter="surat-waqiah"><span class="ayah-no">91</span>Fa saLaamul Laka Min 'aSh-haabiL yaMiin</p><p class="para ayah latin" data-ayah="92" data-chapter="surat-waqiah"><span class="ayah-no">92</span>Wa amMaa in Kaana Minal Mukadz-DziBiinadh DhooLLiin</p><p class="para ayah latin" data-ayah="93" data-chapter="surat-waqiah"><span class="ayah-no">93</span>Fa Nuzulum Min haMiim</p><p class="para ayah latin" data-ayah="94" data-chapter="surat-waqiah"><span class="ayah-no">94</span>Wa TaShliyatu Jahiim</p><p class="para ayah latin" data-ayah="95" data-chapter="surat-waqiah"><span class="ayah-no">95</span>inNa HaaDzaa LaHuwa haqQuL yaQiin</p><p class="para ayah latin" data-ayah="96" data-chapter="surat-waqiah"><span class="ayah-no">96</span>FasabBih BismiRobBikaL ‘aZhiim suBhanallooH Wal hamdulillaH Wa laa illaaHa illallooH AllooHu Akbar laa haula Wa laa Quwwata illaa billaa Hil aLiiYiiL aZhiim 7X.</p><p class="para latin waqiah-extra" data-chapter="surat-waqiah">Ya han-Nan YaMan-Nan, Ya FatTah Ya RozZak, Ya GhoNii Ya Mughni AghniNii 7X.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa AkfiNii Bihalaal-ika ‘An Haroomika, Wa AghniNii Bi Fadhlika AmMan SiWaaka ...... (7X)</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma innii As’aluka Bihaqqi Suurati al-WAAQI‘ah Wa AsRooriHaa, Wa AnWaariHaa, An TarzuqoNii Rizqon Waasi‘an halaalan Thoyyiban, Min Ghoiri Kaddin, Wa laa Nashabin, Wa laa Man-nin, Wa laa Ta‘abin, Wa Tuyas-Siro Lii Umuurii KullaHaa, Wa Taqdhiya hawaa’ijii, innaka ‘Alaa Kulli Syai’iin Qodiir.</p><p class="para latin" data-chapter="surat-waqiah">Waftah Lii Abwaaba Rizqika Mina As-Samaa’i Wal-Ardhi, Wa Baarik Lii Fiimaa Rozaqtanii.</p><p class="para latin" data-chapter="surat-waqiah">AlloohumMa Yaa Alloohu Yaa ‘Aliiyu Yaa ‘AZhiimu Yaa haliimu Yaa ‘Aliim. Anta RobBii, Wa ’ilmuka hasBii, Faniq’mar RobBu-RobBii, Waniq’mal hasBu-hasBii, TanShuru Man-TaSya'u, Wa Antal ‘aZiizur Rohiim.</p><p class="para latin" data-chapter="surat-waqiah">ALLOOHUMMA inNaa NasAluka Salaamatan Fid-Dun-YaaWal-Akhiroh, Wal-‘Aafiyatan Fil Jasadi, Wash-Shihhatan Fil-Badani, Wa Ziyaa Datan Fil ‘ilmi, Wa Barokatan Fir-Rizqi, Wat-Taubatan Qoblal Maut, War-Rohmatan ‘indal-Maut, Wal-Maghfirotan ba‘dal-maut. Alloohumma hawwin ‘alaiNaa fii Sakaraatil-maut, Wa NajjiNaa minan-naar, Wal ‘Aqfwa ‘indal-hisaab.</p><h3 class="subhead">Doa Setelah Al-Waqi'ah</h3><p class="para latin" data-chapter="surat-waqiah">AllooHumMa inNi As 'Aluka Bi AnNi Asyhadu AnNaka Antalloohu, Laa illaaHa illaa Anta; antal AhaduSh Shomad AlladZi Lam Yalid Wa Lam Yulad Wa Lam Yakul Lahu Kufuwan Ahad.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa Sholli 'Alaa Sayyidina MuhamMadin Sholatan Tuwassi'u BiHaa 'Alainal Arzaaqo, Watuhas Sinu BiHaa Lanal Akhlaaqo Wa 'Alaa 'AaliHi WaShohbi Wasallim</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma innii As’aluka Rizqon Thoyyiban, Wa ‘ilman NAAFI‘an, Wa ‘Amalan Mutaqob-balan, Wa Qolban Khooshi‘an, Wa Lisaanan dZaakiron, Wa Badanan ‘Alal-Balaa’i Shoobiron.</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma in Kaana Rizqunaa Fii As-Samaa’i Fa Anzilhu,</p><p class="para latin" data-chapter="surat-waqiah">Wa in Kaana Fil-ardhi Fa Akhrij-HU,</p><p class="para latin" data-chapter="surat-waqiah">Wa in Kaana Ba‘iidan FAqorribu,</p><p class="para latin" data-chapter="surat-waqiah">Wa in Kanna qoliilan faka-tsirhu,</p><p class="para latin" data-chapter="surat-waqiah">Wa in Kaana KatSiiron Fa Baarik Lanaa Fiih, Birohmatika Yaa Arhamar-Roohimīn.</p><p class="para latin" data-chapter="surat-waqiah">AlloohumMa In Kaana Maa Ad‘Uu Bihi MusTahiilan Fa Anta al Qoodiru SuBhaanaka, Laa Yuq‘Jizuka Syai'un Fil Ardhi, wa Laa Fis SaMaa-i.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa in Kaana SyarRon, Faj‘alhu Khoiron, WarzuqNii Bihi Yaa Alloohu, Yaa Mudab-Biral layli Wan-NaHaar.</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma Yassir Lanaa Kulla Shoq‘Bin, Wahlul kulla ‘Uqdatin, Wa Naj-jinaa Min Kulli ham-min, Wa Ghommin, Wa Karbin.</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma laa sahla illaa maa Ja‘Altahuu sahla, wa anta Taj ‘Alul hazna idza Syiq’ta sahla</p><p class="para latin" data-chapter="surat-waqiah">Alloohumma iqdhi, wa naffis Kuroobanaa, Wakfinaa Maa Aham-Manaa Wa Maa Aghom-Manaa</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa Sahil Lii Mathlabi, Wa Yassir Lii MaqShiDii, WarzuqNii Bitaskhiirin Minka, Waj ‘Al Khuthuwaatii MuBaarokah, Waftah Lii Abwaaba Fadhlik, Wa Baarik Lii Fii RizQii Wa‘umRii, Waj‘Alnii Mina asSaa‘i-Diina Al Muflihiin.</p><p class="para latin" data-chapter="surat-waqiah">Baddil Dhiqii farojan, Wa ‘Ajzii QuWWatan, Wa Ahlaamii WAAQI‘an. Wa AkhrijNii Min hawlii iLaa hawLik, Wa Min DHOQ'Fii iLaa QuuWatika.</p><p class="para latin" data-chapter="surat-waqiah">Wa Kulla Maa Ataman-Naahu Min AmRii AiyaKuuna, Fa inNaHu Laa Faa‘ila LiMaa TuRiiduHu siWaak. Wa Laa Yuq‘jizuka Syai'un, Wa Laa YaSh‘Ubu ‘alaik.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa al Khofiiyyi Anaa Muhtaajun Dzaliilun, Wa Anta Al-Qowiyyul Ghoniyy</p><p class="para latin" data-chapter="surat-waqiah">AlloohumMa Yaa Sarii‘al-hiSaab, Yaa Syadiidal ‘iQoob, Yaa GhoFuur, Yaa Rohiim. Wa Yaa Khooliqo Kulli Syai’, Yaa Faathiros Samaawaati Wal-ardh,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Faaliqol Wan-Nawaa, Yaa Faaliqol ishBaah.</p><p class="para latin" data-chapter="surat-waqiah">Yaa Waliyyal hasaNaat, Yaa Daafi‘as Sayi’aat,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Ghoofirol KhoThii’aat, Yaa Saatirol-awroot,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Maani‘AL Baliyyaah. Yaa Muqiilal ‘AtSaRoot,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Muhyiyal AmWaat, Yaa Munawwiral Ardhi Was-SaMaaWaati. iqdhii haajaTii Fii Haadzihis-Saa‘Aat.</p><p class="para latin" data-chapter="surat-waqiah">Yaa ilaaHal AwwaLiina Wal-AakhiRiin,</p><p class="para latin" data-chapter="surat-waqiah">Yaa Badi‘As-SaMaaWaati Wal Ardh,</p><p class="para latin" data-chapter="surat-waqiah">Yaa dZal-Jalaali wal-ihRoom. Wa Shollalloohu ‘alaa SaiyidiNaa MuhamMadin Wa ‘Alaa Aalihi Wa Shohbihi Ajma’iin. Walhamdu Lillaahi Robbil ‘Aalamiin.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa Tajallaa Lii Bi-iroodaTika Yaa AllooH, Wa Qudrotika, Wa haulika, Wa Quwwatika, Wa QohHarika, Wa JabBaarika, inNama AmruHu idZa aRooda Syaian Aiyaquula Lahu Kun Fayakun</p><p class="para latin" data-chapter="surat-waqiah">Wa Tajallaa ‘Alaiya Bi Anwaari rohmatika, Wa Asroori qudrotika, Waftah Lii Abwaaba Fadhlika, Wa Ahyi Qolbii Binuuri ma‘rifatika, Waj‘alnii Minal Mukhlishiina Fii Mahab-Batika, WarzuqNii Bi_Qodhoika, Birohmatika Yaa Arhamar Roohimiin.</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa RobBaNaa Anzil 'Alaina Maa' idatam Minas Samaa'i Takuunu LaNaa 'iidal Lil-AwaliNaa Wal AakhiriNaa Wa ayatam minka warzuqNaa Wa 'anta Khoirur Rooziqin 3X</p><p class="para latin" data-chapter="surat-waqiah">Wamai Yattaqillaaha Yaj'al Lahu MakhroJaa. WaYar ZuQHu min haitSu Laa YahTasiB, Wamai YatawakKal Alalloohi FaHuwa hasbuH, innaLLooHa Baaligu AmriH,</p><p class="para latin" data-chapter="surat-waqiah">Qod Ja'AlallooHu LikuLi Syaiin QodRoo</p><p class="para latin" data-chapter="surat-waqiah">RobBi inNi Maghluubun FaantaShir, Wajbur QolBiiyal Munkasir, Wajma' Syamliiyal MundaSyir, inNaka Antar Rohmanul Muqtadiru,</p><p class="para latin" data-chapter="surat-waqiah">ikfiNii Yaa KaaFii, Wa 'Anaal 'Abdu Al-muftaQiir, Wa Kafa BillaaHi Waliiyaau Wa Kafa BillaaHi NaShiiroo,</p><p class="para latin" data-chapter="surat-waqiah">inNasy-Syirka Ladhulmun Adhiim, Wamal-LooHu YuRiidu Dhulman lil 'ibaad, Faquthi'a Daa Birul Qoumil LadZiina DholaMuu, Wal hamdu LillaHi RobBil 'AalaMiin</p><p class="para latin" data-chapter="surat-waqiah">AllooHumMa RobBaNaa Taqobal MinNaa inNaka Antas SaMii’ul ‘Aliim, Watub ‘AlaiNaa inNaka Antat TauWaabur Rohiim. Wa SholallooHu 'Alaa Saiyidina MuhamMad Wa 'Alaa AaliHii Wa ShohBiiHii Wabarik Wasallim. Walhamdu LillaaHir RobBil ‘AalaMiin</p></section><section class="chapter" id="surat-mulk"><h2>Surat Al-Mulk</h2><span class="surah-status">30 AYAT • MODE HAFALAN AKTIF</span><p class="para ayah latin" data-ayah="1" data-chapter="surat-mulk"><span class="ayah-no">1</span>TaBaarokaL LaDzii BiyadiHiL Mulku Wa Huwa ‘aLaa KuLLi Syai'in qoDiir</p><p class="para ayah latin" data-ayah="2" data-chapter="surat-mulk"><span class="ayah-no">2</span>Al-ladzii KholaqoL Mauta WaL haYaata LiyaBlu Wakum AiYukum Ahsanu ‘AmaLaa; Wa HuwaL ‘aZiizuL GhoFuur</p><p class="para ayah latin" data-ayah="3" data-chapter="surat-mulk"><span class="ayah-no">3</span>Al-ladzii Kholaqo saB‘A saMaaWaaTin ThiBaaqo; Maa taRooFii Kholqir RohMaani Min taFaaWut; Farji‘il BaShoro HalTaRoo Min FuThuur</p><p class="para ayah latin" data-ayah="4" data-chapter="surat-mulk"><span class="ayah-no">4</span>Tsum-Marji‘iL BaShoro KarRotaini YanQoliB ilaikal BaShoru Khoosi'Au Wa Huwa haSiir</p><p class="para ayah latin" data-ayah="5" data-chapter="surat-mulk"><span class="ayah-no">5</span>Walaqod ZaiyanNaas-SaMaa-adDunYaa bimaShoo Biiha Waja‘alNaaHaa ruJuumal Lisy-SyaYaa Thiin; Wa Aq‘tadNaa LaHum ‘aDzaaBas Sa’iir</p><p class="para ayah latin" data-ayah="6" data-chapter="surat-mulk"><span class="ayah-no">6</span>Walil LaDziina KafaRuu BirobBiHim ‘aDzaabu jaHanNama waBiq’saL MaShiir</p><p class="para ayah latin" data-ayah="7" data-chapter="surat-mulk"><span class="ayah-no">7</span>iDzaa ulQuu FiiHaa Sami‘Uu LaHaa SyahiQou waHiya taFuur</p><p class="para ayah latin" data-ayah="8" data-chapter="surat-mulk"><span class="ayah-no">8</span>TaKaadu Tamaiyazu MinaL Ghoizh; KullaMaa ulqiya FiiHaa Faujun sa 'AlaHum KhozanatuHaa, alam yaq’tikum naDziir</p><p class="para ayah latin" data-ayah="9" data-chapter="surat-mulk"><span class="ayah-no">9</span>QooLuu baLaaqod Jaa'aNaa naDziirun Fakadz-DzaBNaa WaQuLNaa Maa Naz-Zalalloohu Min Syai'in in antum illaa Fii DhoLaalin kaBiir</p><p class="para ayah latin" data-ayah="10" data-chapter="surat-mulk"><span class="ayah-no">10</span>WaQooLuu Lau KunNaa nasMa’u Au na’qiLu Maa KunNaa Fii aSh-haabis Sa’iir</p><p class="para ayah latin" data-ayah="11" data-chapter="surat-mulk"><span class="ayah-no">11</span>Faaq’taroFuu biDzam biHim fasuhQoLLi 'aSh-haabis Sa’iir</p><p class="para ayah latin" data-ayah="12" data-chapter="surat-mulk"><span class="ayah-no">12</span>inNal-LaDziina YakhSyauna RobBaHum BilGhoibi LaHum MafiroTuu wa Ajrung kaBiir</p><p class="para ayah latin" data-ayah="13" data-chapter="surat-mulk"><span class="ayah-no">13</span>Wa-AsirRuu Qoulakum aWiiJ-HaRuubih; inNaHuu ‘aliimun biDzaatish ShuDuur</p><p class="para ayah latin" data-ayah="14" data-chapter="surat-mulk"><span class="ayah-no">14</span>ALaa Yaq’lamu man Kholaqo waHuwal-laThiiful KhoBiir</p><p class="para ayah latin" data-ayah="15" data-chapter="surat-mulk"><span class="ayah-no">15</span>Huwal-LaDzii Jaq’ala lakumul arDho DzaLuulan FaamSyuu Fii maNaakibiHaa wakuLuu mirRizqih; Wa'ilaiHin NuSyuur</p><p class="para ayah latin" data-ayah="16" data-chapter="surat-mulk"><span class="ayah-no">16</span>‘A-amintum Man fisSaMaa’i AiyakhSifa bikumul arDho fa'iDzaa hiyataMuuur</p><p class="para ayah latin" data-ayah="17" data-chapter="surat-mulk"><span class="ayah-no">17</span>Am amintum Man fisSaMaa’i aiyurSila ‘alaikum haaShiban; Fasataq’ laMuuna Kaifa naDziir</p><p class="para ayah latin" data-ayah="18" data-chapter="surat-mulk"><span class="ayah-no">18</span>WalaQod KadzDzabal LaDziina Min QoBLiHim faKaifa Kaana NaKiir</p><p class="para ayah latin" data-ayah="19" data-chapter="surat-mulk"><span class="ayah-no">19</span>Awalam Yarow ilath-Thoiri FauqoHum ShoooFFaatiu Wayaq'bidh; Maa yumsikuhunNaa illarRohMaan; inNaHuu bikulli Syaiing baShiir</p><p class="para ayah latin" data-ayah="20" data-chapter="surat-mulk"><span class="ayah-no">20</span>AmMan HaaDzal LaDzii Huwa jundul Lakum yan Shurukum MinDuunir RohMaa; inil KaafiRuuna illaa Fii GhuRuur</p><p class="para ayah latin" data-ayah="21" data-chapter="surat-mulk"><span class="ayah-no">21</span>AmMan HaaDzal LaDzii yarzuQukum in Amsaka Rizqoh; bal LajJuu Fii ‘UTuuWiu wanuFuur</p><p class="para ayah latin" data-ayah="22" data-chapter="surat-mulk"><span class="ayah-no">22</span>Afamai yamSyii MukibBan ‘aLaa waJHiHii ahDaa amMai yamSyii saWiiyan ‘aLaa ShiRootim MustaQiim</p><p class="para ayah latin" data-ayah="23" data-chapter="surat-mulk"><span class="ayah-no">23</span>Qul Huwal LaDzii anSyaq’akum Wajaq’ala Lakumus Sam’A Wal aBShooro Wal af’idah; QoLiiLaam Maa taSyKuRuun</p><p class="para ayah latin" data-ayah="24" data-chapter="surat-mulk"><span class="ayah-no">24</span>Qul Huwal-LaDzii Dzaro-Akum Fil arDhi Wa ilaiHi tuhSyaRuun</p><p class="para ayah latin" data-ayah="25" data-chapter="surat-mulk"><span class="ayah-no">25</span>WayaQuu Luuna maTaa HaaDzaL waq’du in Kuntum ShoodiQiin</p><p class="para ayah latin" data-ayah="26" data-chapter="surat-mulk"><span class="ayah-no">26</span>Qul inNamal ‘ilmu ‘indallooHi wa inNaMaa aNaa naDziirum MuBiin</p><p class="para ayah latin" data-ayah="27" data-chapter="surat-mulk"><span class="ayah-no">27</span>FaLaam Maa Roq'auhu zulfatan Siii’at wuJuuHul-LaDziina kafaRuu waQiila HaaDzal-LaDzii kuntum biHii tadDa’uun</p><p class="para ayah latin" data-ayah="28" data-chapter="surat-mulk"><span class="ayah-no">28</span>Qul aro’aitum in ahlaka niyallooHu wamam-Ma’iya AuRohimaNaa, famai yuJiirul KaafiRiina min ‘aDzaabin aLiim</p><p class="para ayah latin" data-ayah="29" data-chapter="surat-mulk"><span class="ayah-no">29</span>Qul Huwar RohMaanu AamanNaa biHi wa ‘alaiHi tawak- KalNaa; Fasataq’ laMuuna man Huwa fii DhoLaalim muBiin</p><p class="para ayah latin" data-ayah="30" data-chapter="surat-mulk"><span class="ayah-no">30</span>Qul aro’aitum in 'aSh-baha Maa ’ukum Ghouron famai yaq’Tiikum biMaa’im Ma’iin</p><h3 class="subhead">Doa Setelah Al-Mulk</h3><p class="para latin" data-chapter="surat-mulk">Allahumma Aj’alna Mim-Man Yatlu Suratul Al Mulk,</p><p class="para latin" data-chapter="surat-mulk">Wa Yantafi’u Biha, Wa Yuq’minu Bi Ayatiha, Wa Yaq’malu Bimuh kamiha, Wa Yatajan-nabu Mutasya bihiha, Waj’alna Nuron Lana Fi Quburina, Wa Muq’nisatan Lana Fi Wahdatina, Wa Syafi’atan Lana Yaumal Qiyamah.</p><p class="para latin" data-chapter="surat-mulk">Allahumma Naj-jina Min ‘Azabil Qobri, Wa Min ‘Azabil Jahan-Nam, Wa Min Fitnatil Mahya Wal Mamat, Wa Min Fitnatil Masihid Dajjal, Wa adkhilnal Jan-nata Ma’al Abroor, Ya ‘Azizu Ya Ghoffar, Ya RobBal ‘Alamin.</p></section><section class="chapter" id="yasin-waqiah-tabarok">
 <h2>Yasin Waqiah Tabarok</h2>
 <span class="surah-status">PAKET BACAAN • YASIN • AL-WAQI’AH • AL-MULK</span>
 <div class="repeat-demo" style="margin:12px 0 18px">
@@ -1371,7 +1091,7 @@ html,body{max-width:100vw!important;overflow-x:hidden!important}
 </div>
 <div class="slideshow-settings"><label>Durasi <select id="slideDuration"><option value="2000">2 detik</option><option value="3000">3 detik</option><option selected="" value="5000">5 detik</option><option value="10000">10 detik</option></select></label><label><input id="slideShuffle" type="checkbox"/> Acak</label><label><input checked="" id="slideRepeat" type="checkbox"/> Ulangi</label></div>
 <p class="hint">Foto disimpan offline di perangkat. Slide show dapat memenuhi layar dan dikendalikan dengan sentuhan atau tombol panah.</p>
-<div class="media-gallery-panel" id="mediaGalleryPanel"><div id="rc71PdfImportHint" style="font-size:12px;color:var(--muted);margin:6px 0 10px">PDF disimpan di penyimpanan browser perangkat ini.</div>
+<div class="media-gallery-panel" id="mediaGalleryPanel">
   <div class="media-tabs">
     <button class="action on" type="button" data-media-tab="photo">📷 Foto</button>
     <button class="action" type="button" data-media-tab="audio">🎵 Audio</button>
@@ -1382,8 +1102,8 @@ html,body{max-width:100vw!important;overflow-x:hidden!important}
     <label class="action primary media-import-label">＋ Impor Audio / Video
       <input id="mediaImportInput" type="file" accept="audio/*,video/*,.mp3,.mp4,.m4a,.aac,.wav,.ogg,.webm" multiple hidden>
     </label>
-    <label class="action primary file-label" id="mediaImportPdfBtn" for="mediaImportPdfInput">＋ Impor PDF</label>
-    <input id="mediaImportPdfInput" type="file" accept="application/pdf,.pdf,application/octet-stream" multiple hidden>
+    <button class="action" id="mediaImportPdfBtn" type="button">＋ Impor PDF</button>
+    <input id="mediaImportPdfInput" type="file" accept="application/pdf,.pdf" multiple hidden>
     <button class="action" id="mediaExportFolderBtn" type="button">📁 Simpan ke Folder Media</button>
     <button class="action" id="mediaExportAllBtn" type="button">⬇ Ekspor Semua</button>
     <small>Media tersimpan di database perangkat; dapat dicadangkan ke Folder Media.</small>
@@ -1411,8 +1131,7 @@ html,body{max-width:100vw!important;overflow-x:hidden!important}
 <div class="modal-actions"><button class="action primary" id="saveNoteBtn">Simpan</button><button class="action" id="cancelNoteBtn">Batal</button></div>
 </div>
 <div class="notes-list" id="notesList"></div><div class="empty-state" id="notesEmpty">Belum ada diary.</div></section></article>
-</main><footer class="bottom"><button class="action" onclick="goTo('beranda')">⌂ Home</button><button class="action nav-fullscreen-btn" id="navFullscreenBtn" aria-label="Layar penuh" title="Layar penuh">⛶</button><button class="action" id="themeNavBtn" aria-label="Ganti tema gelap/terang" title="Ganti tema">◐ Tema</button><button class="action" id="smartCounterNavBtn" aria-label="Buka Smart Counter" title="Smart Counter">🔢 Counter</button><button class="action" id="prevBtn">◀</button><button class="action" id="focusBtn">Fokus</button><button class="action primary" id="autoBtn">▶ Scroll</button><button class="action" id="autoFocusBtn">◎ Auto Fokus</button><button class="action" id="nextBtn">▶</button><button class="action" id="fontDownBtn">A−</button><button class="action" id="fontBtn">A+</button><button class="action" id="checkpointBtn">📍 Simpan</button><button class="action" id="editBtn">✏️ Edit</button></footer></div><div class="drawer" id="drawer"><div class="shade"></div><aside class="panel"><button aria-label="Tutup menu" class="icon" id="closeBtn">✕</button><h3>Daftar Isi</h3><input class="searchbox" id="search" placeholder="Cari kata dalam bacaan..."/><button class="action primary" id="manageTocBtn" style="width:100%;margin:14px 0">☰ Atur Daftar Isi</button><div class="toc-group" data-menu-id="panduan-ziarah"><button class="toc-head"><span>🕌 Panduan Ziarah Kubur</span><b>+</b></button><div class="toc-list">
-<button onclick="goTo('panduan-ziarah')">Buka</button></div></div><div class="toc-group" data-menu-id="tawasulan"><button class="toc-head"><span>📿 TAWASULAN</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('tawasulan')">Buka</button><small>Bacaan Tawassul</small></div></div><div class="toc-group" data-menu-id="surat-yasin-ziarah"><button class="toc-head"><span>📖 Surat Yasin</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('surat-yasin-ziarah')">Buka</button><small>83 ayat • Ritual Ziarah</small></div></div><div class="toc-group" data-menu-id="tahlil-ziarah"><button class="toc-head"><span>📿 Tahlil</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('tahlil-ziarah')">Buka</button><small>Bacaan Tahlil • Ritual Ziarah</small></div></div><div class="toc-group" data-menu-id="surat-mulk"><button class="toc-head"><span>🌙 Surat Al-Mulk</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('surat-mulk')">Buka</button><small>30 ayat</small></div></div><div class="toc-group" data-menu-id="surat-waqiah"><button class="toc-head"><span>🌾 Surat Al-Waqi’ah</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('surat-waqiah')">Buka</button><small>96 ayat</small></div></div><div class="toc-group" data-menu-id="yasin-waqiah-tabarok"><button class="toc-head"><span>📚 Yasin Waqiah Tabarok</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('yasin-waqiah-tabarok')">Buka</button><small>Yasin • Al-Waqi’ah • Al-Mulk</small></div></div><div class="toc-group" data-menu-id="doa-1"><button class="toc-head"><span>🤲 Doa Setelah Sholat</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('doa-1')">Buka</button><small>Bacaan pilihan</small></div></div><div class="toc-group" data-menu-id="doa-2"><button class="toc-head"><span>⭐ Doa Hajat</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('doa-2')">Buka</button><small>Bacaan pilihan</small></div></div><div class="toc-group" data-menu-id="library-bacaan"><button class="toc-head"><span>📚 Library Bacaan</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('library-bacaan')">Buka</button><small>Koleksi bacaan</small></div></div><div class="toc-group" data-menu-id="galeri-foto"><button class="toc-head"><span>🎞️ Media Galeri</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('galeri-foto')">Buka</button><small>Foto, Audio &amp; Video</small></div></div><div class="toc-group" data-menu-id="catatan"><button class="toc-head"><span>📝 Catatan</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('catatan')">Buka</button><small>Catatan pribadi</small></div></div><h3>Pengaturan</h3><div class="settings-row"><button data-theme="emerald">Emerald</button><button data-theme="sepia">Sepia</button><button data-theme="dark">Gelap</button></div><div class="settings-row"><button id="speedDown">Scroll −</button><button id="speedLabel">1.0×</button><button id="speedUp">Scroll +</button><button id="speedTurbo" type="button">⚡ +60</button></div><div class="settings-row"><button id="focusSpeedDown">Fokus lebih lambat</button><button id="focusSpeedLabel">0,75×</button><button id="focusSpeedUp">Fokus lebih cepat</button></div><div class="control-card"><label>Kecepatan Auto Scroll: <output id="lpmOut">200 baris/menit</output></label><input id="lpmRange" max="420" min="10" step="5" type="range" value="200"/><div class="hint">Kecepatan dihitung berdasarkan tinggi baris aktual. Font lebih besar otomatis disesuaikan agar ritme baca tetap stabil.</div></div><div class="control-card"><label>Auto Fokus</label><select id="focusMode"><option selected="" value="phrase">Per frasa</option><option value="paragraph">Per paragraf</option></select><div class="hint">Auto Fokus memiliki ritme sendiri dan tidak bergantung pada kecepatan Auto Scroll.</div></div>
+</main><footer class="bottom"><button class="action" onclick="goTo('beranda')">⌂ Home</button><button class="action" id="prevBtn" aria-label="Sebelumnya">《</button><button class="action" id="focusBtn">Fokus</button><button class="action primary" id="autoBtn">▶ Scroll</button><button class="action" id="autoFocusBtn">◎ Auto Fokus</button><button class="action" id="nextBtn" aria-label="Berikutnya">》</button><button class="action" id="fontDownBtn">A−</button><button class="action" id="fontBtn">A+</button><button class="action" id="checkpointBtn">📍 Simpan</button><button class="action" id="editBtn">✏️ Edit</button></footer></div><div class="drawer" id="drawer"><div class="shade"></div><aside class="panel"><button aria-label="Tutup menu" class="icon" id="closeBtn">✕</button><h3>Daftar Isi</h3><input class="searchbox" id="search" placeholder="Cari kata dalam bacaan..."/><button class="action primary" id="manageTocBtn" style="width:100%;margin:14px 0">☰ Atur Daftar Isi</button><div class="toc-group" data-menu-id="panduan-ziarah"><button class="toc-head"><span>🕌 Panduan Ziarah Kubur</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('panduan-ziarah')">Buka</button><small>Panduan ziarah kubur</small></div></div><div class="toc-group" data-menu-id="tawasulan"><button class="toc-head"><span>📿 TAWASULAN</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('tawasulan')">Buka</button><small>Bacaan Tawassul</small></div></div><div class="toc-group" data-menu-id="surat-yasin-ziarah"><button class="toc-head"><span>📖 Surat Yasin</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('surat-yasin-ziarah')">Buka</button><small>83 ayat • Ritual Ziarah</small></div></div><div class="toc-group" data-menu-id="tahlil-ziarah"><button class="toc-head"><span>📿 Tahlil</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('tahlil-ziarah')">Buka</button><small>Bacaan Tahlil • Ritual Ziarah</small></div></div><div class="toc-group" data-menu-id="doa-tahlil"><button class="toc-head"><span>🤲 Doa Tahlil</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('doa-tahlil')">Buka</button><small>Bacaan Doa Tahlil</small></div></div><div class="toc-group" data-menu-id="surat-waqiah"><button class="toc-head"><span>🌾 Surat Al-Waqi’ah</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('surat-waqiah')">Buka</button><small>96 ayat</small></div></div><div class="toc-group" data-menu-id="surat-mulk"><button class="toc-head"><span>🌙 Surat Al-Mulk</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('surat-mulk')">Buka</button><small>30 ayat</small></div></div><div class="toc-group" data-menu-id="doa-1"><button class="toc-head"><span>🤲 Doa Umum</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('doa-1')">Buka</button><small>Bacaan pilihan</small></div></div><div class="toc-group" data-menu-id="doa-2"><button class="toc-head"><span>⭐ Doa Hajat</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('doa-2')">Buka</button><small>Bacaan pilihan</small></div></div><div class="toc-group" data-menu-id="yasin-waqiah-tabarok"><button class="toc-head"><span>📚 Yasin Waqiah Tabarok</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('yasin-waqiah-tabarok')">Buka</button><small>Yasin • Al-Waqi’ah • Al-Mulk</small></div></div><div class="toc-group" data-menu-id="library-bacaan"><button class="toc-head"><span>📚 Library Bacaan</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('library-bacaan')">Buka</button><small>Koleksi bacaan</small></div></div><div class="toc-group" data-menu-id="galeri-foto"><button class="toc-head"><span>🎞️ Galeri Foto</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('galeri-foto')">Buka</button><small>Foto, Audio & Video</small></div></div><div class="toc-group" data-menu-id="catatan"><button class="toc-head"><span>📝 Catatan</span><b>+</b></button><div class="toc-sub"><button onclick="goTo('catatan')">Buka</button><small>Catatan pribadi</small></div></div><h3>Pengaturan</h3><div class="settings-row"><button data-theme="emerald">Emerald</button><button data-theme="sepia">Sepia</button><button data-theme="dark">Gelap</button></div><div class="settings-row"><button id="speedDown">Scroll −</button><button id="speedLabel">1.0×</button><button id="speedUp">Scroll +</button><button id="speedTurbo" type="button">⚡ +60</button></div><div class="settings-row"><button id="focusSpeedDown">Fokus lebih lambat</button><button id="focusSpeedLabel">0,75×</button><button id="focusSpeedUp">Fokus lebih cepat</button></div><div class="control-card"><label>Kecepatan Auto Scroll: <output id="lpmOut">200 baris/menit</output></label><input id="lpmRange" max="420" min="10" step="5" type="range" value="200"/><div class="hint">Kecepatan dihitung berdasarkan tinggi baris aktual. Font lebih besar otomatis disesuaikan agar ritme baca tetap stabil.</div></div><div class="control-card"><label>Auto Fokus</label><select id="focusMode"><option selected="" value="phrase">Per frasa</option><option value="paragraph">Per paragraf</option></select><div class="hint">Auto Fokus memiliki ritme sendiri dan tidak bergantung pada kecepatan Auto Scroll.</div></div>
 <div class="control-card" id="paragraphKaraokeCard">
 <label>🎤 Karaoke per paragraf: <output id="karaokeParagraphOut">7,5 dtk</output></label>
 <input id="karaokeParagraphRange" max="30" min="2" step="0.5" type="range" value="7.5"/>
@@ -1464,7 +1183,16 @@ html,body{max-width:100vw!important;overflow-x:hidden!important}
 <div class="toast" id="toast"></div><script>
 function markOpenings(){document.querySelectorAll('.para').forEach(p=>{if(p.querySelector('.opening'))return;const nodes=[...p.childNodes];for(const n of nodes){if(n.nodeType!==3||!n.textContent.trim())continue;const t=n.textContent;const m=t.match(/^([\s\S]*?(?:[.;!?]|$))/);if(!m||!m[1])continue;const s=document.createElement('span');s.className='opening';s.textContent=m[1];n.textContent=t.slice(m[1].length);p.insertBefore(s,n);break}})}markOpenings();
 function applyColorCycle(){const byChapter={};document.querySelectorAll('.para').forEach(p=>{const ch=p.dataset.chapter||'umum';byChapter[ch]=(byChapter[ch]||0)+1;p.classList.remove('c1','c2','c3','c4','c5');p.classList.add('c'+(((byChapter[ch]-1)%5)+1));});}applyColorCycle();
-const reader=document.getElementById('reader'),paras=[...document.querySelectorAll('#reader > article.book > section.chapter .para')],drawer=document.getElementById('drawer');let active=0,auto=false,raf=0,speed=.45,autoFocus=false,focusTimer=0,focusDelay=4500,fs=20,themeIndex=0;const themes=['emerald','sepia','dark'];function toast(t){const x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1500)}function setActive(i,c=true){active=Math.max(0,Math.min(paras.length-1,i));paras.forEach((p,n)=>p.classList.toggle('active',n===active));if(c)paras[active].scrollIntoView({behavior:'smooth',block:'center'});SAFE_STORE.setItem('tqv3b3-active',active)}function goTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});closeDrawer();setTimeout(()=>{let i=paras.findIndex(p=>p.dataset.chapter===id);if(i>=0)setActive(i,false)},350)}window.goTo=goTo;function toggleFocus(){document.body.classList.toggle('focus');focusBtn.classList.toggle('on');if(document.body.classList.contains('focus'))setActive(active)}function tick(){if(!auto)return;reader.scrollTop+=speed;raf=requestAnimationFrame(tick)}function toggleAuto(){auto=!auto;autoBtn.textContent=auto?'⏸ Scroll':'▶ Scroll';autoBtn.classList.toggle('on',auto);auto?tick():cancelAnimationFrame(raf)}function scheduleAutoFocus(){clearTimeout(focusTimer);if(!autoFocus)return;focusTimer=setTimeout(()=>{if(active>=paras.length-1){toggleAutoFocus(false);toast('Auto fokus selesai');return;}setActive(active+1,true);scheduleAutoFocus();},focusDelay)}function toggleAutoFocus(force){autoFocus=typeof force==='boolean'?force:!autoFocus;autoFocusBtn.textContent=autoFocus?'⏸ Auto Fokus':'◎ Auto Fokus';autoFocusBtn.classList.toggle('on',autoFocus);if(autoFocus){if(!document.body.classList.contains('focus'))toggleFocus();setActive(active,true);scheduleAutoFocus();}else clearTimeout(focusTimer)}function openDrawer(){drawer.classList.add('open')}function closeDrawer(){drawer.classList.remove('open')}menuBtn.onclick=openDrawer;closeBtn.onclick=closeDrawer;document.querySelector('.shade').onclick=closeDrawer;focusBtn.onclick=toggleFocus;autoBtn.onclick=toggleAuto;autoFocusBtn.onclick=()=>toggleAutoFocus();prevBtn.onclick=()=>setActive(active-1);nextBtn.onclick=()=>setActive(active+1);fontDownBtn.onclick=()=>{fs=Math.max(14,fs-2);document.documentElement.style.setProperty('--fs',fs+'px');SAFE_STORE.setItem('tqv3b3-fs',fs);toast('Ukuran huruf '+fs+' px')};fontBtn.onclick=()=>{fs=Math.min(34,fs+2);document.documentElement.style.setProperty('--fs',fs+'px');SAFE_STORE.setItem('tqv3b3-fs',fs);toast('Ukuran huruf '+fs+' px')};themeBtn.onclick=()=>{themeIndex=(themeIndex+1)%themes.length;document.documentElement.dataset.theme=themes[themeIndex];SAFE_STORE.setItem('tqv3b3-theme',themes[themeIndex]);toast('Tema '+themes[themeIndex])};const themeNavBtn=document.getElementById('themeNavBtn'); themeNavBtn?.addEventListener('click',()=>themeBtn?.click()); const smartCounterNavBtn=document.getElementById('smartCounterNavBtn'); smartCounterNavBtn?.addEventListener('click',()=>document.getElementById('manualSmartCounterBtn')?.click());const appFullscreenBtn=document.getElementById('appFullscreenBtn');
+const reader=document.getElementById('reader'),drawer=document.getElementById('drawer');
+const RC71_READING_ORDER=['panduan-ziarah','tawasulan','surat-yasin-ziarah','tahlil-ziarah','doa-tahlil','surat-waqiah','surat-mulk','doa-1','doa-2','yasin-waqiah-tabarok'];
+const RC71_CHAPTER_RANK=new Map(RC71_READING_ORDER.map((id,i)=>[id,i]));
+const paras=[...document.querySelectorAll('#reader > article.book > section.chapter .para')]
+  .sort((a,b)=>{
+    const ra=RC71_CHAPTER_RANK.has(a.dataset.chapter)?RC71_CHAPTER_RANK.get(a.dataset.chapter):999;
+    const rb=RC71_CHAPTER_RANK.has(b.dataset.chapter)?RC71_CHAPTER_RANK.get(b.dataset.chapter):999;
+    if(ra!==rb)return ra-rb;
+    return [...a.parentElement.querySelectorAll('.para')].indexOf(a)-[...b.parentElement.querySelectorAll('.para')].indexOf(b);
+  });let active=0,auto=false,raf=0,speed=.45,autoFocus=false,focusTimer=0,focusDelay=4500,fs=20,themeIndex=0;const themes=['emerald','sepia','dark'];function toast(t){const x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1500)}function setActive(i,c=true){active=Math.max(0,Math.min(paras.length-1,i));paras.forEach((p,n)=>p.classList.toggle('active',n===active));if(c)paras[active].scrollIntoView({behavior:'smooth',block:'center'});SAFE_STORE.setItem('tqv3b3-active',active)}function goTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});closeDrawer();setTimeout(()=>{let i=paras.findIndex(p=>p.dataset.chapter===id);if(i>=0)setActive(i,false)},350)}window.goTo=goTo;function toggleFocus(){document.body.classList.toggle('focus');focusBtn.classList.toggle('on');if(document.body.classList.contains('focus'))setActive(active)}function tick(){if(!auto)return;reader.scrollTop+=speed;raf=requestAnimationFrame(tick)}function toggleAuto(){auto=!auto;autoBtn.textContent=auto?'⏸ Scroll':'▶ Scroll';autoBtn.classList.toggle('on',auto);auto?tick():cancelAnimationFrame(raf)}function scheduleAutoFocus(){clearTimeout(focusTimer);if(!autoFocus)return;focusTimer=setTimeout(()=>{if(active>=paras.length-1){toggleAutoFocus(false);toast('Auto fokus selesai');return;}setActive(active+1,true);scheduleAutoFocus();},focusDelay)}function toggleAutoFocus(force){autoFocus=typeof force==='boolean'?force:!autoFocus;autoFocusBtn.textContent=autoFocus?'⏸ Auto Fokus':'◎ Auto Fokus';autoFocusBtn.classList.toggle('on',autoFocus);if(autoFocus){if(!document.body.classList.contains('focus'))toggleFocus();setActive(active,true);scheduleAutoFocus();}else clearTimeout(focusTimer)}function openDrawer(){drawer.classList.add('open')}function closeDrawer(){drawer.classList.remove('open')}menuBtn.onclick=openDrawer;closeBtn.onclick=closeDrawer;document.querySelector('.shade').onclick=closeDrawer;focusBtn.onclick=toggleFocus;autoBtn.onclick=toggleAuto;autoFocusBtn.onclick=()=>toggleAutoFocus();prevBtn.onclick=()=>setActive(active-1);nextBtn.onclick=()=>setActive(active+1);fontDownBtn.onclick=()=>{fs=Math.max(14,fs-2);document.documentElement.style.setProperty('--fs',fs+'px');SAFE_STORE.setItem('tqv3b3-fs',fs);toast('Ukuran huruf '+fs+' px')};fontBtn.onclick=()=>{fs=Math.min(34,fs+2);document.documentElement.style.setProperty('--fs',fs+'px');SAFE_STORE.setItem('tqv3b3-fs',fs);toast('Ukuran huruf '+fs+' px')};themeBtn.onclick=()=>{themeIndex=(themeIndex+1)%themes.length;document.documentElement.dataset.theme=themes[themeIndex];SAFE_STORE.setItem('tqv3b3-theme',themes[themeIndex]);toast('Tema '+themes[themeIndex])};const themeNavBtn=document.getElementById('themeNavBtn'); themeNavBtn?.addEventListener('click',()=>themeBtn?.click()); const smartCounterNavBtn=document.getElementById('smartCounterNavBtn'); smartCounterNavBtn?.addEventListener('click',()=>document.getElementById('manualSmartCounterBtn')?.click());const appFullscreenBtn=document.getElementById('appFullscreenBtn');
 const navFullscreenBtn=document.getElementById('navFullscreenBtn');
 function setAppFullscreen(on){
   const active=!!on;
@@ -1613,6 +1341,16 @@ focusSpeedDown.onclick=()=>{focusTempo=Math.min(2.5,+(focusTempo+.15).toFixed(2)
 focusSpeedUp.onclick=()=>{focusTempo=Math.max(.45,+(focusTempo-.15).toFixed(2));updateFocusTempo(true)};
 updateLpm(false);
 updateFocusTempo(false);
+// RC71 V6.1.8: restore active position by chapter after the reading-order migration.
+(function restoreActiveByChapter(){
+  try{
+    const savedChapter=JSON.parse(SAFE_STORE.getItem(B4KEY+'resume')||'null')?.chapter;
+    if(savedChapter){
+      const idx=paras.findIndex(p=>p.dataset.chapter===savedChapter);
+      if(idx>=0){active=idx;SAFE_STORE.setItem('tqv3b3-active',String(idx));}
+    }
+  }catch(_){ }
+})();
 window.addEventListener('pageshow',()=>{
   const savedLpm=Number(SAFE_STORE.getItem(B4KEY+'lpm'));
   const savedTempo=Number(SAFE_STORE.getItem(B4KEY+'focusTempo'));
@@ -1855,18 +1593,19 @@ const DEFAULT=[
 {id:'tawasulan',title:'TAWASULAN',icon:'📿',visible:true},
 {id:'surat-yasin-ziarah',title:'Surat Yasin',icon:'📖',visible:true},
 {id:'tahlil-ziarah',title:'Tahlil',icon:'📿',visible:true},
+{id:'doa-tahlil',title:'Doa Tahlil',icon:'🤲',visible:true},
 {id:'surat-waqiah',title:'Surat Al-Waqi’ah',icon:'🌾',visible:true},
 {id:'surat-mulk',title:'Surat Al-Mulk',icon:'🌙',visible:true},
-{id:'doa-1',title:'Doa Setelah Sholat',icon:'🤲',visible:true},
+{id:'doa-1',title:'Doa Umum',icon:'🤲',visible:true},
 {id:'doa-2',title:'Doa Hajat',icon:'⭐',visible:true},
 {id:'yasin-waqiah-tabarok',title:'Yasin Waqiah Tabarok',icon:'📚',visible:true},
 {id:'library-bacaan',title:'Library Bacaan',icon:'📚',visible:true},
-{id:'galeri-foto',title:'Media Galeri',icon:'🎞️',visible:true},
+{id:'galeri-foto',title:'Galeri Foto',icon:'🎞️',visible:true},
 {id:'catatan',title:'Catatan',icon:'📝',visible:true}
 ];
 const read=(k,d)=>{try{return JSON.parse(SAFE_STORE.getItem(KEY+k)||'null')??d}catch{return d}},write=(k,v)=>SAFE_STORE.setItem(KEY+k,JSON.stringify(v));
 const esc=s=>(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const migration='menu-order-v4-dom-sync';
+const migration='menu-order-v5-requested-rc71';
 let menu=read('menu',null);
 function normalizeMenu(){
   const stored=Array.isArray(menu)?menu.filter(x=>x?.id):[];
@@ -3074,34 +2813,14 @@ window.renderBlocks=(container,blocks)=>{if(!container)return;container.replaceC
 <script id="rc71-import-storage-engine">
 (function(){
 'use strict';
-const DB_NAME='RC71_IMPORT_STORAGE',DB_VER=3;
+const DB_NAME='RC71_IMPORT_STORAGE',DB_VER=2;
 let dbp;
-function openDB(){
-  if(dbp)return dbp;
-  dbp=new Promise((resolve,reject)=>{
-    const r=indexedDB.open(DB_NAME,DB_VER);
-    r.onupgradeneeded=()=>{
-      const d=r.result;
-      if(!d.objectStoreNames.contains('library'))d.createObjectStore('library',{keyPath:'id',autoIncrement:true});
-      if(!d.objectStoreNames.contains('documents'))d.createObjectStore('documents',{keyPath:'id',autoIncrement:true});
-      if(!d.objectStoreNames.contains('media'))d.createObjectStore('media',{keyPath:'id',autoIncrement:true});
-    };
-    r.onblocked=()=>reject(new Error('Penyimpanan sedang dipakai tab RC71 lain. Tutup tab RC71 yang lain lalu coba lagi.'));
-    r.onsuccess=()=>{
-      const db=r.result;
-      db.onversionchange=()=>{try{db.close()}catch{}};
-      if(!db.objectStoreNames.contains('documents')){
-        try{db.close()}catch{}
-        dbp=null;
-        try{indexedDB.deleteDatabase(DB_NAME)}catch{}
-        return reject(new Error('Basis data PDF lama tidak lengkap. Muat ulang RC71 sekali lalu coba impor lagi.'));
-      }
-      resolve(db);
-    };
-    r.onerror=()=>reject(r.error||new Error('IndexedDB tidak tersedia di browser ini.'));
-  });
-  return dbp;
-}
+function openDB(){if(dbp)return dbp;dbp=new Promise((resolve,reject)=>{const r=indexedDB.open(DB_NAME,DB_VER);
+r.onupgradeneeded=()=>{const d=r.result;
+if(!d.objectStoreNames.contains('library'))d.createObjectStore('library',{keyPath:'id',autoIncrement:true});
+if(!d.objectStoreNames.contains('documents'))d.createObjectStore('documents',{keyPath:'id',autoIncrement:true});
+if(!d.objectStoreNames.contains('media'))d.createObjectStore('media',{keyPath:'id',autoIncrement:true});};
+r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});return dbp}
 async function put(store,v){const d=await openDB();return new Promise((ok,no)=>{const q=d.transaction(store,'readwrite').objectStore(store).add(v);q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})}
 function notify(s){if(typeof window.showToast==='function')window.showToast(s);else if(typeof window.toast==='function')window.toast(s);else console.log(s)}
 async function zipEntries(buf){
@@ -3154,9 +2873,8 @@ async function importLibraryFile(file){
 async function importDocument(file){
  const name=file?.name||'', type=file?.type||'';
  if(!/\.(pdf|docx)$/i.test(name) && !/application\/(pdf|vnd.openxmlformats-officedocument.wordprocessingml.document)/i.test(type)) throw Error('Format dokumen tidak didukung');
- const blob=new Blob([await file.arrayBuffer()],{type:type||'application/pdf'});
- if(!blob.size)throw new Error('File PDF kosong atau tidak dapat dibaca.');
- await put('documents',{name,type:type||'application/pdf',size:blob.size,blob,createdAt:Date.now()});
+ const buf=await file.arrayBuffer();
+ await put('documents',{name,type:type||'application/octet-stream',size:file.size,blob:buf,createdAt:Date.now()});
  document.dispatchEvent(new CustomEvent('rc71-documents-updated'));
  notify('Dokumen tersimpan: '+file.name);
 }
@@ -3237,7 +2955,7 @@ const panel=$('mediaGalleryPanel'), list=$('mediaList'), photoGrid=$('galleryGri
 if(!panel||!list)return;
 let tab='photo', items=[], current=null, currentURL=null, speed=1;
 let pdfItems=[], pdfCurrent=null, pdfURL=null, pdfText='', tpRunning=false, tpRaf=0, tpOffset=0;
-let tpSpeed=+(SAFE_STORE.getItem('rc71-pdf-tp-speed')||1), tpFont=+(SAFE_STORE.getItem('rc71-pdf-tp-font')||30);
+let tpSpeed=+(localStorage.getItem('rc71-pdf-tp-speed')||1), tpFont=+(localStorage.getItem('rc71-pdf-tp-font')||30);
 const overlay=$('mediaPlayerOverlay'), video=$('mediaVideoPlayer'), audio=$('mediaAudioPlayer'), title=$('mediaPlayerTitle');
 const pdfOverlay=$('rc71PdfOverlay'), pdfFrame=$('rc71PdfFrame'), pdfTitle=$('rc71PdfTitle'), tpOverlay=$('rc71TpOverlay'), tpTitle=$('rc71TpTitle'), tpText=$('rc71TpText'), tpPause=$('rc71TpPause'), tpSpeedLabel=$('rc71TpSpeedLabel'), tpStatus=$('rc71TpStatus');
 
@@ -3282,14 +3000,14 @@ function render(){
   list.appendChild(c);
  });
 }
-async function openImportDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open('RC71_IMPORT_STORAGE',3);r.onupgradeneeded=()=>{const db=r.result;if(!db.objectStoreNames.contains('library'))db.createObjectStore('library',{keyPath:'id',autoIncrement:true});if(!db.objectStoreNames.contains('documents'))db.createObjectStore('documents',{keyPath:'id',autoIncrement:true});if(!db.objectStoreNames.contains('media'))db.createObjectStore('media',{keyPath:'id',autoIncrement:true})};r.onblocked=()=>reject(new Error('Database RC71 sedang dipakai tab lain.'));r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error||new Error('Database PDF tidak tersedia.'))})}
+async function openImportDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open('RC71_IMPORT_STORAGE',2);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
 async function getDocuments(){const d=await openImportDB();return new Promise((ok,no)=>{const q=d.transaction('documents','readonly').objectStore('documents').getAll();q.onsuccess=()=>ok(q.result||[]);q.onerror=()=>no(q.error)})}
 async function deleteDocument(id){const d=await openImportDB();return new Promise((ok,no)=>{const q=d.transaction('documents','readwrite').objectStore('documents').delete(id);q.onsuccess=()=>ok();q.onerror=()=>no(q.error)})}
 function blobOfDoc(d){return d.blob instanceof Blob?d.blob:new Blob([d.blob],{type:d.type||'application/pdf'})}
 function isPdfDoc(d){return /pdf/i.test(d.type||'')||/\.pdf$/i.test(d.name||'')}
 function stopTp(){tpRunning=false;cancelAnimationFrame(tpRaf);tpPause.textContent='▶ Mulai'}
-function updateTpSpeed(){tpSpeedLabel.textContent=tpSpeed.toFixed(1)+'×';SAFE_STORE.setItem('rc71-pdf-tp-speed',String(tpSpeed))}
-function updateTpFont(){tpText.style.fontSize=tpFont+'px';SAFE_STORE.setItem('rc71-pdf-tp-font',String(tpFont))}
+function updateTpSpeed(){tpSpeedLabel.textContent=tpSpeed.toFixed(1)+'×';localStorage.setItem('rc71-pdf-tp-speed',String(tpSpeed))}
+function updateTpFont(){tpText.style.fontSize=tpFont+'px';localStorage.setItem('rc71-pdf-tp-font',String(tpFont))}
 function tpTick(){if(!tpRunning)return;tpOffset-=0.35*tpSpeed;tpText.style.transform=`translateY(${tpOffset}px)`;tpRaf=requestAnimationFrame(tpTick)}
 function startTp(){if(!pdfText.trim())return;tpRunning=true;tpPause.textContent='Ⅱ Jeda';if(tpOffset===0)tpOffset=Math.min(0,innerHeight*.28);tpTick()}
 function openPdfReader(d){stopTp();pdfCurrent=d;if(pdfURL)URL.revokeObjectURL(pdfURL);pdfURL=URL.createObjectURL(blobOfDoc(d));pdfTitle.textContent=d.name||'PDF Reader';pdfFrame.src=pdfURL;pdfOverlay.classList.add('open');pdfOverlay.setAttribute('aria-hidden','false')}
@@ -3558,18 +3276,8 @@ $('mediaExportAllBtn')?.addEventListener('click',exportAllMedia);
  const r=await mirrorAllMedia();
  console.info('MEDIA_STORAGE mirror',r);
 })();
-$('mediaImportPdfInput')?.addEventListener('change',async e=>{
- const files=[...(e.target.files||[])];
- if(!files.length)return;
- let ok=0;
- for(const f of files){
-  try{await window.RC71ImportStorage.importDocument(f);ok++;}
-  catch(err){console.warn('PDF import failed',err);toast2('Impor PDF gagal: '+(err?.message||'File tidak dapat disimpan'));}
- }
- e.target.value='';
- if(ok)toast2(ok+' PDF berhasil diimpor');
- await reloadPdfs();
-});
+$('mediaImportPdfBtn')?.addEventListener('click',()=>$('mediaImportPdfInput')?.click());
+$('mediaImportPdfInput')?.addEventListener('change',async e=>{for(const f of e.target.files||[]){try{await window.RC71ImportStorage.importDocument(f)}catch(err){console.warn(err);toast2('Impor PDF gagal: '+err.message)}}e.target.value=''});
 $('rc71PdfClose')?.addEventListener('click',closePdfReader);$('rc71PdfTpBtn')?.addEventListener('click',()=>pdfCurrent&&openPdfTeleprompter(pdfCurrent));$('rc71TpClose')?.addEventListener('click',closeTp);tpPause?.addEventListener('click',()=>{if(tpRunning)stopTp();else startTp()});$('rc71TpSlow')?.addEventListener('click',()=>{tpSpeed=Math.max(.2,+(tpSpeed-.1).toFixed(1));updateTpSpeed()});$('rc71TpFast')?.addEventListener('click',()=>{tpSpeed=Math.min(3,+(tpSpeed+.1).toFixed(1));updateTpSpeed()});$('rc71TpFontDown')?.addEventListener('click',()=>{tpFont=Math.max(18,tpFont-2);updateTpFont()});$('rc71TpFontUp')?.addEventListener('click',()=>{tpFont=Math.min(64,tpFont+2);updateTpFont()});$('rc71TpRestart')?.addEventListener('click',()=>{stopTp();tpOffset=0;tpText.style.transform='translateY(28vh)'});$('rc71PdfFullBtn')?.addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await pdfOverlay.requestFullscreen?.({navigationUI:'hide'})}catch{}});document.addEventListener('rc71-documents-updated',reloadPdfs);document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(tpOverlay.classList.contains('open'))closeTp();else if(pdfOverlay.classList.contains('open'))closePdfReader()}});
 (async()=>{await seedBuiltins();await reload();await reloadPdfs()})();
 })();
@@ -3897,6 +3605,54 @@ html:-webkit-full-screen .nav-fullscreen-btn{
 </script>
 
 
+<style id="rc71-v619-navigation-finetune">
+/* V6.1.9 — clean bottom navigation and compact Smart Counter flying controls */
+.bottom #prevBtn,.bottom #nextBtn{width:48px!important;padding-left:0!important;padding-right:0!important;font-size:22px!important;font-family:Arial,sans-serif!important}
+.bottom #prevBtn,.bottom #nextBtn{font-weight:900!important;letter-spacing:-2px}
+#smartCounterControls{right:calc(14px + env(safe-area-inset-right))!important;bottom:calc(74px + env(safe-area-inset-bottom))!important;transform:none!important;gap:5px!important;padding:5px!important;z-index:160!important}
+#smartCounterControls button{width:38px!important;height:38px!important;min-height:38px!important;font-size:13px!important;border-radius:50%!important;box-shadow:0 6px 18px rgba(0,0,0,.18)!important}
+#smartCounterControls button#scPlus{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
+#smartCounterControls button#scReset{font-size:12px!important}
+#smartCounterControls button#scExit{background:color-mix(in srgb,var(--muted) 12%,var(--paper))!important}
+/* Remove decorative information/status boxes while keeping the real chapter title. */
+.chapter > .surah-status{display:none!important}
+.chapter > .repeat-demo{display:none!important}
+@media(max-width:380px){#smartCounterControls{right:7px!important;bottom:calc(70px + env(safe-area-inset-bottom))!important}#smartCounterControls button{width:34px!important;height:34px!important;min-height:34px!important;font-size:12px!important}.bottom #prevBtn,.bottom #nextBtn{width:43px!important;font-size:20px!important}}
+</style>
+<script id="rc71-v619-navigation-finetune-script">
+(()=>{
+  const navIds=['navFullscreenBtn','themeNavBtn','smartCounterNavBtn'];
+  navIds.forEach(id=>document.getElementById(id)?.remove());
+  const prev=document.getElementById('prevBtn'), next=document.getElementById('nextBtn');
+  if(prev) prev.textContent='《';
+  if(next) next.textContent='》';
+
+  const controls=document.getElementById('smartCounterControls');
+  const minus=document.getElementById('scMinus'), plus=document.getElementById('scPlus'), reset=document.getElementById('scReset'), exit=document.getElementById('scExit');
+  const fab=document.getElementById('counterFab');
+  const sync=()=>{ if(!controls||!fab)return; controls.classList.toggle('show',fab.classList.contains('show')); };
+  if(fab && controls){
+    new MutationObserver(sync).observe(fab,{attributes:true,attributeFilter:['class']});
+    sync();
+  }
+  const stopIfPaused=()=>{try{if(window.SmartDzikirCounter?.isPaused?.()) window.SmartDzikirCounter.resume?.()}catch(e){}};
+  minus?.addEventListener('click',e=>{e.stopPropagation();stopIfPaused();window.SmartDzikirCounter?.decrement?.();});
+  plus?.addEventListener('click',e=>{e.stopPropagation();stopIfPaused();window.SmartDzikirCounter?.increment?.();});
+  reset?.addEventListener('click',e=>{e.stopPropagation();window.SmartDzikirCounter?.reset?.();});
+  exit?.addEventListener('click',e=>{e.stopPropagation();window.SmartDzikirCounter?.exit?.();sync();});
+
+  // Completion feedback: two short beeps, deliberately separate from the normal +1 click.
+  window.addEventListener('smartcountercomplete',()=>{
+    try{
+      const C=window.AudioContext||window.webkitAudioContext;if(!C)return;
+      const c=window.__rc71Audio||(window.__rc71Audio=new C());
+      if(c.state==='suspended')c.resume();
+      const beep=(when,freq)=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=freq;g.gain.setValueAtTime(.0001,when);g.gain.exponentialRampToValueAtTime(.065,when+.008);g.gain.exponentialRampToValueAtTime(.0001,when+.075);o.connect(g);g.connect(c.destination);o.start(when);o.stop(when+.085)};
+      const t=c.currentTime+.015;beep(t,880);beep(t+.115,1047);
+    }catch(e){}
+  });
+})();
+</script>
 <script id="rc71-stability-guard">
 /* RC71 V6.1.2 STABLE BASELINE
    This guard is diagnostic only. It never changes application behavior. */
@@ -3966,9 +3722,9 @@ const $=id=>document.getElementById(id);
 const ov=$('rc71PdfVisualTpOverlay'), vp=$('rc71VtpViewport'), pages=$('rc71VtpPages');
 const title=$('rc71VtpTitle'), pause=$('rc71VtpPause'), speedLabel=$('rc71VtpSpeedLabel'), status=$('rc71VtpStatus');
 if(!ov||!vp||!pages)return;
-let running=false, raf=0, last=0, speed=+(SAFE_STORE.getItem('rc71-vtp-speed')||40), current=null, pdfUrl=null;
+let running=false, raf=0, last=0, speed=+(localStorage.getItem('rc71-vtp-speed')||40), current=null, pdfUrl=null;
 const speeds=[10,20,30,40,55,70,90,120,160,220];
-function clampSpeed(){speed=Math.max(10,Math.min(220,speed));SAFE_STORE.setItem('rc71-vtp-speed',String(speed));speedLabel.textContent=speed+' px/s'}
+function clampSpeed(){speed=Math.max(10,Math.min(220,speed));localStorage.setItem('rc71-vtp-speed',String(speed));speedLabel.textContent=speed+' px/s'}
 function stop(){running=false;cancelAnimationFrame(raf);raf=0;last=0;pause.textContent='▶ Auto Scroll'}
 function tick(t){if(!running)return;if(!last)last=t;const dt=Math.min(80,t-last);last=t;vp.scrollTop+=speed*dt/1000; if(vp.scrollTop+vp.clientHeight>=vp.scrollHeight-2){stop();status.textContent='Selesai • semua halaman telah dibaca';return}raf=requestAnimationFrame(tick)}
 function start(){if(vp.scrollHeight<=vp.clientHeight+2)return;running=true;pause.textContent='Ⅱ Jeda';last=0;raf=requestAnimationFrame(tick)}
@@ -4025,7 +3781,7 @@ function findPdfFromTarget(target){
  }
  return null;
 }
-async function getDocs(){return new Promise((resolve,reject)=>{const r=indexedDB.open('RC71_IMPORT_STORAGE',3);r.onsuccess=()=>{const db=r.result;const q=db.transaction('documents','readonly').objectStore('documents').getAll();q.onsuccess=()=>resolve(q.result||[]);q.onerror=()=>reject(q.error)};r.onerror=()=>reject(r.error)})}
+async function getDocs(){return new Promise((resolve,reject)=>{const r=indexedDB.open('RC71_IMPORT_STORAGE',2);r.onsuccess=()=>{const db=r.result;const q=db.transaction('documents','readonly').objectStore('documents').getAll();q.onsuccess=()=>resolve(q.result||[]);q.onerror=()=>reject(q.error)};r.onerror=()=>reject(r.error)})}
 async function openByName(name){const docs=await getDocs();const d=docs.find(x=>(x.name||'')===name);if(d)await open(d);else alert('File PDF tidak ditemukan di penyimpanan impor.')}
 // Capture before the old text-extraction Teleprompter handlers. This preserves the PDF page exactly, including its original colors.
 document.addEventListener('click',async e=>{
@@ -4052,69 +3808,443 @@ window.RC71VisualPDFTeleprompter={open,close,start,stop};
 })();
 </script>
 
-<script id="rc71-pwa-register">
-if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-}
+<script>
+/* RC71 V6.1.5 — Editor reliability repair
+   Rebind Preview and Save after all enhancement layers so later patches cannot
+   accidentally leave the editor buttons inert. */
+(function(){
+  function bindEditorButtons(){
+    const modal=document.getElementById('editorModal');
+    const previewBtn=document.getElementById('previewEditBtn');
+    const saveBtn=document.getElementById('saveEditBtn');
+    const preview=document.getElementById('editPreview');
+    const status=document.getElementById('editorStatus');
+    const text=document.getElementById('editText');
+    if(!modal||!previewBtn||!saveBtn)return;
+
+    [previewBtn,saveBtn].forEach(b=>{b.type='button';b.removeAttribute('disabled');});
+
+    previewBtn.onclick=function(e){
+      e.preventDefault(); e.stopPropagation();
+      try{
+        if(typeof refreshPreview==='function') refreshPreview();
+        if(status) status.textContent='Preview diperbarui dari hasil editing terbaru.';
+        if(preview) preview.scrollIntoView({behavior:'smooth',block:'center'});
+      }catch(err){
+        console.error('RC71 Preview error:',err);
+        if(status) status.textContent='Preview gagal diperbarui. Teks tetap aman.';
+        if(typeof toast==='function') toast('Preview gagal diperbarui');
+      }
+    };
+
+    saveBtn.onclick=function(e){
+      e.preventDefault(); e.stopPropagation();
+      try{
+        if(typeof saveEdit!=='function') throw new Error('Fungsi Simpan tidak tersedia');
+        saveEdit();
+      }catch(err){
+        console.error('RC71 Save error:',err);
+        if(status) status.textContent='Simpan gagal: '+(err?.message||'kesalahan tidak dikenal');
+        if(typeof toast==='function') toast('Simpan gagal — perubahan belum diterapkan');
+      }
+    };
+
+    /* Keep Preview synchronized even when the user edits without pressing Preview. */
+    if(text && !text.dataset.rc715Bound){
+      text.addEventListener('input',()=>{
+        try{ if(typeof refreshPreview==='function') refreshPreview(); }catch(err){ console.error(err); }
+      });
+      text.dataset.rc715Bound='1';
+    }
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindEditorButtons,{once:true});
+  else bindEditorButtons();
+  setTimeout(bindEditorButtons,250);
+  setTimeout(bindEditorButtons,1000);
+})();
 </script>
-<style id="rc71-ipad-portrait-width-fix">
-/* RC71 V9 — iPad portrait reading area: override the legacy 8cm book width. */
-@media (orientation: portrait) and (min-width: 600px) {
-  html, body, .app {
-    width: 100% !important;
-    max-width: none !important;
+
+
+<script>
+/* RC71 V6.1.7 — persistent editor + reliable Preview
+   IndexedDB is used as a durable fallback when localStorage is unavailable
+   (notably with some Android content:// launches). The last saved text is
+   therefore restored after closing/re-opening the HTML/PWA. */
+(function(){
+  const DB='amp-rc71-persistence-v1', STORE='kv', KEY='editor-overrides';
+  let dbPromise=null;
+  function openDB(){
+    if(dbPromise)return dbPromise;
+    dbPromise=new Promise((resolve,reject)=>{
+      if(!window.indexedDB)return reject(new Error('IndexedDB unavailable'));
+      const req=indexedDB.open(DB,1);
+      req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(STORE))req.result.createObjectStore(STORE)};
+      req.onsuccess=()=>resolve(req.result);
+      req.onerror=()=>reject(req.error||new Error('IndexedDB open failed'));
+    });
+    return dbPromise;
+  }
+  async function idbGet(){
+    const db=await openDB();
+    return new Promise((resolve,reject)=>{
+      const tx=db.transaction(STORE,'readonly'),q=tx.objectStore(STORE).get(KEY);
+      q.onsuccess=()=>resolve(q.result||{}); q.onerror=()=>reject(q.error);
+    });
+  }
+  async function idbSet(value){
+    const db=await openDB();
+    return new Promise((resolve,reject)=>{
+      const tx=db.transaction(STORE,'readwrite');
+      tx.objectStore(STORE).put(value,KEY);
+      tx.oncomplete=()=>resolve(); tx.onerror=()=>reject(tx.error);
+    });
+  }
+  async function hydrate(){
+    try{
+      const durable=await idbGet();
+      if(durable && typeof durable==='object' && Object.keys(durable).length){
+        const current=(typeof getOverrides==='function')?getOverrides():{};
+        const merged=Object.assign({},durable,current);
+        if(typeof setOverrides==='function')setOverrides(merged);
+        if(typeof applyOverridesAndSemantic==='function')applyOverridesAndSemantic();
+        window.__rc716EditorReady=true;
+      }else window.__rc716EditorReady=true;
+    }catch(e){
+      console.warn('RC71 durable editor hydrate:',e);
+      window.__rc716EditorReady=true;
+    }
+  }
+  window.__rc716EditorHydrated=hydrate();
+
+  /* Capture the actual Save click in the capture phase. This runs after the
+     normal editor handler in the event cycle, then persists the resulting
+     override map. */
+  document.addEventListener('click',async function(e){
+    const b=e.target.closest?.('#saveEditBtn');
+    if(!b)return;
+    setTimeout(async()=>{
+      try{
+        if(typeof getOverrides==='function') await idbSet(getOverrides());
+      }catch(err){console.warn('RC71 durable editor save:',err)}
+    },80);
+  },false);
+
+  /* Make Preview a direct, robust action and keep it enabled. */
+  const bind=()=>{
+    const b=document.getElementById('previewEditBtn');
+    if(!b)return;
+    b.type='button'; b.disabled=false; b.removeAttribute('aria-disabled');
+    b.onclick=function(e){
+      e.preventDefault(); e.stopPropagation();
+      try{
+        if(typeof refreshPreview==='function')refreshPreview();
+        const st=document.getElementById('editorStatus');
+        if(st)st.textContent='Preview diperbarui dari hasil editing terbaru.';
+        const pv=document.getElementById('editPreview');
+        if(pv)pv.scrollIntoView({behavior:'smooth',block:'center'});
+      }catch(err){
+        console.error(err);
+        const st=document.getElementById('editorStatus');
+        if(st)st.textContent='Preview gagal diperbarui.';
+      }
+    };
+  };
+  bind(); setTimeout(bind,300); setTimeout(bind,1000);
+})();
+</script>
+
+<script id="rc717-editor-persistence-final">
+/* RC71 V6.1.7 — authoritative editor persistence repair.
+   Save writes the complete override map to IndexedDB and only then closes the editor.
+   On reload, IndexedDB is hydrated and applied to the reader. Preview is direct-bound. */
+(function(){
+  'use strict';
+  const DB='amp-rc71-persistence-v2', STORE='kv', KEY='editor-overrides-v2';
+  let dbp=null;
+  function openDB(){
+    if(dbp)return dbp;
+    dbp=new Promise((resolve,reject)=>{
+      if(!window.indexedDB)return reject(new Error('IndexedDB unavailable'));
+      const r=indexedDB.open(DB,1);
+      r.onupgradeneeded=()=>{const db=r.result;if(!db.objectStoreNames.contains(STORE))db.createObjectStore(STORE)};
+      r.onsuccess=()=>resolve(r.result); r.onerror=()=>reject(r.error||new Error('IndexedDB open failed'));
+    }); return dbp;
+  }
+  async function put(v){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(v,KEY);tx.oncomplete=res;tx.onerror=()=>rej(tx.error||new Error('IndexedDB write failed'));});}
+  async function get(){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readonly');const q=tx.objectStore(STORE).get(KEY);q.onsuccess=()=>res(q.result||{});q.onerror=()=>rej(q.error||new Error('IndexedDB read failed'));});}
+  async function hydrate(){
+    try{
+      const durable=await get();
+      if(durable&&typeof durable==='object'&&Object.keys(durable).length){
+        const current=(typeof getOverrides==='function'?getOverrides():{});
+        /* Durable values win. This prevents a blank localStorage value from overwriting a saved edit. */
+        const merged=Object.assign({},current,durable);
+        if(typeof setOverrides==='function')setOverrides(merged);
+        if(typeof applyOverridesAndSemantic==='function')applyOverridesAndSemantic();
+        if(typeof window.__ampSoftRefresh==='function')window.__ampSoftRefresh();
+      }
+      window.__rc717Hydrated=true;
+    }catch(e){console.warn('RC71 V6.1.7 hydrate:',e);window.__rc717Hydrated=true;}
+  }
+  window.__rc717Persist=put;
+  window.__rc717Hydrate=hydrate();
+
+  function bind(){
+    const save=document.getElementById('saveEditBtn'), prev=document.getElementById('previewEditBtn');
+    if(save&&!save.dataset.rc717){
+      save.dataset.rc717='1'; save.type='button'; save.disabled=false;
+      save.onclick=async function(e){
+        e.preventDefault(); e.stopImmediatePropagation();
+        const status=document.getElementById('editorStatus');
+        try{
+          /* Run the canonical save routine first; it updates the live paragraph and local storage. */
+          if(typeof window.__ampGenericSaveEdit==='function')window.__ampGenericSaveEdit();
+          /* Save routine closes modal; capture the resulting complete override map. */
+          const ovs=typeof getOverrides==='function'?getOverrides():{};
+          await put(ovs);
+          if(status)status.textContent='Perubahan tersimpan permanen.';
+        }catch(err){
+          console.error(err);
+          if(status)status.textContent='Simpan gagal: '+(err&&err.message?err.message:'penyimpanan tidak tersedia');
+          if(typeof toast==='function')toast('Simpan gagal — perubahan belum dipastikan tersimpan');
+        }
+      };
+    }
+    if(prev&&!prev.dataset.rc717){
+      prev.dataset.rc717='1'; prev.type='button'; prev.disabled=false; prev.removeAttribute('aria-disabled');
+      prev.onclick=function(e){
+        e.preventDefault(); e.stopImmediatePropagation();
+        try{
+          if(typeof refreshPreview==='function')refreshPreview();
+          const st=document.getElementById('editorStatus');if(st)st.textContent='Preview diperbarui dari hasil editing terbaru.';
+          const pv=document.getElementById('editPreview');if(pv)pv.scrollIntoView({behavior:'smooth',block:'center'});
+        }catch(err){console.error(err);}
+      };
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
+  setTimeout(bind,150);setTimeout(bind,500);setTimeout(bind,1200);
+})();
+</script><!-- RC71 V7.0 iPad 10.9 GitHub Edition: responsive UI layer; core logic preserved from RC71 V6.1.9. -->\n<style id="rc71-v7-ipad-10-9-edition">
+/* ==========================================================
+   RC71 V7.0 — iPad 10.9 Edition
+   GitHub Pages-ready responsive layer.
+   Core application logic is intentionally preserved.
+   ========================================================== */
+@media (min-width:768px) and (max-width:1199px){
+  :root{--fs:24px}
+  header{min-height:62px;padding:10px 22px;gap:14px}
+  header h1{font-size:24px;font-weight:800}
+  header .icon{font-size:25px;padding:10px 12px;border-radius:14px}
+  .reader-wrap{padding-top:18px;padding-bottom:100px}
+  .book{width:min(860px,calc(100vw - 90px));max-width:860px;min-height:auto;padding:30px 42px 72px;border-radius:22px}
+  .chapter{padding-top:24px}
+  .chapter h2{font-size:34px;padding:18px 0 14px}
+  .subhead{font-size:22px;padding:13px 16px;margin:30px 0 18px}
+  .para{font-size:var(--fs);line-height:1.82;margin-bottom:14px;padding:10px 12px}
+  .ayah{padding-left:52px}
+  .ayah-no{left:8px;top:14px;width:34px;height:34px;font-size:15px}
+  .bottom{min-height:68px;padding:9px 16px calc(9px + env(safe-area-inset-bottom));gap:9px;justify-content:center;overflow-x:auto}
+  .bottom .action{height:48px;min-height:48px;padding:10px 16px;border-radius:15px;font-size:15px}
+  .bottom #prevBtn,.bottom #nextBtn{width:58px;font-size:26px}
+  .bottom #focusBtn,.bottom #autoFocusBtn{min-width:112px}
+  .bottom #autoBtn{min-width:118px}
+  .bottom #fontDownBtn,.bottom #fontBtn{width:56px;font-size:20px}
+  .drawer .panel{width:min(410px,44vw);padding:24px}
+  .panel h3{font-size:22px}
+  .toc-head{font-size:17px;padding:16px 6px}
+  .toc-sub{padding:11px 6px 16px}
+  .searchbox{font-size:16px;padding:13px}
+  .home-grid{grid-template-columns:repeat(3,1fr);gap:16px}
+  .home-card{min-height:130px;padding:20px 16px;border-radius:20px}
+  .home-card b{font-size:19px}.home-card span{font-size:14px}.home-card .emoji{font-size:34px}
+  .modal-card{width:min(820px,92vw);border-radius:24px;padding:24px}
+}
+@media (min-width:768px) and (orientation:landscape){
+  .app{grid-template-rows:62px 1fr 68px}
+  .reader-wrap{padding-left:24px;padding-right:24px}
+  .book{width:min(900px,calc(100vw - 150px));max-width:900px}
+  .bottom{left:0;right:0}
+  .bottom::-webkit-scrollbar{height:0}
+  .counter-fab{right:24px!important;bottom:92px!important}
+  #smartCounterControls{right:24px!important;bottom:190px!important}
+}
+@media (min-width:768px) and (orientation:portrait){
+  .app{grid-template-rows:62px 1fr 68px}
+  .book{width:min(760px,calc(100vw - 56px));max-width:760px}
+  .bottom{justify-content:flex-start;padding-left:20px;padding-right:20px}
+}
+@media (min-width:1024px) and (orientation:landscape){
+  /* iPad 10.9 landscape: elegant right rail in fullscreen, preserving RC71 controls. */
+  body.app-fullscreen>.app>footer.bottom,
+  html:fullscreen .app>footer.bottom,
+  html:-webkit-full-screen .app>footer.bottom{
+    width:72px!important;max-width:72px!important;gap:8px!important;padding:7px!important;
+    border-radius:28px 0 0 28px!important;box-shadow:-8px 0 28px rgba(0,0,0,.16)!important;
+  }
+  body.app-fullscreen>.app>footer.bottom .action,
+  html:fullscreen .app>footer.bottom .action,
+  html:-webkit-full-screen .app>footer.bottom .action{
+    width:56px!important;min-width:56px!important;height:50px!important;min-height:50px!important;
+    padding:6px!important;font-size:13px!important;border-radius:16px!important;
+  }
+  body.app-fullscreen>.app>footer.bottom #prevBtn,
+  body.app-fullscreen>.app>footer.bottom #nextBtn,
+  html:fullscreen .app>footer.bottom #prevBtn,
+  html:fullscreen .app>footer.bottom #nextBtn,
+  html:-webkit-full-screen .app>footer.bottom #prevBtn,
+  html:-webkit-full-screen .app>footer.bottom #nextBtn{font-size:28px!important}
+  body.app-fullscreen .reader-wrap,
+  html:fullscreen .reader-wrap,
+  html:-webkit-full-screen .reader-wrap{padding-right:92px!important}
+}
+@media (hover:hover){
+  .bottom .action:hover,.home-card:hover,.icon:hover{transform:translateY(-1px);box-shadow:0 7px 18px rgba(0,0,0,.10)}
+}
+</style>\n
+<!-- RC72 iPad Layout Normalization: single final authority for reader geometry -->
+<style id="rc72-ipad-layout-normalization">
+/*
+  RC72 responsive reader geometry.
+  This final layer deliberately resolves earlier landscape/portrait conflicts.
+  Verse numbers keep their absolute positioning, but the text gutter is sized
+  so the number can never intrude into the reading column.
+*/
+
+/* Tablet/iPad base */
+@media (min-width:768px){
+  .reader-wrap{
+    width:100%;
+    max-width:none;
+    overflow-x:hidden!important;
+  }
+  .book{
+    box-sizing:border-box!important;
+  }
+  .para.ayah{
+    position:relative!important;
+    padding-left:72px!important;
+    min-height:56px;
+  }
+  .para.ayah .ayah-no{
+    left:14px!important;
+    top:12px!important;
+    width:38px!important;
+    height:38px!important;
+    font-size:15px!important;
+    line-height:1!important;
+    z-index:1;
+  }
+}
+
+/* iPad portrait: use the actual screen width instead of a narrow fixed book */
+@media (min-width:768px) and (orientation:portrait){
+  .app{
+    width:100vw!important;
+    height:100dvh!important;
+    grid-template-rows:62px 1fr 68px!important;
+  }
+  .reader-wrap{
+    width:100vw!important;
+    height:auto!important;
+    padding:14px 14px calc(88px + env(safe-area-inset-bottom))!important;
+  }
+  .book{
+    width:calc(100vw - 28px)!important;
+    max-width:none!important;
+    min-height:100%!important;
+    margin:0 auto!important;
+    padding:24px clamp(20px,3.2vw,34px) 72px!important;
+    border-radius:20px!important;
+  }
+  .chapter{padding-top:18px!important}
+  .chapter h2{font-size:clamp(28px,4.5vw,36px)!important}
+  .para{
+    font-size:clamp(21px,3.25vw,27px)!important;
+    line-height:1.72!important;
+  }
+  .bottom{
+    width:100%!important;
+    min-height:68px!important;
+    padding:9px 14px calc(9px + env(safe-area-inset-bottom))!important;
+    justify-content:flex-start!important;
+  }
+}
+
+/* iPad landscape: reader occupies all usable width left of the right rail */
+@media (min-width:768px) and (orientation:landscape){
+  :root{--rc72-rail:78px}
+
+  .app{
+    width:100vw!important;
+    height:100dvh!important;
+    grid-template-rows:48px 1fr!important;
+  }
+  header{
+    height:48px!important;
+    min-height:48px!important;
+    padding-right:calc(var(--rc72-rail) + 12px + env(safe-area-inset-right))!important;
+  }
+  .reader-wrap{
+    width:calc(100vw - var(--rc72-rail) - 10px - env(safe-area-inset-right))!important;
+    max-width:none!important;
+    height:calc(100dvh - 48px)!important;
+    margin:0!important;
+    padding:10px 10px 26px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+  }
+  .book{
+    width:100%!important;
+    max-width:none!important;
+    min-height:100%!important;
+    margin:0!important;
+    padding:14px clamp(18px,3vw,42px) 56px!important;
+    border-radius:10px!important;
   }
 
-  .reader-wrap, #reader {
-    width: 100% !important;
-    max-width: none !important;
-    padding: 8px 12px 120px !important;
-    margin: 0 !important;
-    overflow-x: hidden !important;
+  /* Definitive anti-overlap geometry for Yasin, Al-Waqi'ah and Al-Mulk. */
+  #surat-yasin-ziarah .para.ayah,
+  #surat-waqiah .para.ayah,
+  #surat-mulk .para.ayah{
+    padding-left:76px!important;
+    min-height:58px!important;
+  }
+  #surat-yasin-ziarah .ayah-no,
+  #surat-waqiah .ayah-no,
+  #surat-mulk .ayah-no{
+    left:16px!important;
+    top:12px!important;
+    width:40px!important;
+    height:40px!important;
+    font-size:16px!important;
   }
 
-  .book {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 16px 20px 34px !important;
-    border-radius: 12px !important;
+  footer.bottom,.bottom{
+    top:calc(env(safe-area-inset-top) + 4px)!important;
+    right:calc(env(safe-area-inset-right) + 3px)!important;
+    bottom:calc(env(safe-area-inset-bottom) + 4px)!important;
+    left:auto!important;
+    width:var(--rc72-rail)!important;
+    min-width:var(--rc72-rail)!important;
+    height:auto!important;
+    padding:4px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    flex-wrap:nowrap!important;
+    align-items:stretch!important;
+    gap:3px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    z-index:1200!important;
   }
-
-  .chapter,
-  .chapter-body,
-  .chapter-head,
-  .para,
-  .wirid-sholat-para {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-  }
-
-  .para {
-    padding-left: 6px !important;
-    padding-right: 6px !important;
-  }
-
-  /* Dedicated number column also applies in portrait iPad. */
-  .ayah {
-    display: grid !important;
-    grid-template-columns: 38px minmax(0, 1fr) !important;
-    column-gap: 10px !important;
-    align-items: start !important;
-    padding-left: 0 !important;
-    position: relative !important;
-  }
-
-  .ayah-no {
-    position: static !important;
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    width: 30px !important;
-    height: 30px !important;
-    margin-top: 3px !important;
-    justify-self: start !important;
+  footer.bottom .action,.bottom .action{
+    width:100%!important;
+    min-width:0!important;
+    min-height:31px!important;
+    height:auto!important;
+    flex:0 0 auto!important;
   }
 }
 </style>
